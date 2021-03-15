@@ -3,7 +3,7 @@
 En el presente repositorio se encuentran todos los laboratorios que se van a utilizar en la asignatura Tecnologías de Desarrollo de Software IDE, materia electiva de la UTN FRRo.
 
 Pre-Requisitios
-- Visual Studio 2019 (NET)
+- Visual Studio .Net (deseable última versión)
 > Programacion
 >
 > https://visualstudio.microsoft.com/es/downloads/
