@@ -23,6 +23,22 @@ En el presente repositorio se encuentran todos los laboratorios que se van a uti
 
 #### Glosario
 
+1. Control de Versiones
+> Gestión de los cambios que se le realizan al codigo, puede ser manual (utilizando prefijos vN.M y guardando los archivos iterativamente en el equipo o en Drive por ejemplo) o utilizando alguna herramienta que lo facilite (Git en este caso)
+
+2. Git 
+3. Fork
+4. Clone
+5. Staging Area
+6. Branch
+7. Commit
+8. Pull
+9. Push
+10. Pull Request
+11. Remote
+12. Origin
+13. Master
+
 > Para una explicación mucho mas completa consultar: https://elc.github.io/posts/git-guide-with-visual-interface/es/
 de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo https://github.com/ELC
 
