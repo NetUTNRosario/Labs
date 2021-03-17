@@ -2,6 +2,11 @@
 
 En el presente repositorio se encuentran todos los laboratorios que se van a utilizar en la asignatura Tecnologías de Desarrollo de Software IDE, materia electiva de la UTN FRRo.
 
+### Indice
+- [Pre-Requisitos](#Pre-Requisitos)
+- [Glosario](#Glosario)
+- [Instrucciones](#Instrucciones)
+
 #### Pre-Requisitos
 - Visual Studio .Net (deseable última versión)
 > Programación
@@ -16,7 +21,7 @@ En el presente repositorio se encuentran todos los laboratorios que se van a uti
 > 
 > https://www.gitkraken.com/download
 
-#### Glosario (en términos simples)
+#### Glosario
 
 > Para una explicación mucho mas completa consultar: https://elc.github.io/posts/git-guide-with-visual-interface/es/
 de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo https://github.com/ELC
