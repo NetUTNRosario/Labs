@@ -2,7 +2,7 @@
 
 En el presente repositorio se encuentran todos los laboratorios que se van a utilizar en la asignatura Tecnologías de Desarrollo de Software IDE, materia electiva de la UTN FRRo.
 
-Pre-Requisitios
+#### Pre-Requisitios
 - Visual Studio .Net (deseable última versión)
 > Programacion
 >
@@ -16,8 +16,14 @@ Pre-Requisitios
 > 
 > https://www.gitkraken.com/download
 
+#### Glosario (en terminos simples)
 
+> Para una explicación mucho mas completa consultar: https://elc.github.io/posts/git-guide-with-visual-interface/es/
+de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo https://github.com/ELC
+
+### Instruciones
 La forma de trabajo que se va a utilizar este año consiste en los siguientes pasos:
+> Esta se encuentra inspirada por la que es utilizada en la materias electiva Soporte a la Gestión de Datos con Programación Visual (Python)  
 1. Forkear el repositorio oficial de practica seleccionando su usuario de GitHub
 ![tutoGit_P0](https://user-images.githubusercontent.com/41701343/111100579-d2fd5000-8526-11eb-83a3-119c0b2ce18e.png)
 
