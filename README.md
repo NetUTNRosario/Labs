@@ -1,27 +1,24 @@
-# practica-2021
+# Labs-2021
 
-En el presente repositorio se encuentran todos los laboratorios que se van a utilizar en la asignatura Tecnologías de Desarrollo de Software IDE, materia electiva de la UTN FRRo.
+En este repositorio se encuentran todos los laboratorios utilizados en la asignatura Tecnologías de Desarrollo de Software IDE, materia electiva de la UTN FRRo.
 
-### Indice
-- [Pre-Requisitos](#Pre-Requisitos)
-- [Glosario](#Glosario)
-- [Instrucciones](#Instrucciones)
+|Índice|
+|:-|
+|:computer: [Pre-Requisitos](#Pre-Requisitos)|
+|:bookmark_tabs: [Glosario](#Glosario)|
+|:briefcase: [Instrucciones Git](#Instrucciones)|
 
-#### Pre-Requisitos
-- Visual Studio .Net (deseable última versión)
-> Programación
->
-> https://visualstudio.microsoft.com/es/downloads/
-- Usuario GitHub
-> Repositorios online
-> 
-> https://github.com/join?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home
-- GitKraken
-> Control de versiones con repositorios Git locales
-> 
-> https://www.gitkraken.com/download
+## Pre-Requisitos
 
-#### Glosario
+|Requisito|Descripción|Link|
+|:-|:-|:-|
+|Visual Studio .Net|Entorno para programar. Es deseable tener descargada la última versión|[https://visualstudio.microsoft.com/es/downloads/](https://visualstudio.microsoft.com/es/downloads/)|
+|Usuario GitHub|Repositorios online|[https://github.com/join](https://github.com/join?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home)|
+|GitKraken|Control de versiones con repositorios Git locales|https://www.gitkraken.com/download|
+
+> Nota: La versión gratuita de GitKraken posee todo lo necesario a utilizar, pero existe para el que le guste la herramienta una versión premium con otras features como: Tener Boards estilo trello y calendarios, entre otras cosas. Se puede conseguir gratuitamente como alumno universitario, teniendo un correo @frro dado de alta en la universidad (Secretaría de Asuntos Universitarios).
+
+## Glosario
 
 1. Control de Versiones
 > Gestión de los cambios que se le realizan al codigo, puede ser manual (utilizando prefijos vN.M y guardando los archivos iterativamente en el equipo o en Drive por ejemplo) o utilizando alguna herramienta que lo facilite (Git en este caso)
@@ -41,8 +38,9 @@ En el presente repositorio se encuentran todos los laboratorios que se van a uti
 
 > Para una explicación mucho mas completa consultar: https://elc.github.io/posts/git-guide-with-visual-interface/es/
 de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo https://github.com/ELC
+[remote]
 
-### Instrucciones
+## Instrucciones Git
 La forma de trabajo que se va a utilizar este año consiste en los siguientes pasos:
 > Esta se encuentra inspirada por la que es utilizada en la materias electiva Soporte a la Gestión de Datos con Programación Visual (Python)  
 1. Forkear el repositorio oficial de practica seleccionando su usuario de GitHub
