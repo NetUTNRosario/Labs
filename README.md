@@ -29,10 +29,10 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 > Gestión de los cambios que se le realizan al código, puede ser manual (utilizando prefijos vN.M y guardando los archivos iterativamente en el equipo o en Drive por ejemplo) o utilizando alguna herramienta que lo facilite (Git en este caso).
 
 ### Git
-> Sistema de control de versiones distribuido, esto significa que sirve para gestionar los cambios en el código de forma local y en un repositorio remoto que es ejecutado en un servidor central. Es gratis y opensource. Web para descargar: [https://git-scm.com/](https://git-scm.com/)
+> Sistema de control de versiones distribuido, esto significa que sirve para gestionar los cambios en el código de forma local y en un repositorio remoto que es ejecutado en un servidor central. Es gratis y opensource. Web para descargar: [https://git-scm.com/](https://git-scm.com/).
 
 ### Fork
-> Generar un repositorio bifurcado que está asociado tanto al repositorio original como al propio. Permite probar cambios que no son deseables de hacer en el original y a la vez mantenerse al día con los cambios que puedan surgir allí
+> Generar un repositorio bifurcado que está asociado tanto al repositorio original como al propio. Permite probar cambios que no son deseables de hacer en el original y a la vez mantenerse al día con los cambios que puedan surgir allí.
 
 ### Clone
 > Equivalente a descargar los binarios del repositorio. Se debe copiar la dirección URI del repositorio que se quiere clonar. Al usar esta herramienta  se optimiza la descarga de código y a la vez mejora la usabilidad. Un ejemplo sería: encuentro un repositorio interesante en GitHub y deseo tenerlo localmente en mi computadora, en vez de descargar el repo manualmente, lo clono desde el remoto a través de su dirección URI y se genera el repo local en mi computadora directamente.
@@ -40,11 +40,20 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 ### Staging Area
 > Área donde se congelan los cambios realizados en los archivos que se agregaron a está. Son todos los cambios que tenemos de forma local pero que aún no han sido incluídos en un "commit" y por lo tanto no podemos enviarlos aún a nuestro repositorio remoto.
 
+### Tracking
+> Tarea que realiza Git de realizar un seguimiento de los cambios nuevos que realizamos al escribir nuevo código con respecto a nuestros archivos locales, a su vez que con respecto a nuestro repositorio remoto. El tracking será de archivos nuevos, modificaciones o eliminaciones.
+
+### Gitignore
+> Se puede crear un archivo llamado ".gitignore" y escribir adentro archivos o carpetas a forma de "blacklist", es decir, lo que esté ahí adentro será ignorado por Git y no almacenará información de esos archivos (no tracking), no los subirá a remoto tampoco.
+
+### Add
+> Cuando tenemos un archivo nuevo o algun tipo de cambio que Git no está trackeando, podemos agregarlo a nuestro staging area para (que este pueda entrar luego en un commit) mediante `git add nombreArchivo`. Si queremos decirle que agregue todos nuestros cambios excepto archivos eliminados a staging area, usamos `git add .`. Si queremos decirle que agregue todos nuestros cambios excepto archivos nuevos a staging area, usamos `git add -u`. Si queremos que agregue TODOS sin exceptuar ninguno es `git add -A` (esta linea ejecuta `git add .` y luego `git add -u`).
+
 ### Branch
-> Cuando quieres realizar cambios es recomendable realizarlos en una “sección propia” o Branch bifurcada desde algún punto de partida (desde un commit específico) a donde subirás los cambios y podrán ser vistos en el control de versiones online como GitHub o GitLab, pero estos cambios no se ven reflejados en el Master de tu repositorio directamente, hasta que se realice un Merge de los cambios que tienes en tu Branch hacia Main. (Ejemplo: tengo que hacer una feature llamada “Login” para el usuario, creo una rama “login_user” y empiezo a subir mis cambios ahí. Cuando termino la feature, “mergeo” la Branch login_user a Master y de esta forma todos nuestros cambios serán enviados al Main del proyecto). Puedes cambiar de rama con el comando `git checkout nombreBranch`
+> Cuando quieres realizar cambios es recomendable realizarlos en una “sección propia” o Branch bifurcada desde algún punto de partida (desde un commit específico) a donde subirás los cambios y podrán ser vistos en el control de versiones online como GitHub o GitLab, pero estos cambios no se ven reflejados en el Master de tu repositorio directamente, hasta que se realice un Merge de los cambios que tienes en tu Branch hacia Main. (Ejemplo: tengo que hacer una feature llamada “Login” para el usuario, creo una rama “login_user” y empiezo a subir mis cambios ahí. Cuando termino la feature, “mergeo” la Branch login_user a Master y de esta forma todos nuestros cambios serán enviados al Main del proyecto). Puedes cambiar de rama con el comando `git checkout nombreBranch`.
 
 ### Commit
-> Información que contiene los nuevos cambios que realicé en el código, quien lo realizó, un ID y la fecha. Al realizar commits, podemos subirlos de nuestro repo local al repositorio remoto compartido con el equipo, mediante `git push origin -u nombreBranch`. También podemos traernos los Commits que realizaron otros miembros del equipo y subieron al remoto para mantenernos actualizados con todos los cambios, mediante `git pull`. Tener en cuenta que Push y Pull funciona por Branch, por lo que si se quiere es traer o enviar Commits a otras Branches, se debe cambiar de Branch haciendo `git checkout nombreBranch`
+> Información que contiene los nuevos cambios que realicé en el código, quien lo realizó, un ID y la fecha. Al realizar commits, podemos subirlos de nuestro repo local al repositorio remoto compartido con el equipo, mediante `git push origin -u nombreBranch`. También podemos traernos los Commits que realizaron otros miembros del equipo y subieron al remoto para mantenernos actualizados con todos los cambios, mediante `git pull`. Tener en cuenta que Push y Pull funciona por Branch, por lo que si se quiere es traer o enviar Commits a otras Branches, se debe cambiar de Branch haciendo `git checkout nombreBranch`.
 
 ### Pull
 > Descargar los cambios presentes en repositorio [remote] a local. Todos los commits subidos al remoto por por los demás integrantes del grupo serán descargados en tu repo local para mantenerte sincronizado. Solo trae los cambios que detecta en la rama actual.
@@ -68,6 +77,9 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 > Branch principal del repositorio, en esta generalmente se cuenta con la versión más estable del código. Una forma recomendada de trabajar es hacer una branch por cada nuevo requerimiento o caso de uso que estemos trabajando y subamos commits allí, y luego de terminarlo recién ahí pasarlos a "Master" (mediante un Merge directo o una Pull Request en donde los otros integrantes deben aprobar los cambios antes).
 > Nota: desde 2020 en Git se reemplazó la branch Master por “Main”. Solamente los repositorios creados posteriormente a 2020 poseen este cambio.
 
+### Working Directory
+> Suele pasar como sinónimo a repositorio local, pero no lo es. El Working Directory representa a los archivos físicos reales en tu computadora, mientras que el repositorio local (origin=¿) es una representación virtual del mismo. Cuando tenemos cambios nuevos locales mientras escribimos nuevo código, Git trackea estos cambios comparando el Working Directory con Origin (Local Repo).
+
 ### Commits Log
 > Historial de commits. Cada repositorio tiene uno, y te cuenta "la historia" de los commits con autores, cambios y fechas. Todos los cambios que hagamos en el repo son guardados automaticamente en el log. Puede accederse a él mediante `git log`.
 
@@ -78,17 +90,21 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 Posición en la que nos encontramos en el Commit Tree. Por default siempre que hagamos pull estaremos viendo hasta el último de los commits, pero podemos "volver atrás" versiones de nuestro código moviendo el "HEAD" hacia otro punto de la historia (ejemplo: quiero ver como era el codigo hace una semana, y se hicieron 5 commits esta semana, entonces vuelvo 5 commits atrás y veré esa versión antigua de mi código sin los cambios nuevos). Mover el head no borra ni crea commits nuevos, no es peligroso.
 
 ### Status
-Ver el estado general de mi repositorio remoto en la branch actual, con respecto a remoto. Me dirá en que branch estoy, cuantos commits tengo por enviar, cuantos cambios tengo en "Staging Area" sin aun haberlos metido en un commit nuevo, etc... GitKraken ofrece esta información de forma visual en la vista principal del repositorio, pero por consola se debería escribir `git status`.
+> Ver el estado general de mi repositorio remoto en la branch actual, con respecto a remoto. Me dirá en que branch estoy, cuantos commits tengo por enviar, cuantos cambios tengo en "Staging Area" sin aun haberlos metido en un commit nuevo, etc... GitKraken ofrece esta información de forma visual en la vista principal del repositorio, pero por consola se debería escribir `git status`.
 
 ### Reset
-Si queremos deshacer cambios locales que aún no hemos enviado al remoto, podemos realizar un "reset" de nuestros cambios. El reset puede revertir uno o más commmits locales. En Gitkraken se hace un reset tocando el ícono de la papelera al lado de nuestros cambios. Hay 3 tipos de reset. El `git reset --soft` que solamente mueve "HEAD" hacia atrás sin borrar los cambios, es solo para ver nuestro codigo en una version anterior antes de los cambios; el `git reset --mixed` (el default) que borrará la cantidad de commits que le indiquemos, pero los cambios no se pierden sino que se vuelven al "Staging Area" y nos dejará hacer nuevos commits; y el `git reset --hard` que es peligroso pues borra directamente la cantidad de commits solicitados y estos se "pierden para siempre".
+> Si queremos deshacer cambios locales que aún no hemos enviado al remoto, podemos realizar un "reset" de nuestros cambios. El reset puede revertir uno o más commmits locales. En Gitkraken se hace un reset tocando el ícono de la papelera al lado de nuestros cambios. Hay 3 tipos de reset. El `git reset --soft` que solamente mueve "HEAD" hacia atrás sin borrar los cambios, es solo para ver nuestro codigo en una version anterior antes de los cambios; el `git reset --mixed` (el default) que borrará la cantidad de commits que le indiquemos, pero los cambios no se pierden sino que se vuelven al "Staging Area" y nos dejará hacer nuevos commits; y el `git reset --hard` que es peligroso pues borra directamente la cantidad de commits solicitados y estos se "pierden para siempre".
 
 ### Stash
-Si tenemos cambios sin commitear y cambiamos de branch, podemos "guardarlos" temporalmente en un "vault" llamado Stash. Más adelante si los necesitamos de vuelta en la misma branch u otra, se realiza un Stash Pop que recupera el código y lo coloca devuelta en Staging Area.
+> Si tenemos cambios sin commitear y cambiamos de branch, podemos "guardarlos" temporalmente en un "vault" llamado Stash. Más adelante si los necesitamos de vuelta en la misma branch u otra, se realiza un Stash Pop que recupera el código y lo coloca devuelta en Staging Area.
+
+### Fetch
+> Traer los cambios del repositorio remoto al local, pero sin reemplazar los archivos físicos. Esto es para visualizar los cambios pero sin reemplazarlos aún (a diferencia de Pull), pues a lo mejor queremos hacer otra tarea antes de reemplazarlos. Podría decirce que, en el fondo, un Pull es un Fetch + un Merge a nuestros archivos locales.
 
 ### Rebase
-Un rebase modifica la historia de commits de nuestro repositorio, por lo tanto es peligroso. Podemos necesitarlo por ejemplo cuando creamos commits incorrectos y queremos cambiarlos, pero estos ya los subimos al remoto con Push y nos arrepentimos. Con rebase se puede cambiar el nombre de commits en remoto, unificar diferentes commits en uno, borrar commits enteros, entre otras cosas. Estando en la branch en la que queremos modificar (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir `git rebase -i HEAD~n`, donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i nos indica que será un rebase interactivo (te da instrucciones de que se puede hacer con cada commit, sea unificar, renobrar, borrar, etc...).
+> Un rebase modifica la historia de commits de nuestro repositorio, por lo tanto es peligroso. Podemos necesitarlo por ejemplo cuando creamos commits incorrectos y queremos cambiarlos, pero estos ya los subimos al remoto con Push y nos arrepentimos. Con rebase se puede cambiar el nombre de commits en remoto, unificar diferentes commits en uno, borrar commits enteros, entre otras cosas. Estando en la branch en la que queremos modificar (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir `git rebase -i HEAD~n`, donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i nos indica que será un rebase interactivo (te da instrucciones de que se puede hacer con cada commit, sea unificar, renobrar, borrar, etc...).
 
+### Otras Guías
 > Para una explicación más completa de muchos de estos conceptos y como realizar varios de los casos de uso principales con Git y haciendo uso de Gitkraken, consultar: [https://elc.github.io/posts/git-guide-with-visual-interface/es/](https://elc.github.io/posts/git-guide-with-visual-interface/es/) de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo [https://github.com/ELC](https://github.com/ELC).
 
 > Otra guía sencilla (está tanto en español como en inglés) sobre Git pero haciendo uso de la Consola, consultar: [https://rogerdudler.github.io/git-guide/index.es.html](https://rogerdudler.github.io/git-guide/index.es.html) del usuario de GitHub [https://github.com/rogerdudler/](https://github.com/rogerdudler/).
