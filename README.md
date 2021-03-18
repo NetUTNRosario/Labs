@@ -5,6 +5,7 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 |Índice|
 |:-|
 |:computer: [Pre-Requisitos](#Pre-Requisitos)|
+|:cactus: [Git Working Tree](#Git-Working-Tree)|
 |:bookmark_tabs: [Glosario](#Glosario)|
 |:briefcase: [Instrucciones Git](#Instrucciones)|
 
@@ -18,6 +19,18 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 |GitKraken|Control de versiones con repositorios Git locales|https://www.gitkraken.com/download|
 
 > Nota: La versión gratuita de GitKraken posee todo lo necesario a utilizar, pero existe para el que le guste la herramienta una versión premium con otras features como: Tener Boards estilo trello y calendarios, entre otras cosas. Se puede conseguir gratuitamente como alumno universitario, teniendo un correo @frro dado de alta en la universidad (Secretaría de Asuntos Universitarios).
+
+
+## El Working Tree de Git
+![git_working_tree](https://user-images.githubusercontent.com/44505076/111569584-b4df5c00-8781-11eb-8ee4-6c2c00ccb8cd.png)
+
+La carpeta real archivos físicos se denomina `Working Directory`. Al clonar de internet un repositorio (ejemplo de GitHub u otra plataforma); o realizar la tarea manual de descargarlo, descomprimirlo e inicializarlo (que es equivalente) estamos generando un `Repositorio Local` (llamado también `Origin`) que representa de forma virtual nuestro Working Directory. Si escribimos nuevo código, git se da cuenta de las diferencias en los archivos con respecto al último cambio almacenado en `Origin`. A esto se le dice que Git "trackea" nuestros archivos. Para que nuestros cambios físicos (crear un nuevo archivo, modificar uno o borar uno) se almacenen efectivamente en el repositorio local ("Origin"), se debe realizar un "Commit" que es un contenedor con los cambios que realizamos, junto a un ID, el autor de los cambios y una fecha. El repositorio local se maneja 100% con commits.
+
+Cuando tenemos cambios en archivos, pero estos aún no han sido incluídos en un Commit, se les dice que están en `Staging Area`, y representa todos los archivos que git detectó una diferencia con respecto al último commit que posee en nuestro repo local. Con lo que está en "Staging Area" podemos o realizar un Commit para que pertenezca oficialmente a nuestro repo local, así como borrarlos y dejar los archivos como estaban antes.
+
+El repositorio que se encuentra almacenado en GitHub (u otra plataforma) para todos los miembros del equipo se denomina `Repositorio Remoto`; Git también "trackea" la diferencia entre nuestro repositorio local ("Origin") y el remoto. Podemos traer commits que hayan subido al remoto otros compañeros nuestros de trabajo a nuestro repositorio local, asì como subir commits de nuestro local al remoto y mantenernos sincronizados. La comunicación entre cambios locales nuestros y cambios de nuestros compañeros ya subidos al remoto, se realiza siempre por commits.
+
+> Para Los comandos más importantes en la comunicación del working tree de Git, consultar en el Glosario de la sección siguiente.
 
 
 ## Glosario
