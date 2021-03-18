@@ -20,29 +20,80 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 
 ## Glosario
 
-1. Control de Versiones
-> Gestión de los cambios que se le realizan al codigo, puede ser manual (utilizando prefijos vN.M y guardando los archivos iterativamente en el equipo o en Drive por ejemplo) o utilizando alguna herramienta que lo facilite (Git en este caso)
+### Repositorio
+> Almacenamiento virtual de tu proyecto. Te permite guardar versiones del código a las que puedes acceder cuando lo necesites.
 
-2. Git 
-3. Fork
-4. Clone
-5. Staging Area
-6. Branch
-7. Commit
-8. Pull
-9. Push
-10. Pull Request
-11. Remote
-12. Origin
-13. Master
+### Control de Versiones
+> Gestión de los cambios que se le realizan al código, puede ser manual (utilizando prefijos vN.M y guardando los archivos iterativamente en el equipo o en Drive por ejemplo) o utilizando alguna herramienta que lo facilite (Git en este caso).
 
-> Para una explicación mucho mas completa consultar: https://elc.github.io/posts/git-guide-with-visual-interface/es/
-de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo https://github.com/ELC
-[remote]
+### Git
+> Sistema de control de versiones distribuido, esto significa que sirve para gestionar los cambios en el código de forma local y en un repositorio remoto que es ejecutado en un servidor central. Es gratis y opensource. Web para descargar: [https://git-scm.com/](https://git-scm.com/)
+
+### Fork
+> Generar un repositorio bifurcado que está asociado tanto al repositorio original como al propio. Permite probar cambios que no son deseables de hacer en el original y a la vez mantenerse al día con los cambios que puedan surgir allí
+
+### Clone
+> Equivalente a descargar los binarios del repositorio. Se debe copiar la dirección URI del repositorio que se quiere clonar. Al usar esta herramienta  se optimiza la descarga de código y a la vez mejora la usabilidad. Un ejemplo sería: encuentro un repositorio interesante en GitHub y deseo tenerlo localmente en mi computadora, en vez de descargar el repo manualmente, lo clono desde el remoto a través de su dirección URI y se genera el repo local en mi computadora directamente.
+
+### Staging Area
+> Área donde se congelan los cambios realizados en los archivos que se agregaron a está. Son todos los cambios que tenemos de forma local pero que aún no han sido incluídos en un "commit" y por lo tanto no podemos enviarlos aún a nuestro repositorio remoto.
+
+### Branch
+> Cuando quieres realizar cambios es recomendable realizarlos en una “sección propia” o Branch bifurcada desde algún punto de partida (desde un commit específico) a donde subirás los cambios y podrán ser vistos en el control de versiones online como GitHub o GitLab, pero estos cambios no se ven reflejados en el Master de tu repositorio directamente, hasta que se realice un Merge de los cambios que tienes en tu Branch hacia Main. (Ejemplo: tengo que hacer una feature llamada “Login” para el usuario, creo una rama “login_user” y empiezo a subir mis cambios ahí. Cuando termino la feature, “mergeo” la Branch login_user a Master y de esta forma todos nuestros cambios serán enviados al Main del proyecto). Puedes cambiar de rama con el comando '''git checkout nombreBranch'''
+
+### Commit
+> Información que contiene los nuevos cambios que realicé en el código, quien lo realizó, un ID y la fecha. Al realizar commits, podemos subirlos de nuestro repo local al repositorio remoto compartido con el equipo, mediante ‘’’git push origin -u nombreBranch’’’. También podemos traernos los Commits que realizaron otros miembros del equipo y subieron al remoto para mantenernos actualizados con todos los cambios, mediante ‘’’git pull’’’. Tener en cuenta que Push y Pull funciona por Branch, por lo que si se quiere es traer o enviar Commits a otras Branches, se debe cambiar de Branch haciendo ‘’’git checkout nombreBranch’’’
+
+### Pull
+> Descargar los cambios presentes en repositorio [remote] a local. Todos los commits subidos al remoto por por los demás integrantes del grupo serán descargados en tu repo local para mantenerte sincronizado. Solo trae los cambios que detecta en la rama actual.
+
+### Push
+> Subir los cambios realizados en local al repositorio [remote](#Remote). Solo sube todos los cambios que se encuentren dentro de Commits. Los demás integrantes del equipo podrán descargar tus cambios y mantenerse sincronizados. Solo sube al remoto los commits que detecta en la rama actual.
+
+### Merge
+> Agregar los cambios presentes en una branch determinada a otra branch. Ejemplo: realizé 3 commits en una branch llamada "register_user" y ahora quiero que estos commits estén en master porque completé la tarea y ya no trabajaré en esa branch, entonces se "mergean" los commits de register_user en Master.
+
+### Pull Request
+> Se podria llamar “Merge Request” que es más exacto (En GitLab posee ese nombre). Es una solicitud que realiza un integrante del equipo hacia los demás, pidiendo agregar los cambios realizados en una determinada branch a otra. Esto se gestiona por determinados usuarios revisores que pueden optar por aprobar lo realizado, hacer comentarios para requerir cambios o preguntas para aclarar porqué se procedió de determinada manera. Los comentarios se realizan online en Github y pueden ser comentarios generales, por archivo o por linea. Una vez que los reviewers aprueban los cambios, se acepta la Pull Request y los commits nuevos se mergean (por default) a master.
+
+### [Remote]
+> Refiere al repositorio central que es ejecutado en un servidor con determinado nivel acceso para cada uno de los desarrolladores. Es el repositorio que almacena github y al cual se le realiza Push para enviar commits y Pull para traer commits de los demás integrantes del equipo.
+
+### Origin
+> Es el repositorio local manejado por cada desarrollador en sus equipos. Se comunica con el repositorio remoto alojado en GitHub mediante un area intermediaria a la cual denominaremos "Staging Area", en donde enviaremos nuestros commits con Push, y recibiremos commits de los demas integrantes del equipo que hayan subido sus commits con Pull.
+
+### Master
+> Branch principal del repositorio, en esta generalmente se cuenta con la versión más estable del código. Una forma recomendada de trabajar es hacer una branch por cada nuevo requerimiento o caso de uso que estemos trabajando y subamos commits allí, y luego de terminarlo recién ahí pasarlos a "Master" (mediante un Merge directo o una Pull Request en donde los otros integrantes deben aprobar los cambios antes).
+> Nota: desde 2020 en Git se reemplazó la branch Master por “Main”. Solamente los repositorios creados posteriormente a 2020 poseen este cambio.
+
+### Commits Log
+> Historial de commits. Cada repositorio tiene uno, y te cuenta "la historia" de los commits con autores, cambios y fechas. Todos los cambios que hagamos en el repo son guardados automaticamente en el log. Puede accederse a él mediante '''git log'''.
+
+### Commits Tree
+> Ver el Historial de commits de nuestro repo (Commit Log) como un árbol con sus ramificaciones (Branches). GitKraken presenta un Tree en la vista principal del repositorio.
+
+### HEAD
+Posición en la que nos encontramos en el Commit Tree. Por default siempre que hagamos pull estaremos viendo hasta el último de los commits, pero podemos "volver atrás" versiones de nuestro código moviendo el "HEAD" hacia otro punto de la historia (ejemplo: quiero ver como era el codigo hace una semana, y se hicieron 5 commits esta semana, entonces vuelvo 5 commits atrás y veré esa versión antigua de mi código sin los cambios nuevos). Mover el head no borra ni crea commits nuevos, no es peligroso.
+
+### Status
+Ver el estado general de mi repositorio remoto en la branch actual, con respecto a remoto. Me dirá en que branch estoy, cuantos commits tengo por enviar, cuantos cambios tengo en "Staging Area" sin aun haberlos metido en un commit nuevo, etc... GitKraken ofrece esta información de forma visual en la vista principal del repositorio, pero por consola se debería escribir '''git status'''.
+
+### Reset
+Si queremos deshacer cambios locales que aún no hemos enviado al remoto, podemos realizar un "reset" de nuestros cambios. El reset puede revertir uno o más commmits locales. En Gitkraken se hace un reset tocando el ícono de la papelera al lado de nuestros cambios. Hay 3 tipos de reset. El '''git reset --soft''' que solamente mueve "HEAD" hacia atrás sin borrar los cambios, es solo para ver nuestro codigo en una version anterior antes de los cambios; el '''git reset --mixed''' (el default) que borrará la cantidad de commits que le indiquemos, pero los cambios no se pierden sino que se vuelven al "Staging Area" y nos dejará hacer nuevos commits; y el '''git reset --hard''' que es peligroso pues borra directamente la cantidad de commits solicitados y estos se "pierden para siempre".
+
+### Stash
+Si tenemos cambios sin commitear y cambiamos de branch, podemos "guardarlos" temporalmente en un "vault" llamado Stash. Más adelante si los necesitamos de vuelta en la misma branch u otra, se realiza un Stash Pop que recupera el código y lo coloca devuelta en Staging Area.
+
+### Rebase
+Un rebase modifica la historia de commits de nuestro repositorio, por lo tanto es peligroso. Podemos necesitarlo por ejemplo cuando creamos commits incorrectos y queremos cambiarlos, pero estos ya los subimos al remoto con Push y nos arrepentimos. Con rebase se puede cambiar el nombre de commits en remoto, unificar diferentes commits en uno, borrar commits enteros, entre otras cosas. Estando en la branch en la que queremos modificar (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir '''git rebase -i HEAD~n''', donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i nos indica que será un rebase interactivo (te da instrucciones de que se puede hacer con cada commit, sea unificar, renobrar, borrar, etc...).
+
+> Para una explicación mucho mas completa consultar: [https://elc.github.io/posts/git-guide-with-visual-interface/es/](https://elc.github.io/posts/git-guide-with-visual-interface/es/)
+de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo [https://github.com/ELC](https://github.com/ELC)
 
 ## Instrucciones Git
 La forma de trabajo que se va a utilizar este año consiste en los siguientes pasos:
-> Esta se encuentra inspirada por la que es utilizada en la materias electiva Soporte a la Gestión de Datos con Programación Visual (Python)  
+> Esta se encuentra inspirada por la forma de trabajo que es utilizada en otra materia electiva de la UTN, y fue implementada por [@ELC](https://github.com/ELC) en aquella materia.
+
 1. Forkear el repositorio oficial de practica seleccionando su usuario de GitHub
 ![tutoGit_P0](https://user-images.githubusercontent.com/41701343/111100579-d2fd5000-8526-11eb-83a3-119c0b2ce18e.png)
 
