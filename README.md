@@ -8,6 +8,7 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 |:bookmark_tabs: [Glosario](#Glosario)|
 |:briefcase: [Instrucciones Git](#Instrucciones)|
 
+
 ## Pre-Requisitos
 
 |Requisito|Descripción|Link|
@@ -17,6 +18,7 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 |GitKraken|Control de versiones con repositorios Git locales|https://www.gitkraken.com/download|
 
 > Nota: La versión gratuita de GitKraken posee todo lo necesario a utilizar, pero existe para el que le guste la herramienta una versión premium con otras features como: Tener Boards estilo trello y calendarios, entre otras cosas. Se puede conseguir gratuitamente como alumno universitario, teniendo un correo @frro dado de alta en la universidad (Secretaría de Asuntos Universitarios).
+
 
 ## Glosario
 
@@ -56,11 +58,11 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 ### Pull Request
 > Se podria llamar “Merge Request” que es más exacto (En GitLab posee ese nombre). Es una solicitud que realiza un integrante del equipo hacia los demás, pidiendo agregar los cambios realizados en una determinada branch a otra. Esto se gestiona por determinados usuarios revisores que pueden optar por aprobar lo realizado, hacer comentarios para requerir cambios o preguntas para aclarar porqué se procedió de determinada manera. Los comentarios se realizan online en Github y pueden ser comentarios generales, por archivo o por linea. Una vez que los reviewers aprueban los cambios, se acepta la Pull Request y los commits nuevos se mergean (por default) a master.
 
-### [Remote]
+### Remote
 > Refiere al repositorio central que es ejecutado en un servidor con determinado nivel acceso para cada uno de los desarrolladores. Es el repositorio que almacena github y al cual se le realiza Push para enviar commits y Pull para traer commits de los demás integrantes del equipo.
 
 ### Origin
-> Es el repositorio local manejado por cada desarrollador en sus equipos. Se comunica con el repositorio remoto alojado en GitHub mediante un area intermediaria a la cual denominaremos "Staging Area", en donde enviaremos nuestros commits con Push, y recibiremos commits de los demas integrantes del equipo que hayan subido sus commits con Pull.
+> Es el repositorio local manejado por cada desarrollador en sus equipos. Se comunica con el repositorio [remoto](#Remote) alojado en GitHub mediante un area intermediaria a la cual denominaremos "Staging Area", en donde enviaremos nuestros commits con Push, y recibiremos commits de los demas integrantes del equipo que hayan subido sus commits con Pull.
 
 ### Master
 > Branch principal del repositorio, en esta generalmente se cuenta con la versión más estable del código. Una forma recomendada de trabajar es hacer una branch por cada nuevo requerimiento o caso de uso que estemos trabajando y subamos commits allí, y luego de terminarlo recién ahí pasarlos a "Master" (mediante un Merge directo o una Pull Request en donde los otros integrantes deben aprobar los cambios antes).
@@ -87,12 +89,14 @@ Si tenemos cambios sin commitear y cambiamos de branch, podemos "guardarlos" tem
 ### Rebase
 Un rebase modifica la historia de commits de nuestro repositorio, por lo tanto es peligroso. Podemos necesitarlo por ejemplo cuando creamos commits incorrectos y queremos cambiarlos, pero estos ya los subimos al remoto con Push y nos arrepentimos. Con rebase se puede cambiar el nombre de commits en remoto, unificar diferentes commits en uno, borrar commits enteros, entre otras cosas. Estando en la branch en la que queremos modificar (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir '''git rebase -i HEAD~n''', donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i nos indica que será un rebase interactivo (te da instrucciones de que se puede hacer con cada commit, sea unificar, renobrar, borrar, etc...).
 
-> Para una explicación mucho mas completa consultar: [https://elc.github.io/posts/git-guide-with-visual-interface/es/](https://elc.github.io/posts/git-guide-with-visual-interface/es/)
-de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo [https://github.com/ELC](https://github.com/ELC)
+> Para una explicación más completa de muchos de estos conceptos y como realizar varios de los casos de uso principales con Git y haciendo uso de Gitkraken, consultar: [https://elc.github.io/posts/git-guide-with-visual-interface/es/](https://elc.github.io/posts/git-guide-with-visual-interface/es/) de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo [https://github.com/ELC](https://github.com/ELC).
+
+> Otra guía sencilla (está tanto en español como en inglés) sobre Git pero haciendo uso de la Consola, consultar: [https://rogerdudler.github.io/git-guide/index.es.html](https://rogerdudler.github.io/git-guide/index.es.html) del usuario de GitHub [https://github.com/rogerdudler/](https://github.com/rogerdudler/).
+
 
 ## Instrucciones Git
 La forma de trabajo que se va a utilizar este año consiste en los siguientes pasos:
-> Esta se encuentra inspirada por la forma de trabajo que es utilizada en otra materia electiva de la UTN, y fue implementada por [@ELC](https://github.com/ELC) en aquella materia.
+> Esta se encuentra inspirada por la forma de trabajo que fue implementada por otros adscriptos en otra materia electiva de la UTN llamdada "Soporte a la Gestión de Datos con Programación Visual"
 
 1. Forkear el repositorio oficial de practica seleccionando su usuario de GitHub
 ![tutoGit_P0](https://user-images.githubusercontent.com/41701343/111100579-d2fd5000-8526-11eb-83a3-119c0b2ce18e.png)
