@@ -7,8 +7,8 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 |:computer: [Pre-Requisitos](#Pre-Requisitos)|
 |:cactus: [Git Working Tree](#El-Working-Tree-de-Git)|
 |:bookmark_tabs: [Glosario](#Glosario)|
-|:briefcase: [Instrucciones Git](#Instrucciones-Git)|
-
+|:briefcase: [Instrucciones Git](#Instrucciones)|
+|:star2: [Extra](#Extra)|
 
 ## Pre-Requisitos
 
@@ -24,13 +24,11 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 ## El Working Tree de Git
 ![git_working_tree](https://user-images.githubusercontent.com/44505076/111569584-b4df5c00-8781-11eb-8ee4-6c2c00ccb8cd.png)
 
-La carpeta real archivos físicos se denomina [Working Directory](#Working-Directory) (también denominado `Workspace`). Al [clonar](#Clone) de Internet un repositorio (ejemplo de GitHub u otra plataforma); o realizar la tarea manual de descargarlo, descomprimirlo e inicializarlo (que es equivalente) estamos generando un `Repositorio Local` (llamado también `Origin`) que representa de forma virtual nuestro [Working Directory](#Working-Directory). Si escribimos nuevo código, git se da cuenta de las diferencias en los archivos con respecto al último cambio almacenado en [local](#Local). A esto se le dice que Git "trackea" nuestros archivos. Para que nuestros cambios físicos (crear un nuevo archivo, modificar uno o borar uno) se almacenen efectivamente en el [repositorio local](#Local), se debe realizar un [commit](#Commit) que es un contenedor con los cambios que realizamos, junto a un ID, el autor de los cambios y una fecha. El repositorio local se maneja 100% con [commits](#Commit).
+La carpeta real de archivos físicos se denomina [Working Directory](#Working-Directory) (también denominado `Workspace`). Al [clonar](#Clone) de Internet un repositorio (ejemplo de GitHub u otra plataforma) o realizar la tarea manual de descargarlo, descomprimirlo e inicializarlo (que es equivalente) estamos generando un [Repositorio Local](#Local) que representa de forma logica nuestro [Working Directory](#Working-Directory). Si escribimos nuevo código, git trackea (nota) las diferencias en los archivos con respecto al último cambio almacenado en [local](#Local). Para que nuestros cambios físicos (crear, modificar o eliminar algun archivo) se almacenen efectivamente en el [repositorio local](#Local), se debe realizar un [commit](#Commit) (que es un contenedor con los cambios que realizamos, junto a un ID, el autor de los cambios y una fecha). El repositorio local se maneja 100% con [commits](#Commit).
 
-Cuando tenemos cambios en archivos, pero estos aún no han sido incluidos en un [commit](#Commit), se les dice que están en [Staging Area](#Staging-Area), y representa todos los archivos que git detectó una diferencia con respecto al último [commit](#Commit) que posee en nuestro repo local. Con lo que está en "Staging Area" podemos o realizar un [commit](#Commit) para que pertenezca oficialmente a nuestro repo local, así como borrarlos y dejar los archivos como estaban antes.
+Cuando hay cambios en algunos archivos, pero estos aún no han sido incluidos en un [commit](#Commit), estos estan en el [Staging Area](#Staging-Area) (que representa a todos los archivos que git detectó una diferencia con respecto al último [commit](#Commit) que posee en nuestro repositorio local). Con lo que está allí podemos realizar un [commit](#Commit) para que sea agregado oficialmente a nuestro repo local o remover estos cambios de este area y dejar los archivos como estaban antes.
 
-El repositorio que se encuentra almacenado en GitHub (u otra plataforma) para todos los miembros del equipo se denomina `Repositorio Remoto`; Git también "trackea" la diferencia entre nuestro repositorio local ("Origin") y el remoto. Podemos traer [commits](#Commit) que hayan subido al remoto otros compañeros nuestros de trabajo a nuestro repositorio local, así como subir [commits](#Commit) de nuestro local al remoto y mantenernos sincronizados. La comunicación entre cambios locales nuestros y cambios de nuestros compañeros ya subidos al remoto, se realiza siempre por commits.
-
-> Para los comandos más importantes en la comunicación del working tree de Git, consultar en el Glosario de la sección siguiente.
+El repositorio que se encuentra almacenado en GitHub (u otra plataforma) para todos los miembros del equipo se denomina [Repositorio Remoto](#Remote), referenciado como ***Origin***. Git también rastrea la diferencia entre nuestro repositorio local y el remoto. Es posible traer ([pull](#Pull)) al [repositorio local](#Local) los [commits](#Commit) que hayan subido al [remoto](#Remote) otros compañeros, así como subir ([push](#Push)) [commits](#Commit) en el sentido inverso al anterior y mantenernos sincronizados.
 
 
 ## Glosario
@@ -105,18 +103,6 @@ El repositorio que se encuentra almacenado en GitHub (u otra plataforma) para to
 ### Status
 > Ver el estado general de mi repositorio [local](#Local) en la [branch](#Branch) actual, con respecto a [remoto](#Remote). Me dirá en que branch estoy, cuantos commits tengo por enviar, cuantos cambios tengo en "Staging Area" sin aun haberlos metido en un commit nuevo, etc... GitKraken ofrece esta información de forma visual en la vista principal del repositorio, pero por consola se debería escribir `git status`.
 
-### Reset
-> Si queremos deshacer cambios locales que aún no hemos enviado al remoto, podemos realizar un "reset" de nuestros cambios. El reset puede revertir uno o más commmits locales. En Gitkraken se hace un reset tocando el ícono de la papelera al lado de nuestros cambios. Hay 3 tipos de reset. El `git reset --soft` que solamente mueve "HEAD" hacia atrás sin borrar los cambios, es solo para ver nuestro codigo en una version anterior antes de los cambios; el `git reset --mixed` (el default) que borrará la cantidad de commits que le indiquemos, pero los cambios no se pierden sino que se vuelven al "Staging Area" y nos dejará hacer nuevos commits; y el `git reset --hard` que es peligroso pues borra directamente la cantidad de commits solicitados y estos se "pierden para siempre".
-
-### Stash
-> Si tenemos cambios sin commitear y cambiamos de [branch](#Branch), podemos "guardarlos" temporalmente en un "vault" llamado Stash. Más adelante si los necesitamos de vuelta en la misma branch u otra, se realiza un Stash Pop que recupera el código y lo coloca devuelta en [Staging Area](#Staging-Area).
-
-### Fetch
-> Traer los cambios del repositorio [remoto](#Remote) al [local](#Local), pero sin reemplazar los archivos físicos. Esto es para visualizar los cambios pero sin reemplazarlos aún (a diferencia de [Pull](#Pull)), pues a lo mejor queremos hacer otra tarea antes de reemplazarlos. Podría decirse que, en el fondo, un [Pull](#Pull) es un [Fetch](#Fetch) + un [Merge](#Merge) a nuestros archivos locales.
-
-### Rebase
-> Un rebase modifica la historia de [commits](#Commit) de nuestro repositorio, por lo tanto es peligroso. Podemos necesitarlo por ejemplo cuando creamos commits incorrectos y queremos cambiarlos, pero estos ya los subimos al remoto con [push](#Push) y nos arrepentimos. Con rebase se puede cambiar el nombre de [commits](#Commit) en remoto, unificarlos diferentes en uno o borrarlos, entre otras cosas. Estando en la branch en la que queremos modificar (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir `git rebase -i HEAD~n`, donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i nos indica que será un rebase interactivo (te da instrucciones de que se puede hacer con cada commit, sea unificar, renobrar, borrar, etc...).
-
 ### Otras Guías
 > Para una explicación más completa de muchos de estos conceptos y como realizar varios de los casos de uso principales con Git y haciendo uso de Gitkraken, consultar: [https://elc.github.io/posts/git-guide-with-visual-interface/es/](https://elc.github.io/posts/git-guide-with-visual-interface/es/) de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo [https://github.com/ELC](https://github.com/ELC).
 
@@ -171,3 +157,18 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 
 12. Agregar el repositorio de la asignatura a [remote](#Remote), de manera de que pueda tener los ultimas actualizaciones a los ejercicios y sea capaz de realizar [pull requests](#Pull-Request) a este
 ![tutoGit_P17](https://user-images.githubusercontent.com/41701343/111102253-697f4080-852a-11eb-8c81-a59aed316325.png)
+
+
+## Extra
+
+### Reset
+> Si queremos deshacer cambios locales que aún no hemos enviado al remoto, podemos realizar un "reset" de nuestros cambios. El reset puede revertir uno o más commmits locales. En Gitkraken se hace un reset tocando el ícono de la papelera al lado de nuestros cambios. Hay 3 tipos de reset. El `git reset --soft` que solamente mueve "HEAD" hacia atrás sin borrar los cambios, es solo para ver nuestro codigo en una version anterior antes de los cambios; el `git reset --mixed` (el default) que borrará la cantidad de commits que le indiquemos, pero los cambios no se pierden sino que se vuelven al "Staging Area" y nos dejará hacer nuevos commits; y el `git reset --hard` que es peligroso pues borra directamente la cantidad de commits solicitados y estos se "pierden para siempre".
+
+### Stash
+> Si tenemos cambios sin commitear y cambiamos de [branch](#Branch), podemos "guardarlos" temporalmente en un "vault" llamado Stash. Más adelante si los necesitamos de vuelta en la misma branch u otra, se realiza un Stash Pop que recupera el código y lo coloca devuelta en [Staging Area](#Staging-Area).
+
+### Fetch
+> Traer los cambios del repositorio [remoto](#Remote) al [local](#Local), pero sin reemplazar los archivos físicos. Esto es para visualizar los cambios pero sin reemplazarlos aún (a diferencia de [Pull](#Pull)), pues a lo mejor queremos hacer otra tarea antes de reemplazarlos. Podría decirse que, en el fondo, un [Pull](#Pull) es un [Fetch](#Fetch) + un [Merge](#Merge) a nuestros archivos locales.
+
+### Rebase
+> Un rebase modifica la historia de [commits](#Commit) de nuestro repositorio, por lo tanto es peligroso. Podemos necesitarlo por ejemplo cuando creamos commits incorrectos y queremos cambiarlos, pero estos ya los subimos al remoto con [push](#Push) y nos arrepentimos. Con rebase se puede cambiar el nombre de [commits](#Commit) en remoto, unificarlos diferentes en uno o borrarlos, entre otras cosas. Estando en la branch en la que queremos modificar (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir `git rebase -i HEAD~n`, donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i nos indica que será un rebase interactivo (te da instrucciones de que se puede hacer con cada commit, sea unificar, renobrar, borrar, etc...).
