@@ -15,6 +15,7 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 |Requisito|Descripción|Link|
 |:-|:-|:-|
 |Visual Studio .Net|Entorno para programar. Es deseable tener descargada la última versión|[https://visualstudio.microsoft.com/es/downloads/](https://visualstudio.microsoft.com/es/downloads/)|
+|Git|Sistema de control de versiones distribuido. Multiplataforma y de codigo abierto|[https://git-scm.com/](https://git-scm.com/)|
 |Usuario GitHub|Repositorios online|[https://github.com/join](https://github.com/join?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home)|
 |GitKraken|Control de versiones con repositorios Git locales|[https://www.gitkraken.com/download](https://www.gitkraken.com/download)|
 
@@ -34,74 +35,74 @@ El repositorio que se encuentra almacenado en GitHub (u otra plataforma) para to
 ## Glosario
 
 ### Repositorio
-> Almacenamiento virtual de tu proyecto. Te permite guardar versiones del código a las que puedes acceder cuando lo necesites.
+> Almacenamiento virtual de tu proyecto. Permite guardar versiones del código a las que es posible acceder cuando se necesite.
 
 ### Control de Versiones
-> Gestión de los cambios que se le realizan al código, puede ser manual (utilizando prefijos vN.M y guardando los archivos iterativamente en el equipo o en Drive por ejemplo) o utilizando alguna herramienta que lo facilite (Git en este caso).
+> Gestión de los cambios que se le realizan al código, puede ser manual (utilizando prefijos vN.M y guardando los archivos iterativamente en el equipo o en Google Drive por ejemplo) o utilizando alguna herramienta que lo facilite (Git en este caso).
 
 ### Git
-> Sistema de control de versiones distribuido, esto significa que sirve para gestionar los cambios en el código de forma local y en un repositorio remoto que es ejecutado en un servidor central. Es gratis y opensource. Web para descargar: [https://git-scm.com/](https://git-scm.com/).
+> Sistema de control de versiones distribuido, esto significa que sirve para gestionar los cambios en el código de forma local y en un repositorio remoto que es ejecutado en un servidor central. Es gratis y de codigo abierto. Web para descargar: [https://git-scm.com/](https://git-scm.com/).
 
 ### Fork
 > Generar un repositorio bifurcado que está asociado tanto al repositorio original como al propio. Permite probar cambios que no son deseables de hacer en el original y a la vez mantenerse al día con los cambios que puedan surgir allí.
 
 ### Clone
-> Equivalente a descargar los binarios del repositorio. Se debe copiar la dirección URI del repositorio que se quiere clonar. Al usar esta herramienta  se optimiza la descarga de código y a la vez mejora la usabilidad. Un ejemplo sería: encuentro un repositorio interesante en GitHub y deseo tenerlo localmente en mi computadora, en vez de descargar el repo manualmente, lo clono desde el remoto a través de su dirección URI y se genera el repo local en mi computadora directamente.
+> Equivalente a descargar los binarios del repositorio. Se debe copiar la dirección URI del repositorio que se quiere clonar. Al usar esta herramienta se optimiza la descarga de código y a la vez se reduce el numero de pasos requeridos típicamente. Un ejemplo sería: encontrar un repositorio interesante en GitHub y para tenerlo localmente en el equipo, en vez de descargarlo manualmente, se clona a través de su dirección URI y se genera el repositorio local directamente.
 
 ### Staging Area
-> Área donde se congelan los cambios realizados en los archivos que se agregaron a está. Son todos los cambios que tenemos de forma local pero que aún no han sido incluídos en un [commit](#Commit) y por lo tanto no podemos enviarlos aún a nuestro repositorio remoto.
+> Área donde se congelan los cambios realizados en los archivos que se agregaron a está. Son cambios locales que aún no han sido incluidos en un [commit](#Commit) y por lo tanto no podemos enviarlos aún a nuestro repositorio remoto.
 
 ### Tracking
-> Tarea que realiza Git de realizar un seguimiento de los cambios nuevos que realizamos al escribir nuevo código con respecto a nuestros archivos locales, a su vez que con respecto a nuestro repositorio remoto. El tracking será de archivos nuevos, modificaciones o eliminaciones.
+> Tarea que realiza Git, que consiste en rastrear los cambios nuevos que se realizaron al escribir nuevo código con respecto a los archivos locales y a su vez que con respecto al repositorio remoto. El tracking será de archivos nuevos, modificaciones o eliminaciones.
 
 ### Gitignore
-> Se puede crear un archivo llamado ".gitignore" y escribir adentro archivos o carpetas a forma de "blacklist", es decir, lo que esté ahí adentro será ignorado por Git y no almacenará información de esos archivos (no tracking), no los subirá a remoto tampoco.
+> Se puede crear un archivo llamado ".gitignore" e incluir alli archivos o carpetas a forma de "blacklist", es decir, lo que esté ahí dentro será ignorado por Git y no almacenará información de esos archivos (no habrá tracking).
 
 ### Add
-> Cuando tenemos un archivo nuevo o algun tipo de cambio que Git no está trackeando, podemos agregarlo a nuestro [Staging Area](#Staging-Area) para (que este pueda entrar luego en un [commit](#Commit)) mediante `git add nombreArchivo`. Si queremos decirle que agregue todos nuestros cambios excepto archivos eliminados a staging area, usamos `git add .`. Si queremos decirle que agregue todos nuestros cambios excepto archivos nuevos a staging area, usamos `git add -u`. Si queremos que agregue TODOS sin exceptuar ninguno es `git add -A` (esta linea ejecuta `git add .` y luego `git add -u`).
+> Cuando se cuenta con un archivo nuevo o algun tipo de cambio que no esta contenido en el [Staging Area](#Staging-Area), es posible agregarlo a esta ultima mediante `git add nombreArchivo`. Si se quiere agregar todos los cambios, se utiliza `git add .`. Si se requiere agregar todos los cambios excepto archivos nuevos a la staging area, se usa `git add -u`.
 
 ### Branch
-> Cuando quieres realizar cambios es recomendable realizarlos en una “sección propia” o rama bifurcada desde algún punto de partida (commit específico) a donde subirás los cambios y podrán ser vistos en el control de versiones online como GitHub o GitLab, pero estos cambios no se ven reflejados en el Master de tu repositorio directamente, hasta que se realice un [merge](#Merge) de los cambios que hay en la Branch hacia Main. (Ejemplo: tengo que hacer una feature llamada “Login” para el usuario, creo una rama “login_user” y empiezo a subir mis cambios ahí. Cuando termino la feature, hago un [merge](#Merge) de la Branch login_user con Master y de esta forma todos nuestros cambios serán enviados al Main del proyecto). Puedes cambiar de rama con el comando `git checkout nombreBranch`.
+> Cuando se necesite realizar cambios es recomendable que esto se realize en una “sección propia” o rama bifurcada desde algún punto de partida (commit específico) a donde subir los cambios, de modo de que estos ser visibles para los demás en el [repositorio remoto](#Remote). Estos cambios no se ven reflejados en Master/Main del repositorio hasta que se realice un [merge](#Merge) de la Branch hacia Main. (Ejemplo: codificar una feature llamada “Login”, se crea una rama “login_user” y se suben/pushean los cambios alli. Cuando se termina de trabajar con la feature, se hace un [merge](#Merge) de la Branch login_user a Master y de esta forma todos nuestros cambios serán enviados al Main del proyecto). Es posible cambiar de rama con el comando `git checkout nombreBranch`.
 
 ### Commit
-> Información que contiene los nuevos cambios que se realizaron en el código, quien lo realizó, un ID y la fecha. Al realizar commits, podemos subirlos de nuestro repo local al repositorio remoto compartido con el equipo, mediante `git push origin -u nombreBranch`. También podemos traernos los Commits que realizaron otros miembros del equipo y subieron al remoto para mantenernos actualizados con todos los cambios, mediante `git pull`. Tener en cuenta que [Push](#Push) y [Pull](#Pull) funciona por Branch, por lo que si se quiere es traer o enviar Commits a otras Branches, se debe cambiar de Branch haciendo `git checkout nombreBranch`.
+> Información que contiene los nuevos cambios que se realizaron en el código, quien lo realizó, un ID y la fecha. Al realizar commits, se les puede subir al repositorio remoto compartido, mediante `git push origin -u nombreBranch`. También es posible traer los Commits que realizaron otros miembros del equipo y subieron al remoto, mediante `git pull`. Tener en cuenta que [Push](#Push) y [Pull](#Pull) funcionan por Branch, por lo que si se quiere es traer o enviar Commits a otras Branches, se debe cambiar de Branch haciendo `git checkout nombreBranch`.
 
 ### Pull
-> Descargar los cambios presentes en repositorio [remote] a local. Todos los [commit](#Commit) subidos al remoto por por los demás integrantes del grupo serán descargados en tu repo local para mantenerte sincronizado. Solo trae los cambios que detecta en la rama actual.
+> Descargar los cambios presentes en repositorio [remote] a local. Todos los [commit](#Commit) subidos al remoto por los demás integrantes del grupo serán descargados en el repositorio local para mantenerlo sincronizado. Solo trae los cambios que detecta en la rama actual.
 
 ### Push
-> Subir los cambios realizados en local al repositorio [remote](#Remote). Solo sube todos los cambios que se encuentren dentro de Commits. Los demás integrantes del equipo podrán descargar tus cambios y mantenerse sincronizados. Solo sube al remoto los commits que detecta en la rama actual.
+> Subir los cambios realizados en local al repositorio [remote](#Remote). Solo sube todos los cambios que se encuentren dentro de Commits. Solo sube al remoto los que detecte en la rama actual.
 
 ### Merge
-> Agregar los cambios presentes en una [branch](#B) determinada a otra [branch](#Branch). Ejemplo: realizé 3 commits en una branch llamada "register_user" y ahora quiero que estos commits estén en master porque completé la tarea y ya no trabajaré en esa [branch](#Branch), entonces se "mergean" los [commits](#Commit) de register_user en Master.
+> Agregar los cambios presentes en una [branch](#B) determinada a otra [branch](#Branch). Ejemplo: 3 commits en una branch llamada "register_user" se desea que estén en master porque se finalizo la tarea, entonces se "mergean" los [commits](#Commit) de register_user en Master.
 
 ### Pull Request
-> Se podría llamar “Merge Request” que es más exacto (En GitLab posee ese nombre). Es una solicitud que realiza un integrante del equipo hacia los demás, pidiendo agregar los cambios realizados en una determinada [branch](#Branch) a otra. Esto se gestiona por determinados usuarios revisores que pueden optar por aprobar lo realizado, hacer comentarios para requerir cambios o preguntas para aclarar porqué se procedió de determinada manera. Los comentarios se realizan online en Github y pueden ser comentarios generales, por archivo o por linea. Una vez que los reviewers aprueban los cambios, se acepta la Pull Request y los [commits](#Commit) nuevos se mergean (por default) a la [branch](#Branch) correspondiente.
+> Se podría llamar “Merge Request” que es más exacto (En GitLab, la competencia de GitHub, posee ese nombre). Es una solicitud que realiza un integrante del equipo hacia los demás, pidiendo agregar los cambios realizados en una determinada [branch](#Branch) a otra. Esto se gestiona por determinados usuarios revisores que pueden optar por aprobar lo realizado, hacer comentarios para requerir cambios o preguntas para aclarar porqué se procedió de determinada manera. Los comentarios se realizan online en Github y pueden ser comentarios generales, por archivo o por linea. Una vez que los reviewers aprueban los cambios, se acepta la Pull Request y los [commits](#Commit) nuevos se mergean (por default) a la [branch](#Branch) correspondiente.
 
 ### Remote
-> Refiere al repositorio central que es ejecutado en un servidor con determinado nivel acceso para cada uno de los desarrolladores. Es el repositorio que almacena github y al cual se le realiza [push](#Push) para enviar [commits](#Commit) y Pull para traer [commits](#Commit) de los demás integrantes del equipo.
+> Refiere al repositorio central que es ejecutado en un servidor con determinado nivel acceso para cada uno de los desarrolladores. Es el repositorio que almacena GitHub en sus servidores y al cual se le realiza [push](#Push) para enviar [commits](#Commit) y Pull para traer [commits](#Commit) de los demás integrantes del equipo.
 
 ### Local
-> Es el repositorio local manejado por cada desarrollador en sus equipos. Se comunica con el repositorio [remoto](#Remote) alojado en GitHub mediante un area intermediaria a la cual denominaremos [Staging Area](#Staging-Area), en donde enviaremos nuestros commits con Push, y recibiremos commits de los demas integrantes del equipo que hayan subido sus [commits](#Commit) con Pull.
+> Es el repositorio local manejado por cada desarrollador en sus equipos personales. Se comunica con el repositorio [remoto](#Remote) alojado en GitHub mediante un área intermediaria a la cual denominaremos [Staging Area](#Staging-Area), en donde se envían commits con Push y reciben de los demas integrantes del equipo que hayan subido sus [commits](#Commit) con Pull.
 
 ### Master
-> [Branch](#Branch) principal del repositorio, en esta generalmente se cuenta con la versión más estable del código. Una forma recomendada de trabajar es hacer una branch por cada nuevo requerimiento o caso de uso que estemos trabajando y subamos commits allí, y luego de terminarlo recién ahí pasarlos a "Master" (mediante un [merge](#Merge) directo o una [Pull Request](#Pull-Request) en donde los otros integrantes deben aprobar los cambios antes).
+> [Branch](#Branch) principal del repositorio, en esta generalmente se cuenta con la versión más estable del código. Una forma recomendada de trabajar es hacer una branch por cada nuevo requerimiento o caso de uso que se este trabajando y subir los commits allí, para una vez terminado pasarlos a "Master" (mediante un [merge](#Merge) directo o una [Pull Request](#Pull-Request) en donde otros contribuidores deben aprobar los cambios antes).
 > Nota: desde 2020 en Git se reemplazó la branch Master por “Main”. Solamente los repositorios creados posteriormente a 2020 poseen este cambio.
 
 ### Working Directory
-> Suele pasar como sinónimo a repositorio local, pero no lo es. El Working Directory representa a los archivos físicos reales en tu computadora, mientras que el repositorio local (origin=¿) es una representación virtual del mismo. Cuando tenemos cambios nuevos locales mientras escribimos nuevo código, Git trackea estos cambios comparando el Working Directory con Origin (Local Repo).
+> Suele tomarse como sinónimo de repositorio local, lo cual es incorrecto. El Working Directory representa los archivos físicos reales en del equipo, mientras que el repositorio local es una representación virtual del mismo. Cuando haya cambios nuevos locales mientras se escribe nuevo código, Git trackea estos cambios comparando el Working Directory con el repositorio local.
 
 ### Commits Log
-> Historial de commits. Cada repositorio tiene uno, y te cuenta "la historia" de los commits con autores, cambios y fechas. Todos los cambios que hagamos en el repo son guardados automaticamente en el log. Puede accederse a él mediante `git log`.
+> Historial de commits. Cada repositorio tiene uno. Muestra el historial de los commits con autores, cambios y fechas. Todos los cambios que se hagan en el repositorio son guardados automáticamente en el log. Puede accederse a él mediante `git log` o `git log --oneline` para una versión simpliicada.
 
 ### Commits Tree
-> Ver el Historial de commits de nuestro repo ([Commits Log](#Commits-Log)) como un árbol con sus ramificaciones ([Branches](#Branch)). GitKraken presenta un Tree en la vista principal del repositorio.
+> Ver el Historial de commits del repositorio ([Commits Log](#Commits-Log)) como un árbol con sus ramificaciones ([Branches](#Branch)). GitKraken presenta un Tree en la vista principal del repositorio.
 
 ### HEAD
-> Posición en la que nos encontramos en el [Commit Tree](#Commits-Tree). Por default siempre que hagamos pull estaremos viendo hasta el último de los commits, pero podemos "volver atrás" versiones de nuestro código moviendo el "HEAD" hacia otro punto de la historia (ejemplo: quiero ver como era el codigo hace una semana, y se hicieron 5 commits esta semana, entonces vuelvo 5 commits atrás y veré esa versión antigua de mi código sin los cambios nuevos). Mover el head no borra ni crea commits nuevos, no es peligroso.
+> Posición en la que se encontra actualmente en el [Commit Tree](#Commits-Tree). Por default siempre que se haga pull se estara viendo hasta el último de los commits, pero podemos "volver atrás" versiones del código desplazando el "HEAD" hacia otro punto de la historia (ejemplo: para ver como era el codigo hace una semana (se hicieron 5 commits), entonces se hace checkout a 5 commits atrás. En esa versión antigua del código no se cuenta con los cambios nuevos). Mover el HEAD no borra ni crea commits nuevos, por si mismo no es una operación peligrosa en absoluto.
 
 ### Status
-> Ver el estado general de mi repositorio [local](#Local) en la [branch](#Branch) actual, con respecto a [remoto](#Remote). Me dirá en que branch estoy, cuantos commits tengo por enviar, cuantos cambios tengo en "Staging Area" sin aun haberlos metido en un commit nuevo, etc... GitKraken ofrece esta información de forma visual en la vista principal del repositorio, pero por consola se debería escribir `git status`.
+> Ver el estado general del repositorio [local](#Local) en la [branch](#Branch) actual, con respecto a [remoto](#Remote). Muestra en que branch se encuentra, cuantos commits hay, cuantos cambios se presentan en la "Staging Area", etc... GitKraken ofrece esta información de forma visual en la vista principal del repositorio, pero por consola se debería escribir `git status`.
 
 ### Otras Guías
 > Para una explicación más completa de muchos de estos conceptos y como realizar varios de los casos de uso principales con Git y haciendo uso de Gitkraken, consultar: [https://elc.github.io/posts/git-guide-with-visual-interface/es/](https://elc.github.io/posts/git-guide-with-visual-interface/es/) de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo [https://github.com/ELC](https://github.com/ELC).
