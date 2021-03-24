@@ -74,7 +74,7 @@ El repositorio que se encuentra almacenado en GitHub (u otra plataforma) para to
 > Subir los cambios realizados en local al repositorio [remote](#Remote). Solo sube todos los cambios que se encuentren dentro de Commits. Solo sube al remoto los que detecte en la rama actual.
 
 ### Merge
-> Agregar los cambios presentes en una [branch](#B) determinada a otra [branch](#Branch). Ejemplo: 3 commits en una branch llamada "register_user" se desea que estén en master porque se finalizo la tarea, entonces se "mergean" los [commits](#Commit) de register_user en Master.
+> Agregar los cambios presentes en una [branch](#Branch) determinada a otra [branch](#Branch). Ejemplo: 3 commits en una branch llamada "register_user" se desea que estén en master porque se finalizo la tarea, entonces se "mergean" los [commits](#Commit) de register_user en Master.
 
 ### Pull Request
 > Se podría llamar “Merge Request” que es más exacto (En GitLab, la competencia de GitHub, posee ese nombre). Es una solicitud que realiza un integrante del equipo hacia los demás, pidiendo agregar los cambios realizados en una determinada [branch](#Branch) a otra. Esto se gestiona por determinados usuarios revisores que pueden optar por aprobar lo realizado, hacer comentarios para requerir cambios o preguntas para aclarar porqué se procedió de determinada manera. Los comentarios se realizan online en Github y pueden ser comentarios generales, por archivo o por linea. Una vez que los reviewers aprueban los cambios, se acepta la Pull Request y los [commits](#Commit) nuevos se mergean (por default) a la [branch](#Branch) correspondiente.
