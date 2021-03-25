@@ -159,6 +159,11 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 12. Agregar el repositorio de la asignatura a [remote](#Remote), de manera de que pueda tener los ultimas actualizaciones a los ejercicios y sea capaz de realizar [pull requests](#Pull-Request) a este
 ![tutoGit_P17](https://user-images.githubusercontent.com/41701343/111102253-697f4080-852a-11eb-8c81-a59aed316325.png)
 
+13. [Pullear](#Pull) los ultimos cambios presentes en la branch [Main](#Master) del repositorio [remoto](#Remote) de la catedra y [mergear](#Merge) esta con la branch [Main](#Master) del repositorio forkeado local. ![Demostracion en vídeo](https://user-images.githubusercontent.com/41701343/112508562-6d069900-8d6e-11eb-9333-0835db176e1f.mp4)
+
+
+
+
 
 ## Extra
 
@@ -172,4 +177,4 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 > Traer los cambios del repositorio [remoto](#Remote) al [local](#Local), pero sin reemplazar los archivos físicos. Esto es para visualizar los cambios pero sin reemplazarlos aún (a diferencia de [Pull](#Pull)), pues a lo mejor queremos hacer otra tarea antes de reemplazarlos. Podría decirse que, en el fondo, un [Pull](#Pull) es un [Fetch](#Fetch) + un [Merge](#Merge) a nuestros archivos locales.
 
 ### Rebase
-> Un rebase modifica la historia de [commits](#Commit) de nuestro repositorio, por lo tanto es peligroso. Podemos necesitarlo por ejemplo cuando creamos commits incorrectos y queremos cambiarlos, pero estos ya los subimos al remoto con [push](#Push) y nos arrepentimos. Con rebase se puede cambiar el nombre de [commits](#Commit) en remoto, unificarlos diferentes en uno o borrarlos, entre otras cosas. Estando en la branch en la que queremos modificar (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir `git rebase -i HEAD~n`, donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i nos indica que será un rebase interactivo (te da instrucciones de que se puede hacer con cada commit, sea unificar, renobrar, borrar, etc...).
+> Un rebase modifica la historia de [commits](#Commit) de nuestro repositorio, por lo tanto es peligroso. Podemos necesitarlo por ejemplo cuando creamos commits incorrectos y queremos cambiarlos, pero estos ya los subimos al remoto con [push](#Push) y nos arrepentimos. Con rebase se puede cambiar el nombre de [commits](#Commit) en remoto, unificarlos diferentes en uno o borrarlos, entre otras cosas. Estando en la branch en la que queremos modificar (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir `git rebase -i HEAD~n`, donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i nos indica que será un rebase interactivo (te da instrucciones de que se puede hacer con cada commit, sea unificar, renobrar, borrar, etc..
