@@ -114,7 +114,7 @@ El repositorio que se encuentra almacenado en GitHub (u otra plataforma) para to
 La forma de trabajo que se va a utilizar este año consiste en los siguientes pasos:
 > Esta se encuentra inspirada por la forma de trabajo que fue implementada por otros adscriptos en otra materia electiva de la UTN llamdada "Soporte a la Gestión de Datos con Programación Visual"
 
-##### Donde diga `practica-2021` remplazar por `Labs`
+##### IMPORTANTE: Donde diga `practica-2021` remplazar por `Labs`
 
 1. [Forkear](#Fork) el repositorio oficial de practica seleccionando su usuario de GitHub
 ![tutoGit_P0](https://user-images.githubusercontent.com/41701343/111100579-d2fd5000-8526-11eb-83a3-119c0b2ce18e.png)
@@ -158,13 +158,15 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 11. Observar como los commits en la [branch "main"](#Master) están tanto en [local](#Local) (símbolo notebook) como en [remoto](#Remote) (icono del usuario de GitHub). Para cambiar esto [pushear](#Push) los cambios a remoto con el siguiente botón
 ![tutoGit_P16](https://user-images.githubusercontent.com/41701343/111102098-0e4d4e00-852a-11eb-8c0c-8e009a2a0883.png)
 
-12. Agregar el repositorio de la asignatura a [remote](#Remote), de manera de que pueda tener los ultimas actualizaciones a los ejercicios y sea capaz de realizar [pull requests](#Pull-Request) a este
+12. Una vez que se termino de trabajar con el laboratorio como se observa en la siguiente imagen: 
+![tutoGit_P18](https://user-images.githubusercontent.com/41701343/112549216-33e51d80-8d9c-11eb-82ec-a1392966c2a1.png)
+[mergear](#Merge) la [branch actual del ejercicio](#Branch) con la [branch main](#Branch) del [repositorio local](#Local), arrastrando la primera hacia la segunda
+
+
+13. Agregar el repositorio de la asignatura a [remote](#Remote), de manera de que pueda tener los ultimas actualizaciones a los ejercicios y sea capaz de realizar [pull requests](#Pull-Request) a este
 ![tutoGit_P17](https://user-images.githubusercontent.com/41701343/111102253-697f4080-852a-11eb-8c81-a59aed316325.png)
 
-13. [Pullear](#Pull) los ultimos cambios presentes en la branch [Main](#Master) del repositorio [remoto](#Remote) de la catedra y [mergear](#Merge) esta con la branch [Main](#Master) del repositorio forkeado local. ![Demostracion en vídeo](https://user-images.githubusercontent.com/41701343/112508562-6d069900-8d6e-11eb-9333-0835db176e1f.mp4)
-
-
-
+14. [Pullear](#Pull) los ultimos cambios presentes en la branch [Main](#Master) del repositorio [remoto](#Remote) de la catedra y [mergear](#Merge) esta con la branch [Main](#Master) del repositorio forkeado local. ![Demostracion en vídeo](https://user-images.githubusercontent.com/41701343/112508562-6d069900-8d6e-11eb-9333-0835db176e1f.mp4)
 
 
 ## Extra
