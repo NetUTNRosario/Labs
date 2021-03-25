@@ -114,6 +114,8 @@ El repositorio que se encuentra almacenado en GitHub (u otra plataforma) para to
 La forma de trabajo que se va a utilizar este año consiste en los siguientes pasos:
 > Esta se encuentra inspirada por la forma de trabajo que fue implementada por otros adscriptos en otra materia electiva de la UTN llamdada "Soporte a la Gestión de Datos con Programación Visual"
 
+##### Donde diga `practica-2021` remplazar por `Labs`
+
 1. [Forkear](#Fork) el repositorio oficial de practica seleccionando su usuario de GitHub
 ![tutoGit_P0](https://user-images.githubusercontent.com/41701343/111100579-d2fd5000-8526-11eb-83a3-119c0b2ce18e.png)
 
