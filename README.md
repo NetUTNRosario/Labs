@@ -191,7 +191,7 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 
 ![tutoGit_P15](https://user-images.githubusercontent.com/41701343/111101922-a991f380-8529-11eb-9119-cef1a468d9e4.png)
 
-***10.b. En VS ir a *Ver*/*Cambios de GIT* (una vez desplegado se mantiene a la izquierda como opcion)***
+***10.b. En VS ir a *Ver*/*Cambios de GIT* (una vez desplegado se mantiene a la izquierda como opción)***
 
 11. Observar como los commits en la [branch "main"](#Master) están tanto en [local](#Local) (símbolo notebook) como en [remoto](#Remote) (icono del usuario de GitHub). Para cambiar esto [pushear](#Push) los cambios a remoto con el siguiente botón
 
@@ -205,7 +205,7 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 
 [mergear](#Merge) la [branch actual del ejercicio](#Branch) con la [branch main](#Branch) del [repositorio local](#Local), arrastrando la primera hacia la segunda
 
-***12.b. En VS ir a *Ver*/*Repositorio de GIT* y hacer click derecho en la rama del ejercicio para que aparezca el menu desplegable, alli seleccionar la opcion resaltada***
+***12.b. En VS ir a *Ver*/*Repositorio de GIT* y hacer click derecho en la rama del ejercicio para que aparezca el menú desplegable, allí seleccionar la opción resaltada***
 
 ![imagen](https://user-images.githubusercontent.com/41701343/112893491-220fbd00-90b1-11eb-954b-f542c174ef6a.png)
 
@@ -216,9 +216,9 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 
 ***13.b. En VS esto ya esta presente por default***
 
-14. [Pullear](#Pull) los ultimos cambios presentes en la branch [Main](#Master) del repositorio [remoto](#Remote) de la catedra y [mergear](#Merge) esta con la branch [Main](#Master) del repositorio forkeado local. ![Demostracion en vídeo](https://user-images.githubusercontent.com/41701343/112508562-6d069900-8d6e-11eb-9333-0835db176e1f.mp4)
+14. [Pullear](#Pull) los últimos cambios presentes en la branch [Main](#Master) del repositorio [remoto](#Remote) de la catedra y [mergear](#Merge) esta con la branch [Main](#Master) del repositorio forkeado local. ![Demostracion en vídeo](https://user-images.githubusercontent.com/41701343/112508562-6d069900-8d6e-11eb-9333-0835db176e1f.mp4)
 
-***14.b. En VS ir a *Ver*/*Repositorio de GIT* y hacer click derecho en la rama main remota para que aparezca el menu desplegable, alli seleccionar la opcion resaltada***
+***14.b. En VS ir a *Ver*/*Repositorio de GIT* y hacer click derecho en la rama main remota para que aparezca el menú desplegable, allí seleccionar la opción resaltada***
 
 ![imagen](https://user-images.githubusercontent.com/41701343/112894489-4fa93600-90b2-11eb-9fbe-27750a43c15e.png)
 
@@ -226,13 +226,13 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 ## Extra
 
 ### Reset
-> Si queremos deshacer cambios locales que aún no hemos enviado al remoto, podemos realizar un "reset" de nuestros cambios. El reset puede revertir uno o más commmits locales. En Gitkraken se hace un reset tocando el ícono de la papelera al lado de nuestros cambios. Hay 3 tipos de reset. El `git reset --soft` que solamente mueve "HEAD" hacia atrás sin borrar los cambios, es solo para ver nuestro codigo en una version anterior antes de los cambios; el `git reset --mixed` (el default) que borrará la cantidad de commits que le indiquemos, pero los cambios no se pierden sino que se vuelven al "Staging Area" y nos dejará hacer nuevos commits; y el `git reset --hard` que es peligroso pues borra directamente la cantidad de commits solicitados y estos se "pierden para siempre".
+> Si se quiere deshacer cambios locales que aún no se han enviado al remoto, es posible realizar un "reset" de nuestros cambios. El reset puede revertir uno o más commmits locales. En Gitkraken se hace un reset tocando el ícono de la papelera al lado de nuestros cambios. Hay 3 tipos de reset. El `git reset --soft` que solamente mueve "HEAD" hacia atrás sin borrar los cambios, es solo para ver nuestro codigo en una version anterior antes de los cambios; el `git reset --mixed` (el default) que borrará la cantidad de commits que le indiquemos, pero los cambios no se pierden sino que se vuelven al "Staging Area" y se dejará hacer nuevos commits; y el `git reset --hard` que es peligroso pues borra directamente la cantidad de commits solicitados y estos se "pierden para siempre".
 
 ### Stash
-> Si tenemos cambios sin commitear y cambiamos de [branch](#Branch), podemos "guardarlos" temporalmente en un "vault" llamado Stash. Más adelante si los necesitamos de vuelta en la misma branch u otra, se realiza un Stash Pop que recupera el código y lo coloca devuelta en [Staging Area](#Staging-Area).
+> Si hay cambios sin commitear y se quiere cambiar de [branch](#Branch), es posible "guardarlos" temporalmente en un "vault" llamado Stash. Más adelante si son necesarios nuevamente en la misma branch u otra, se realiza un Stash Pop que recupera el código y lo coloca devuelta en [Staging Area](#Staging-Area).
 
 ### Fetch
-> Traer los cambios del repositorio [remoto](#Remote) al [local](#Local), pero sin reemplazar los archivos físicos. Esto es para visualizar los cambios pero sin reemplazarlos aún (a diferencia de [Pull](#Pull)), pues a lo mejor queremos hacer otra tarea antes de reemplazarlos. Podría decirse que, en el fondo, un [Pull](#Pull) es un [Fetch](#Fetch) + un [Merge](#Merge) a nuestros archivos locales.
+> Traer los cambios del repositorio [remoto](#Remote) al [local](#Local), pero sin reemplazar los archivos físicos. Esto es para visualizar los cambios pero sin reemplazarlos aún (a diferencia de [Pull](#Pull)), pues a lo mejor se quiere hacer otra tarea antes de reemplazarlos. Podría decirse que, en el fondo, un [Pull](#Pull) es un [Fetch](#Fetch) + un [Merge](#Merge) a nuestros archivos locales.
 
 ### Rebase
-> Un rebase modifica la historia de [commits](#Commit) de nuestro repositorio, por lo tanto es peligroso. Podemos necesitarlo por ejemplo cuando creamos commits incorrectos y queremos cambiarlos, pero estos ya los subimos al remoto con [push](#Push) y nos arrepentimos. Con rebase se puede cambiar el nombre de [commits](#Commit) en remoto, unificarlos diferentes en uno o borrarlos, entre otras cosas. Estando en la branch en la que queremos modificar (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir `git rebase -i HEAD~n`, donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i nos indica que será un rebase interactivo (te da instrucciones de que se puede hacer con cada commit, sea unificar, renombrar, borrar, etc..
+> Un rebase modifica la historia de [commits](#Commit) del repositorio, por lo tanto es peligroso. Tal vez se necesite por ejemplo cuando se crean commits incorrectos y se quiere cambiarlos, pero estos ya estan subidos al remoto con [push](#Push). Con rebase se puede cambiar el nombre de [commits](#Commit) en remoto, unificarlos diferentes en uno o borrarlos, entre otras cosas. Estando en la branch en la que se desea modificar esto (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir `git rebase -i HEAD~n`, donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i indica que será un rebase interactivo (da instrucciones de que se puede hacer con cada commit, sea unificar, renombrar, borrar, etc... por lo tanto es peligroso. Podemos necesitarlo por ejemplo cuando creamos commits incorrectos y queremos cambiarlos, pero estos ya los subimos al remoto con [push](#Push) y nos arrepentimos. Con rebase se puede cambiar el nombre de [commits](#Commit) en remoto, unificarlos diferentes en uno o borrarlos, entre otras cosas. Estando en la branch en la que queremos modificar (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir `git rebase -i HEAD~n`, donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i nos indica que será un rebase interactivo (te da instrucciones de que se puede hacer con cada commit, sea unificar, renombrar, borrar, etc..
