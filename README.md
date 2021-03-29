@@ -28,12 +28,12 @@ La parte complicada del proceso consiste en seleccionar que componentes de VS in
 ![InstalacionNetComunity_P2](https://user-images.githubusercontent.com/41701343/112885238-e53ec880-90a6-11eb-9b1e-e6f0fca5c57d.png)
 Recordar destilar la opción de Azure Data Lake ya que esa herramienta no sera de utilidad en este curso
 
-### Instalacion de componentes en caso de faltar alguno despues de la intalacion
+### Instalacion de componentes en caso de faltar alguno despues de la instalación
 > [Documentacion oficial](https://docs.microsoft.com/es-es/visualstudio/install/modify-visual-studio?view=vs-2019)
 
 1. Buscar Visual Studio Installer en la barra de búsqueda de aplicaciones sistema operativo utilizado
 2. En la versión de VS utilizada, clickear en modificar
-3. Si se desea instalar alguna carga de trabajo de las [mencionadas anteriormente](#Instalacion-Visual-Studio-Community) clickear en la tab Cargas de Trabajo las correspondientes
+3. Si se desea instalar alguna carga de trabajo de las [mencionadas anteriormente](#Instalación-Visual-Studio-Community) clickear en la tab Cargas de Trabajo las correspondientes
 4. [***Recomendado***] Si, en cambio se prefiere buscar por característica individual, ir a la tab Componentes Individuales (arriba al medio) y seleccionar las correspondientes. Ej. NET 5.0 Runtime
 
 
@@ -132,22 +132,32 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 ##### IMPORTANTE: Donde diga `practica-2021` remplazar por `Labs`
 
 1. [Forkear](#Fork) el repositorio oficial de practica seleccionando su usuario de GitHub
+
 ![tutoGit_P0](https://user-images.githubusercontent.com/41701343/111100579-d2fd5000-8526-11eb-83a3-119c0b2ce18e.png)
 
+
 2. [Clonar](#Clone) el repo forkeado
-- Primero copiar al portapapeles la dirección url de este
+
+2.1 Primero copiar al portapapeles la dirección url de este
+
 ![tutoGit_P2](https://user-images.githubusercontent.com/41701343/111100784-4606c680-8527-11eb-8e96-e00ed107bb12.png)
-- Luego acceder a GitKraken y copiar la url anterior en el formulario de clonacion
+2.2 Luego acceder a GitKraken y copiar la url anterior en el formulario de clonacion
+
 ![tutoGit_P3](https://user-images.githubusercontent.com/41701343/111100928-9aaa4180-8527-11eb-8d9b-548e5f562a36.png)
 ![tutoGit_P4](https://user-images.githubusercontent.com/41701343/111100985-ba416a00-8527-11eb-9099-341edb9c4c60.png)
 
+***2.2b. En Visual Studio ir a *Git*/*Clonar Repositorio* y proceder de la misma forma***
+
 3. Abrir la carpeta con Visual Studio desde el menú contextual (click derecho)
+
 ![tutoGit_P6](https://user-images.githubusercontent.com/41701343/111101096-f674ca80-8527-11eb-9518-2e316b3c6568.png)
 
 4. Cambiar la ubicación predeterminada de los proyectos en Visual Studio
 - Ingresar "ubic" en la *Barra de Búsqueda*
+
 ![tutoGit_P7](https://user-images.githubusercontent.com/41701343/111101162-16a48980-8528-11eb-8f06-77e28c36a81b.png)
 - Cambiar la ubicación predeterminada a la dirección donde esta el repositorio clonado previamente
+
 ![tutoGit_P8](https://user-images.githubusercontent.com/41701343/111101168-1906e380-8528-11eb-928b-78e6c17394dc.png)
 
 5. Ir a al menú desplegable en *Archivo*/*Nuevo*/*Proyecto*
@@ -155,33 +165,62 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 
 6. Llenar el nombre del laboratorio en el campo *Nombre del Proyecto*, el campo *Nombre de la Solución* se ingresara automáticamente con el mismo valor. 
 - Luego clickear en el selector de archivos correspondiente al campo *Ubicación*
+
 ![tutoGit_P10](https://user-images.githubusercontent.com/41701343/111101400-90d50e00-8528-11eb-9f25-9d2ea5fa675f.png)
 - Ingresar la subcarpeta correspondiente a la unidad y el laboratorio en el que se quiera trabajar
+
 ![tutoGit_P11](https://user-images.githubusercontent.com/41701343/111101521-dc87b780-8528-11eb-9c76-e42978b920b3.png)
 
-7. Seleccionar NET 5 en el menú de opciones
+7. Seleccionar NET 5 en el menú de opciones. NOTA: Tener instalado el [runtime](#Instalacion-de-componentes-en-caso-de-faltar-alguno-despues-de-la-instalación)
 
-8. Notar como los nuevos archivos se incluyen en el [Staging Area](#Staging-Area) (sección donde están los archivos marcados) y clickear en stage all changes
+8. Notar como los nuevos archivos se incluyen en el [Staging Area](#Staging-Area) (sección donde están los archivos marcados) al clickear en stage all changes
+
 ![tutoGit_P13](https://user-images.githubusercontent.com/41701343/111101580-faedb300-8528-11eb-88b8-d592ecd8b8f0.png)
 
+***8.b. En VS ir a *Ver*/*Cambios de GIT****
+
+![imagen](https://user-images.githubusercontent.com/41701343/112892379-9ba6ab80-90af-11eb-93ff-801881c83001.png)
+
 9. Crear una nueva [branch](#Branch) con el siguiente formato: UnidadNLabZ con N y Z igual al numero de unidad y de laboratorio respectivamente
+
 ![tutoGit_P14](https://user-images.githubusercontent.com/41701343/111101723-41dba880-8529-11eb-97df-46b6864b6fcf.png)
 
+***9.b. En VS ir a *Git*/*Nueva Rama****
+
 10. [Este paso se repite] [Commitear](#Commit) los cambios escribiendo un mensaje que represente lo realizado, como por ejemplo la inicializacion del proyecto con Visual Studio
+
 ![tutoGit_P15](https://user-images.githubusercontent.com/41701343/111101922-a991f380-8529-11eb-9119-cef1a468d9e4.png)
 
+***10.b. En VS ir a *Ver*/*Cambios de GIT* (una vez desplegado se mantiene a la izquierda como opcion)***
+
 11. Observar como los commits en la [branch "main"](#Master) están tanto en [local](#Local) (símbolo notebook) como en [remoto](#Remote) (icono del usuario de GitHub). Para cambiar esto [pushear](#Push) los cambios a remoto con el siguiente botón
+
 ![tutoGit_P16](https://user-images.githubusercontent.com/41701343/111102098-0e4d4e00-852a-11eb-8c0c-8e009a2a0883.png)
 
+***11.b. No hay equivalente en la UI de VS para GIT***
+
 12. Una vez que se termino de trabajar con el laboratorio como se observa en la siguiente imagen: 
+
 ![tutoGit_P18](https://user-images.githubusercontent.com/41701343/112549216-33e51d80-8d9c-11eb-82ec-a1392966c2a1.png)
+
 [mergear](#Merge) la [branch actual del ejercicio](#Branch) con la [branch main](#Branch) del [repositorio local](#Local), arrastrando la primera hacia la segunda
+
+***12.b. En VS ir a *Ver*/*Repositorio de GIT* y hacer click derecho en la rama del ejercicio para que aparezca el menu desplegable, alli seleccionar la opcion resaltada***
+
+![imagen](https://user-images.githubusercontent.com/41701343/112893491-220fbd00-90b1-11eb-954b-f542c174ef6a.png)
 
 
 13. Agregar el repositorio de la asignatura a [remote](#Remote), de manera de que pueda tener los ultimas actualizaciones a los ejercicios y sea capaz de realizar [pull requests](#Pull-Request) a este
+
 ![tutoGit_P17](https://user-images.githubusercontent.com/41701343/111102253-697f4080-852a-11eb-8c81-a59aed316325.png)
 
+***13.b. En VS esto ya esta presente por default***
+
 14. [Pullear](#Pull) los ultimos cambios presentes en la branch [Main](#Master) del repositorio [remoto](#Remote) de la catedra y [mergear](#Merge) esta con la branch [Main](#Master) del repositorio forkeado local. ![Demostracion en vídeo](https://user-images.githubusercontent.com/41701343/112508562-6d069900-8d6e-11eb-9333-0835db176e1f.mp4)
+
+***14.b. En VS ir a *Ver*/*Repositorio de GIT* y hacer click derecho en la rama main remota para que aparezca el menu desplegable, alli seleccionar la opcion resaltada***
+
+![imagen](https://user-images.githubusercontent.com/41701343/112894489-4fa93600-90b2-11eb-9fbe-27750a43c15e.png)
 
 
 ## Extra
