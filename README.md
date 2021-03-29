@@ -21,6 +21,21 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 
 > Nota: La versión gratuita de GitKraken posee todo lo necesario a utilizar, pero existe para el que le guste la herramienta una versión premium con otras features como: Tener Boards estilo trello y calendarios, entre otras cosas. Se puede conseguir gratuitamente como alumno universitario, teniendo un correo @frro dado de alta en la universidad (Secretaría de Asuntos Universitarios).
 
+### Instalación Visual Studio Community
+
+La parte complicada del proceso consiste en seleccionar que componentes de VS instalar, seleccionar:
+![InstalacionNetComunity_P1](https://user-images.githubusercontent.com/41701343/112885224-e07a1480-90a6-11eb-9292-1a419aa3e7eb.png)
+![InstalacionNetComunity_P2](https://user-images.githubusercontent.com/41701343/112885238-e53ec880-90a6-11eb-9b1e-e6f0fca5c57d.png)
+Recordar destilar la opción de Azure Data Lake ya que esa herramienta no sera de utilidad en este curso
+
+### Instalacion de componentes en caso de faltar alguno despues de la intalacion
+> [Documentacion oficial](https://docs.microsoft.com/es-es/visualstudio/install/modify-visual-studio?view=vs-2019)
+
+1. Buscar Visual Studio Installer en la barra de búsqueda de aplicaciones sistema operativo utilizado
+2. En la versión de VS utilizada, clickear en modificar
+3. Si se desea instalar alguna carga de trabajo de las [mencionadas anteriormente](#Instalacion-Visual-Studio-Community) clickear en la tab Cargas de Trabajo las correspondientes
+4. [***Recomendado***] Si, en cambio se prefiere buscar por característica individual, ir a la tab Componentes Individuales (arriba al medio) y seleccionar las correspondientes. Ej. NET 5.0 Runtime
+
 
 ## El Working Tree de Git
 ![git_working_tree](https://user-images.githubusercontent.com/44505076/111569584-b4df5c00-8781-11eb-8ee4-6c2c00ccb8cd.png)
@@ -181,4 +196,4 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 > Traer los cambios del repositorio [remoto](#Remote) al [local](#Local), pero sin reemplazar los archivos físicos. Esto es para visualizar los cambios pero sin reemplazarlos aún (a diferencia de [Pull](#Pull)), pues a lo mejor queremos hacer otra tarea antes de reemplazarlos. Podría decirse que, en el fondo, un [Pull](#Pull) es un [Fetch](#Fetch) + un [Merge](#Merge) a nuestros archivos locales.
 
 ### Rebase
-> Un rebase modifica la historia de [commits](#Commit) de nuestro repositorio, por lo tanto es peligroso. Podemos necesitarlo por ejemplo cuando creamos commits incorrectos y queremos cambiarlos, pero estos ya los subimos al remoto con [push](#Push) y nos arrepentimos. Con rebase se puede cambiar el nombre de [commits](#Commit) en remoto, unificarlos diferentes en uno o borrarlos, entre otras cosas. Estando en la branch en la que queremos modificar (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir `git rebase -i HEAD~n`, donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i nos indica que será un rebase interactivo (te da instrucciones de que se puede hacer con cada commit, sea unificar, renobrar, borrar, etc..
+> Un rebase modifica la historia de [commits](#Commit) de nuestro repositorio, por lo tanto es peligroso. Podemos necesitarlo por ejemplo cuando creamos commits incorrectos y queremos cambiarlos, pero estos ya los subimos al remoto con [push](#Push) y nos arrepentimos. Con rebase se puede cambiar el nombre de [commits](#Commit) en remoto, unificarlos diferentes en uno o borrarlos, entre otras cosas. Estando en la branch en la que queremos modificar (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir `git rebase -i HEAD~n`, donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i nos indica que será un rebase interactivo (te da instrucciones de que se puede hacer con cada commit, sea unificar, renombrar, borrar, etc..
