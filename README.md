@@ -226,6 +226,8 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 
 ![imagen](https://user-images.githubusercontent.com/41701343/112894489-4fa93600-90b2-11eb-9fbe-27750a43c15e.png)
 
+#### Feedback de alumnos
+> Muchas gracias al alumno [Bruno Coccito](https://github.com/brunococitto) por sus significativos aportes y solicitudes de cambios
 
 ## Extra
 
