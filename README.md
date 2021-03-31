@@ -7,7 +7,7 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 |:computer: [Pre-Requisitos](#Pre-Requisitos)|
 |:cactus: [Git Working Tree](#El-Working-Tree-de-Git)|
 |:bookmark_tabs: [Glosario](#Glosario)|
-|:briefcase: [Instrucciones Git](#Instrucciones)|
+|:briefcase: [Instrucciones Git](#Instrucciones-Git)|
 |:star2: [Extra](#Extra)|
 
 ## Pre-Requisitos
