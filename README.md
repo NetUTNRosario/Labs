@@ -7,7 +7,7 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 |:computer: [Pre-Requisitos](#Pre-Requisitos)|
 |:cactus: [Git Working Tree](#El-Working-Tree-de-Git)|
 |:bookmark_tabs: [Glosario](#Glosario)|
-|:briefcase: [Instrucciones Git](#Instrucciones)|
+|:briefcase: [Instrucciones Git](#Instrucciones-Git)|
 |:star2: [Extra](#Extra)|
 
 ## Pre-Requisitos
@@ -17,7 +17,7 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 |Visual Studio .Net|Entorno para programar. Es deseable tener descargada la última versión|[https://visualstudio.microsoft.com/es/downloads/](https://visualstudio.microsoft.com/es/downloads/)|
 |Git|Sistema de control de versiones distribuido. Multiplataforma y de codigo abierto|[https://git-scm.com/](https://git-scm.com/)|
 |Usuario GitHub|Repositorios online|[https://github.com/join](https://github.com/join?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home)|
-|GitKraken|Control de versiones con repositorios Git locales|[https://www.gitkraken.com/download](https://www.gitkraken.com/download)|
+|***[Recomendado/Opcional]*** GitKraken|Control de versiones con repositorios Git locales|[https://www.gitkraken.com/download](https://www.gitkraken.com/download)|
 
 > Nota: La versión gratuita de GitKraken posee todo lo necesario a utilizar, pero existe para el que le guste la herramienta una versión premium con otras features como: Tener Boards estilo trello y calendarios, entre otras cosas. Se puede conseguir gratuitamente como alumno universitario, teniendo un correo @frro dado de alta en la universidad (Secretaría de Asuntos Universitarios).
 
@@ -127,7 +127,7 @@ El repositorio que se encuentra almacenado en GitHub (u otra plataforma) para to
 
 ## Instrucciones Git
 La forma de trabajo que se va a utilizar este año consiste en los siguientes pasos:
-> Esta se encuentra inspirada por la forma de trabajo que fue implementada por otros adscriptos en otra materia electiva de la UTN llamdada "Soporte a la Gestión de Datos con Programación Visual"
+> Esta se encuentra inspirada por la forma de trabajo que fue implementada por otros adscriptos en otra materia electiva de la UTN llamada "Soporte a la Gestión de Datos con Programación Visual"
 
 ##### IMPORTANTE: Donde diga `practica-2021` remplazar por `Labs`
 
@@ -138,10 +138,10 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 
 2. [Clonar](#Clone) el repo forkeado
 
-2.1 Primero copiar al portapapeles la dirección url de este
+2.1. Primero copiar al portapapeles la dirección url de este
 
 ![tutoGit_P2](https://user-images.githubusercontent.com/41701343/111100784-4606c680-8527-11eb-8e96-e00ed107bb12.png)
-2.2 Luego acceder a GitKraken y copiar la url anterior en el formulario de clonacion
+2.2. Luego acceder a GitKraken y copiar la url anterior en el formulario de clonacion
 
 ![tutoGit_P3](https://user-images.githubusercontent.com/41701343/111100928-9aaa4180-8527-11eb-8d9b-548e5f562a36.png)
 ![tutoGit_P4](https://user-images.githubusercontent.com/41701343/111100985-ba416a00-8527-11eb-9099-341edb9c4c60.png)
@@ -163,6 +163,8 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 5. Ir a al menú desplegable en *Archivo*/*Nuevo*/*Proyecto*
 ![tutoGit_P9](https://user-images.githubusercontent.com/41701343/111101334-6f742200-8528-11eb-886f-e33286c1c9e5.png)
 
+> Al seleccionar el tipo de proyecto revisar que en el titulo este no contenga `(Net Framework)`, ya que estos no permiten seleccionar a NET 5 o NET Core como motor de ejecución
+
 6. Llenar el nombre del laboratorio en el campo *Nombre del Proyecto*, el campo *Nombre de la Solución* se ingresara automáticamente con el mismo valor. 
 - Luego clickear en el selector de archivos correspondiente al campo *Ubicación*
 
@@ -181,11 +183,13 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 
 ![imagen](https://user-images.githubusercontent.com/41701343/112892379-9ba6ab80-90af-11eb-93ff-801881c83001.png)
 
-9. Crear una nueva [branch](#Branch) con el siguiente formato: UnidadNLabZ con N y Z igual al numero de unidad y de laboratorio respectivamente
+9. ***[Recomendado/Opcional]*** Crear una nueva [branch](#Branch) con el siguiente formato: UnidadNLabZ con N y Z igual al numero de unidad y de laboratorio respectivamente
 
 ![tutoGit_P14](https://user-images.githubusercontent.com/41701343/111101723-41dba880-8529-11eb-97df-46b6864b6fcf.png)
 
 ***9.b. En VS ir a *Git*/*Nueva Rama****
+
+> Es posible [commitear](#Commit) los cambios directamente en [main](#Master), sin embargo esta forma es utilizada si se esta trabajando en solitario, lo cual es bastante poco común
 
 10. [Este paso se repite] [Commitear](#Commit) los cambios escribiendo un mensaje que represente lo realizado, como por ejemplo la inicializacion del proyecto con Visual Studio
 
@@ -199,7 +203,7 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 
 ***11.b. No hay equivalente en la UI de VS para GIT***
 
-12. Una vez que se termino de trabajar con el laboratorio como se observa en la siguiente imagen: 
+12. ***[Recomendado/Opcional]*** Una vez que se termino de trabajar con el laboratorio como se observa en la siguiente imagen: 
 
 ![tutoGit_P18](https://user-images.githubusercontent.com/41701343/112549216-33e51d80-8d9c-11eb-82ec-a1392966c2a1.png)
 
@@ -222,6 +226,8 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 
 ![imagen](https://user-images.githubusercontent.com/41701343/112894489-4fa93600-90b2-11eb-9fbe-27750a43c15e.png)
 
+#### Feedback de alumnos
+> Muchas gracias al alumno [Bruno Cocitto](https://github.com/brunococitto) por sus significativos aportes y solicitudes de cambios
 
 ## Extra
 
