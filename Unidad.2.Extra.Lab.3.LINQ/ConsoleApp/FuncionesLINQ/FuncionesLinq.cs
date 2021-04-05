@@ -45,5 +45,32 @@ namespace FuncionesLINQ
 
             return numeros.Where(n => n > 20);
         }
+
+        public IEnumerable<int> ObtenerCodigoPostalDeCiudadesQueTenganEnSuNombreTresCarateresDeterminados(string ciudad)
+        {
+            IEnumerable<Ciudad> ciudades = new List<Ciudad>
+            {
+                 new Ciudad() { Nombre = "Rosario", CodigoPostal = 2000 },
+                 new Ciudad()
+                 {
+                     Nombre = "Córdoba",
+                     CodigoPostal = 5000
+                 },
+                new Ciudad()
+                {
+                    Nombre = "Santa Fe",
+                    CodigoPostal = 3000
+                },
+                new Ciudad() {
+                    Nombre = "San Miguel De Tucuman",
+                    CodigoPostal = 4000
+                }
+                // Cargar 6 mas
+            };
+
+            string ciudadNormalizada = ciudad.ToLower();
+
+            return ciudades.Where(c => c.Nombre.ToLower().Contains(ciudadNormalizada)).Select(c => c.CodigoPostal);
+        }
     }
 }

@@ -37,5 +37,15 @@ namespace FuncionesLinqTest
             Assert.Equal(expected: new List<int> { 21, 32, 25 }, actual: numerosMayoresA20);
             Assert.DoesNotContain(20, numerosMayoresA20);
         }
+
+        [Fact]
+        public void ObtenerCodigoPostalDeCiudadesQueTenganEnSuNombreTresCarateresDeterminadosTest()
+        {
+            var funcionesLinq = new FuncionesLinq();
+
+            IEnumerable<int> codPostalesDeCiudadesSeleccionadas = funcionesLinq.ObtenerCodigoPostalDeCiudadesQueTenganEnSuNombreTresCarateresDeterminados("san");
+
+            Assert.Equal(expected: new List<int> { 3000, 4000 }, actual: codPostalesDeCiudadesSeleccionadas);
+        }
     }
 }
