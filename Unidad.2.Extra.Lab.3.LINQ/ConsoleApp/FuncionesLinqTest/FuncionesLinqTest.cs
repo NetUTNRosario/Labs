@@ -26,5 +26,16 @@ namespace FuncionesLinqTest
                 "Tucumán",
             }, actual: provinciasSeleccionadas);
         }
+
+        [Fact]
+        public void ObtenerNumerosMayoresA20Test()
+        {
+            var funcionesLinq = new FuncionesLinq();
+
+            IEnumerable<int> numerosMayoresA20 = funcionesLinq.ObtenerNumerosMayoresA20();
+
+            Assert.Equal(expected: new List<int> { 21, 32, 25 }, actual: numerosMayoresA20);
+            Assert.DoesNotContain(20, numerosMayoresA20);
+        }
     }
 }

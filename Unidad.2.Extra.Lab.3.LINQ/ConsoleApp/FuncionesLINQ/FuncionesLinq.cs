@@ -38,5 +38,12 @@ namespace FuncionesLINQ
 
             return provincias.Where(e => e.StartsWith("T") || e.StartsWith("S"));
         }
+
+        public IEnumerable<int> ObtenerNumerosMayoresA20()
+        {
+            IEnumerable<int> numeros = new List<int> { 14, 2, 5, 21, 32, 25, 20 };
+
+            return numeros.Where(n => n > 20);
+        }
     }
 }
