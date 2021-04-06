@@ -7,9 +7,15 @@ Familiarizarse con el uso de LINQ to Objects
 60 minutos
 
 ### Pasos
+1. Completar la implementación en la función correspondiente de la clase ***FuncionesLinq***
+2. Llamar a estas funciones desde la clase ***Program*** en el proyecto ***ConsoleApp***
+3. ***[Opcional]*** En la clase ***FuncionesLinqTest*** ir a ***Prueba***/***Ejecutar todas las pruebas*** de la barra de herramientas de VS. Esto es para verificar que la implementación cumpla con las especificaciones requeridas
+
+> Si los tests automatizados en ***FuncionesLinqTest*** pasan no es necesario llamar a todas las funciones por consola, esto representa la típica practica de testing manual
+
+### Ejercicios
 1. Dado un Array que incluya todas las Provincias de Argentina usar LINQ para obtener y mostrar
 por Consola aquellas provincias que empiezan con la letra “S” o “T”
-
 
 2. Crear un programa que acepte una lista de números, los almacene en un objeto del tipo List&lt;int&gt;
 y luego usando LINQ muestre por Consola aquellos que son mayores a 20.
