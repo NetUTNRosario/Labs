@@ -72,5 +72,12 @@ namespace FuncionesLINQ
 
             return ciudades.Where(c => c.Nombre.ToLower().Contains(ciudadNormalizada)).Select(c => c.CodigoPostal);
         }
+
+        public IEnumerable<Empleado> AgregarEmpleadoListaDevolviendolaOrdenadaPorSueldo(IEnumerable<Empleado> empleados, IEnumerable<Empleado> empleadosParaAgregar, string order)
+        {
+            var empleadosActualizados = empleados.Union(empleadosParaAgregar);
+
+            return order == "ASC" ? empleadosActualizados.OrderBy(e => e.Sueldo) : empleadosActualizados.OrderByDescending(e => e.Sueldo);
+        }
     }
 }
