@@ -22,4 +22,7 @@ jobs:
     steps:
       - name: Fork Sync
         uses: tgymnich/fork-sync@v1.2.1
-
+        with:
+          -owner: alereca
+          -base: master
+          -head: master
