@@ -4,7 +4,7 @@ name: Annually reset academic repo
 
 # Controls when the action will run.
 on:
-  # Triggers the workflow on the first of January of each year
+  # Triggers the workflow on every 1st of January
   schedule:
     - cron: "0 0 1 1/12 *"
 
@@ -22,14 +22,17 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
-      - name: List pull request and close all of them
+
+      - name: List pull requests and close all of them
         run: |
-          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
-            prs=$(gh pr list | cut -f 1)
-            echo $prs
-            for pr in $prs
-            do
-              gh pr close $pr
-            done
+          echo "Create a list with each currently active pull request id"
+          prs=$(gh pr list | cut -f 1)
+          echo "Close all of them"
+          for pr in $prs
+          do
+            gh pr close $pr
+          done
+        env: 
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
       - run: echo "All currently active pull requests were closed"
