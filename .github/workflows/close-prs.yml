@@ -2,11 +2,11 @@
 
 name: CI
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on the first of January of each year
   schedule:
-    - cron: '0 0 1 1/12 *'
+    - cron: "0 0 1 1/12 *"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,7 +24,15 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a set of commands using the runners shell
-      - name: List all currently open Pull Request
+      - name: Log into github
+        run: gh auth login
+      
+      - name: List pull request and close all of them
         run: |
-          gh auth login,
-          gh pr list.
+          prs=$(gh pr list | cut -f 1)
+          echo $prs
+          for pr in $prs
+          do
+            gh pr close $pr
+          done
+      -run: echo "All currently active pull requests were closed"
