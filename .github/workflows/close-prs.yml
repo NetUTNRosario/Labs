@@ -35,4 +35,4 @@ jobs:
           do
             gh pr close $pr
           done
-      -run: echo "All currently active pull requests were closed"
+      - run: echo "All currently active pull requests were closed"
