@@ -142,6 +142,8 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 #### Feedback de alumnos
 > Muchas gracias al alumno [Bruno Cocitto](https://github.com/brunococitto) por sus significativos aportes y solicitudes de cambios
 
+Aquel que desee contribuir al repositorio de la catedra puede hacer sus cambios en su fork y luego realizar una pull request para soliticitar agregarlos
+
 ## El Working Tree de Git
 ![git_working_tree](https://user-images.githubusercontent.com/44505076/111569584-b4df5c00-8781-11eb-8ee4-6c2c00ccb8cd.png)
 
