@@ -22,10 +22,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a set of commands using the runners shell
-      - name: Log into github
-        run: gh auth login --with-token ${{ secrets.GITHUB_TOKEN }}
       
       - name: List pull request and close all of them
         run: |
