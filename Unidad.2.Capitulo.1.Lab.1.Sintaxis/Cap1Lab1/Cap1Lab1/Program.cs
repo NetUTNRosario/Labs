@@ -10,6 +10,7 @@ namespace Cap1Lab1
     {
         static void Main(string[] args)
         {
+            
         }
     }
 }
