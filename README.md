@@ -142,6 +142,13 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 #### Feedback de alumnos
 > Muchas gracias al alumno [Bruno Cocitto](https://github.com/brunococitto) por sus significativos aportes y solicitudes de cambios
 
+Aquel que desee soliticitar agregar o cambiar algo, tenga dudas respecto a algun ejercicio o simplemente quiera probar como hacer una [Pull Request](#Pull-Request) puede hacer sus cambios en su fork y luego realizar una pr al repo de la catedra
+
+15. De forma inversa a como se hace merge en GitKraken arrastrar la [branch](#Branch) donde se esta trabajando hacia *Remote*/*NetUtnRosario*/*Main* y seleccionar en el menu contextual: `Push and start a pull request to NetUtnRosario/main`
+
+***15.b. En VS se debe pushear los cambios realizados en la branch donde se este trabajando y luego es necesario ir al sitio del repositorio en GitHub. Ya que el complemento de GIT de VS no puede manejar estas acciones que no son propias de Git en si, sino de la plataforma GitHub***
+![imagen](https://user-images.githubusercontent.com/41701343/116576065-3841b080-a8dd-11eb-85e3-60a6e65087f8.png)
+
 ## El Working Tree de Git
 ![git_working_tree](https://user-images.githubusercontent.com/44505076/111569584-b4df5c00-8781-11eb-8ee4-6c2c00ccb8cd.png)
 
