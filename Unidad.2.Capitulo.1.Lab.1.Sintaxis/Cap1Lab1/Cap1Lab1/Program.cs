@@ -19,23 +19,30 @@ namespace Cap1Lab1
                 Console.WriteLine("Ingrese una opción: ");
                 ConsoleKeyInfo a = Console.ReadKey();
                 Console.Clear();
-                switch (a) 
+                if (a.Key==ConsoleKey.D0)
                 {
-                    case "1":
-                        Console.WriteLine(arg.ToUpper());
-                        return true;
-                    case "2":
-                        Console.WriteLine(arg.ToLower());
-                        return true;
-                    case "3":
-                        Console.WriteLine("El largo del texto es: {0}", arg.Length);
-                        return true;
-                    case "0":
-                        return false;
-
+                    return false;
                 }
+                else
+                {
+                    switch (a.Key)
+                    {
+                        case ConsoleKey.D1:
+                            Console.WriteLine(arg.ToUpper());
+                            break;
+                        case ConsoleKey.D2:
+                            Console.WriteLine(arg.ToLower());
+                            break;
+                        case ConsoleKey.D3:
+                            Console.WriteLine("El largo del texto es: {0}", arg.Length);
+                            break;
+
+                    }
                 Console.WriteLine("Presione una tecla para continuar. ");
                 Console.ReadLine();
+                return true;
+
+                }
 
         }
         static void Main(string[] args)
@@ -59,7 +66,7 @@ namespace Cap1Lab1
                 bool mostrarMenu = true;
                 while (mostrarMenu)
                 {
-                    Menu(inputTexto);
+                    mostrarMenu=Menu(inputTexto);
                 }
             }
 
