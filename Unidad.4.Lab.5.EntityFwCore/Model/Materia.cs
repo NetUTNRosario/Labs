@@ -6,7 +6,7 @@ namespace Model
         public string Descripcion { get; set; }
         public int HsSemanales { get; set; }
         public int HsTotales { get; set; }
-        public int IdPlan { get; set; }
+        public int PlanId { get; set; }
         public Plan Plan { get; set; }
     }
 }

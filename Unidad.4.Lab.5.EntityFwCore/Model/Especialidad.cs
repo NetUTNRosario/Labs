@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Modelo
+namespace Model
 {
     public class Especialidad
     {
