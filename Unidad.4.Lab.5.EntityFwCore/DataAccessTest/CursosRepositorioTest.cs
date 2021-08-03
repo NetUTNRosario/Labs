@@ -24,6 +24,34 @@ namespace RepositorioTest
             Assert.Equal(expected: "Ingeniería en Sistemas de Información", actual: result.FirstOrDefault().Plan.Especialidad.Descripcion);
         }
 
+        [Fact]
+        public void InsertMateriaTest()
+        {
+            // Arrange
+            var cursosRepositorio = new CursosRepositorio(CreateTestDbContextFunction);
+            SeedTestDb(CreateTestDbContextFunction);
+            var materia = new Materia()
+            {
+                Descripcion = "Mineria de Datos",
+                HsSemanales = 4,
+                HsTotales = 128
+            };
+            // Act
+            cursosRepositorio.InsertMateria(materia, "Ingeniería en Sistemas");
+            // Assert
+            using (var context = CreateTestDbContextFunction())
+            {
+                var materiaInDb = context.Materias
+                        .Include(m => m.Plan)
+                        .ThenInclude(p => p.Especialidad)
+                        .FirstOrDefault(m => m.Descripcion == materia.Descripcion);
+                Assert.Equal(expected: 4, actual: materiaInDb.HsSemanales);
+                Assert.Equal(expected: 128, actual: materiaInDb.HsTotales);
+                Assert.Equal(expected: "Ingeniería en Sistemas de Información",
+                             actual: materiaInDb.Plan.Especialidad.Descripcion);
+            }
+        }
+
         private ApplicationContext CreateTestDbContextFunction()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
