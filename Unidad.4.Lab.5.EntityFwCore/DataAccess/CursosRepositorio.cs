@@ -8,11 +8,11 @@ namespace DataAccess
 {
     public class CursosRepositorio
     {
-        private readonly Func<ApplicationContext> _createDbContextFunction;
+        private readonly IApplicationContextFactory _contextFactory;
 
-        public CursosRepositorio(Func<ApplicationContext> createDbContextFunction)
+        public CursosRepositorio(IApplicationContextFactory contextFactory)
         {
-            _createDbContextFunction = createDbContextFunction;
+            _contextFactory = contextFactory;
         }
 
         /// Traer las materias con menos de x horas semanales con el plan z ordenados 
@@ -20,7 +20,7 @@ namespace DataAccess
         /// especialidad asociados a esta
         public IEnumerable<Materia> GetMaterias(int hsSemanales, int anioPlan)
         {
-            using (var context = _createDbContextFunction())
+            using (ApplicationContext context = _contextFactory.CreateContext())
             {
                 return context.Materias
                     .Include(m => m.Plan).ThenInclude(p => p.Especialidad)
@@ -33,7 +33,7 @@ namespace DataAccess
         /// que contenga el nombre parcial enviado como parametro
         public void InsertMateria(Materia materia, string nombreParcialEspecialidad)
         {
-            using (var context = _createDbContextFunction())
+            using (ApplicationContext context = _contextFactory.CreateContext())
             {
                 var plan = context.Planes
                     .Where(p => p.Especialidad.Descripcion.Contains(nombreParcialEspecialidad))

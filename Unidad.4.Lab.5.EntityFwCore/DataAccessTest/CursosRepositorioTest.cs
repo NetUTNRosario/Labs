@@ -6,7 +6,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace RepositorioTest
+namespace DataAccessTest
 {
     public class CursosRepositorioTest
     {
@@ -14,8 +14,8 @@ namespace RepositorioTest
         public void GetMateriasTest()
         {
             // Arrange
-            var cursosRepositorio = new CursosRepositorio(CreateTestDbContextFunction);
-            SeedTestDb(CreateTestDbContextFunction);
+            var cursosRepositorio = new CursosRepositorio(new TestApplicationContextFactory());
+            SeedTestDb(new TestApplicationContextFactory());
             //Act
             var result = cursosRepositorio.GetMaterias(5, 2008);
             //Assert
@@ -28,8 +28,8 @@ namespace RepositorioTest
         public void InsertMateriaTest()
         {
             // Arrange
-            var cursosRepositorio = new CursosRepositorio(CreateTestDbContextFunction);
-            SeedTestDb(CreateTestDbContextFunction);
+            var cursosRepositorio = new CursosRepositorio(new TestApplicationContextFactory());
+            SeedTestDb(new TestApplicationContextFactory());
             var materia = new Materia()
             {
                 Descripcion = "Mineria de Datos",
@@ -39,7 +39,7 @@ namespace RepositorioTest
             // Act
             cursosRepositorio.InsertMateria(materia, "Ingeniería en Sistemas");
             // Assert
-            using (var context = CreateTestDbContextFunction())
+            using (var context = new TestApplicationContextFactory().CreateContext())
             {
                 var materiaInDb = context.Materias
                         .Include(m => m.Plan)
@@ -52,15 +52,7 @@ namespace RepositorioTest
             }
         }
 
-        private ApplicationContext CreateTestDbContextFunction()
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            optionsBuilder.UseSqlite("Data Source=./academia.db");
-
-            return new ApplicationContext(optionsBuilder.Options);
-        }
-
-        private void SeedTestDb(Func<ApplicationContext> contextBuilderFunc)
+        private void SeedTestDb(IApplicationContextFactory contextFactory)
         {
             var especialidades = new List<Especialidad>()
             {
@@ -128,7 +120,7 @@ namespace RepositorioTest
                     Plan = planes[0]
                 }
             };
-            using (var context = contextBuilderFunc())
+            using (ApplicationContext context = contextFactory.CreateContext())
             {
                 context.Database.EnsureDeleted();
                 context.Database.Migrate();

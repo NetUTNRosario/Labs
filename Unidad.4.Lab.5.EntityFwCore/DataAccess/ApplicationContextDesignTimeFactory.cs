@@ -7,7 +7,7 @@ namespace DataAccess
     /// la configuracion del db context a usar para las migraciones
     /// se requiere utilizar esta construicion que la herramienta de 
     /// linea de comandos puede localizar
-    class ApplicationContextFactory : IDesignTimeDbContextFactory<ApplicationContext>
+    class ApplicationContextDesignTimeFactory : IDesignTimeDbContextFactory<ApplicationContext>
     {
         public ApplicationContext CreateDbContext(string[] args)
         {
