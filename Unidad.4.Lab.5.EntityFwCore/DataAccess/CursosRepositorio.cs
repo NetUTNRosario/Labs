@@ -20,30 +20,14 @@ namespace DataAccess
         /// especialidad asociados a esta
         public IEnumerable<Materia> GetMaterias(int hsSemanales, int anioPlan)
         {
-            using (ApplicationContext context = _contextFactory.CreateContext())
-            {
-                return context.Materias
-                    .Include(m => m.Plan).ThenInclude(p => p.Especialidad)
-                    .Where(m => m.HsSemanales <= hsSemanales && m.Plan.Anio == anioPlan)
-                    .OrderByDescending(m => m.HsSemanales).ToList();
-            }
+            throw new NotImplementedException();
         }
 
         /// Guardar una materia con el plan mas actual que este asociado con la especialidad
         /// que contenga el nombre parcial enviado como parametro
         public void InsertMateria(Materia materia, string nombreParcialEspecialidad)
         {
-            using (ApplicationContext context = _contextFactory.CreateContext())
-            {
-                var plan = context.Planes
-                    .Where(p => p.Especialidad.Descripcion.Contains(nombreParcialEspecialidad))
-                    .OrderBy(p => p.Anio)
-                    .FirstOrDefault();
-                    
-                materia.Plan = plan;
-                context.Materias.Add(materia);
-                context.SaveChanges();
-            }
+            throw new NotImplementedException();
         }
     }
 }
