@@ -8,12 +8,7 @@ namespace DataAccess
 {
     public class CursosRepositorio
     {
-        private readonly IApplicationContextFactory _contextFactory;
-
-        public CursosRepositorio(IApplicationContextFactory contextFactory)
-        {
-            _contextFactory = contextFactory;
-        }
+        public CursosRepositorio(IApplicationContextFactory contextFactory) {}
 
         /// Traer las materias con menos de x horas semanales con el plan z ordenados 
         /// en forma descendente por HsSemanales, incluyendo los datos del plan y la 
