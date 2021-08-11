@@ -86,7 +86,7 @@ public class CursosRepositorioTest
 ```
 
 ### Ejercicios
-> Recordar desechar la instancia de context una vez realizada la consulta mediante un bloque ```using``` que cree una instancia del context mediante ```_contextFactory```
+> Recordar desechar la instancia de context una vez realizada la consulta mediante un bloque ```using``` en donde se cree una instancia del context mediante ```_contextFactory.CreateContext()```
 1. Traer las materias con menos de **x** horas semanales con el plan del año **z**, ordenados en forma descendente por horas semanales, incluyendo los datos del plan y la especialidad asociados a estas
 <details close>
 <summary>Ver Pista</summary>
