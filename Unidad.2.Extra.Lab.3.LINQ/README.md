@@ -1,31 +1,30 @@
-# Unidad 2 – Capitulo 3 - Laboratorio 1
+# Unidad 2 ï¿½ Capitulo 3 - Laboratorio 1
 
 ### Objetivos
 Familiarizarse con el uso de LINQ to Objects
 
-### Duración Aproximada
+### Duraciï¿½n Aproximada
 60 minutos
 
 ### Pasos
-1. Completar la implementación en la función correspondiente de la clase ***FuncionesLinq***
-2. Llamar a estas funciones desde la clase ***Program*** en el proyecto ***ConsoleApp***
-3. ***[Opcional]*** En la clase ***FuncionesLinqTest*** ir a ***Prueba***/***Ejecutar todas las pruebas*** de la barra de herramientas de VS. Esto es para verificar que la implementación cumpla con las especificaciones requeridas
+1. Completar la implementaciï¿½n en la funciï¿½n correspondiente de la clase ***FuncionesLinq***
+2. En la clase ***FuncionesLinqTest*** ir a ***Prueba***/***Ejecutar todas las pruebas*** de la barra de herramientas de VS. Esto es para verificar que la implementaciï¿½n cumpla con las especificaciones requeridas
 
-> Si los tests automatizados en ***FuncionesLinqTest*** pasan no es necesario llamar a todas las funciones por consola, esto representa la típica practica de testing manual
+> Si los tests automatizados en ***FuncionesLinqTest*** pasan no es necesario llamar a todas las funciones por consola, esto representa la tï¿½pica practica de testing manual
 
 ### Ejercicios
 1. Dado un Array que incluya todas las Provincias de Argentina usar LINQ para obtener y mostrar
-por Consola aquellas provincias que empiezan con la letra “S” o “T”
+por Consola aquellas provincias que empiezan con la letra ï¿½Sï¿½ o ï¿½Tï¿½
 
-2. Crear un programa que acepte una lista de números, los almacene en un objeto del tipo List&lt;int&gt;
+2. Crear un programa que acepte una lista de nï¿½meros, los almacene en un objeto del tipo List&lt;int&gt;
 y luego usando LINQ muestre por Consola aquellos que son mayores a 20.
 
 
-3. Dado un ArrayList que incluya al menos 10 Ciudades de Argentina incluyendo Nombre y Código
-Postal usar LINQ para obtener y mostrar por Consola el Código Postal de aquellas ciudades que
-incluyan dentro de su nombre una expresión de búsqueda de tres caracteres, sin respetar
-mayúsculas o minúsculas. Por ejemplo, si se ingresa “ros” y el ArrayList incluye Rosario entonces
-debe mostrarse el Código Postal de Rosario.
+3. Dado un ArrayList que incluya al menos 10 Ciudades de Argentina incluyendo Nombre y Cï¿½digo
+Postal usar LINQ para obtener y mostrar por Consola el Cï¿½digo Postal de aquellas ciudades que
+incluyan dentro de su nombre una expresiï¿½n de bï¿½squeda de tres caracteres, sin respetar
+mayï¿½sculas o minï¿½sculas. Por ejemplo, si se ingresa ï¿½rosï¿½ y el ArrayList incluye Rosario entonces
+debe mostrarse el Cï¿½digo Postal de Rosario.
 
 
 4. Dada una List&lt;Empleado&gt; donde Empleado tiene las propiedades Id (int), Nombre (string),
