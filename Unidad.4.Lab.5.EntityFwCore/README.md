@@ -90,7 +90,7 @@ public class CursosRepositorioTest
 
 > Para conocer los datos de la base de datos sobre los cuales los test serán evaluados revisar código de la clase ```TestDbSeed``` del proyecto ```DataAccessTest```
 <details close>
-<summary>Ver Datos en BD</summary>
+<summary>Ver Datos en DB</summary>
 
 ```c#
 var especialidades = new List<Especialidad>()
