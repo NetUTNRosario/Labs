@@ -51,7 +51,7 @@ dotnet tool install --global dotnet-ef
 dotnet ef migrations add Inicial
 ```
 
-7. En la clase ```DataAccess``` agregar el campo ```_contextFactory``` de tipo ```IApplicationContextFactory```, inicializarlo en el constructor
+7. En el proyecto ***DataAccess*** clase ```CursosRepositorio``` agregar el campo ```_contextFactory``` de tipo ```IApplicationContextFactory```, inicializarlo en el constructor
 <details close>
 <summary>Ver Código</summary>
 
@@ -76,7 +76,7 @@ public class CursosRepositorio
 }
 ```
 
-9. En la clase ***DataAccessTest*** ir a ***Prueba***/***Ejecutar todas las pruebas*** de la barra de herramientas de VS. Esto es para verificar que la implementación cumpla con las especificaciones requeridas. Por ejemplo en el caso anterior seria:
+9. En el proyecto ***DataAccessTest*** clase ```CursosRepositorioTest``` ir a ***Prueba***/***Ejecutar todas las pruebas*** de la barra de herramientas de VS. Esto es para verificar que la implementación cumpla con las especificaciones requeridas. Por ejemplo en el caso anterior seria:
 ``` c#
 public class CursosRepositorioTest
 {
@@ -189,7 +189,7 @@ using (ApplicationContext context = _contextFactory.CreateContext())
 
 </br>
 
-2. Guardar una materia con el plan mas actual que este asociado a la especialidad con el nombre parcial enviado como parámetro.
+2. Guardar la materia enviada como primer parámetro, pero antes asignarle el plan mas actual que este asociado a la especialidad con el nombre parcial enviado como segundo parámetro.
 <details close>
 <summary>Ver Pista</summary>
 
