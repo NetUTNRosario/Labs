@@ -6,7 +6,7 @@ namespace Unidad._5.Lab._1.MVC.Models
     {
         IEnumerable<Materia> GetMaterias();
         Materia GetOneMateria(int materiaId);
-        void AddMateria(Materia materia);
+        void UpdateMateria(Materia materia);
     }
 
     public class MateriaRepository : IMateriaRepository
@@ -49,9 +49,9 @@ namespace Unidad._5.Lab._1.MVC.Models
 
         public IEnumerable<Materia> GetMaterias() => _materias;
         public Materia GetOneMateria(int materiaId) => _materias.Find(m => m.Id == materiaId);
-        public void AddMateria(Materia materia)
+        public void UpdateMateria(Materia materia)
         {
-            _materias.Add(materia);
+            _materias[materia.Id] = materia;
         }
     }
 }

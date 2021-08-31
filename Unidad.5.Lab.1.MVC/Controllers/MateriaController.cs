@@ -26,5 +26,17 @@ namespace Unidad._5.Lab._1.MVC.Controllers
         {
             return View(_materiaRepository.GetOneMateria(materiaId));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int materiaId, Materia materia)
+        {
+            if (ModelState.IsValid)
+            {
+                _materiaRepository.UpdateMateria(materia);
+            }
+
+            return View(materia);
+        }
     }
 }

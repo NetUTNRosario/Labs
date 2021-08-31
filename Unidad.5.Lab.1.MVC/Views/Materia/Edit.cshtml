@@ -1,9 +1,23 @@
 @model Materia
 
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">@Model.Descripcion</h5>
-        <p class="card-text">@Model.Plan.Especialidad.Descripcion</p>
-        <a class="btn btn-primary" asp-area="" asp-controller="Materia" asp-action="List">Volver</a>
+<form asp-action="Edit">
+    <div class="mb-3">
+        <label for="descripcionFormControl" class="form-label">Descripcion</label>
+        <input id="descripcionFormControl" class="form-control" placeholder="@Model.Descripcion"
+            value="@Model.Descripcion" />
     </div>
-</div>
+
+    <div class="mb-3">
+        <label for="hsSemanalesFormControl" class="form-label">Horas Semanales</label>
+        <input type="number" id="hsSemanalesFormControl" class="form-control" placeholder="@Model.HsSemanales"
+            value="@Model.HsSemanales">
+    </div>
+
+    <div class="mb-3">
+        <label for="hsTotalesFormControl" class="form-label">Horas Totales</label>
+        <input type="number" id="hsTotalesFormControl" class="form-control" placeholder="@Model.HsTotales"
+            value="@Model.HsTotales">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
