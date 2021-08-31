@@ -1,0 +1,9 @@
+@model IEnumerable<Materia>
+
+<ul class="list-group">
+    @foreach (Materia mat in Model)
+    {
+        <li class="list-group-item">@mat.Descripcion</li>
+    }
+
+</ul>
