@@ -19,8 +19,12 @@ namespace Unidad._5.Lab._1.MVC.Controllers
 
         public IActionResult List()
         {
-            _logger.LogDebug("Acción: Listar materias");
             return View(_materiaRepository.GetMaterias());
+        }
+
+        public IActionResult Edit(int materiaId)
+        {
+            return View(_materiaRepository.GetOneMateria(materiaId));
         }
     }
 }

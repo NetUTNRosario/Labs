@@ -1,0 +1,9 @@
+@model Materia
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Descripcion</h5>
+        <p class="card-text">@Model.Plan.Especialidad.Descripcion</p>
+        <a class="btn btn-primary" asp-area="" asp-controller="Materia" asp-action="List">Volver</a>
+    </div>
+</div>
