@@ -9,11 +9,13 @@ namespace Unidad._5.Lab._1.MVC.Controllers
     {
         private readonly ILogger<MateriaController> _logger;
         private readonly IMateriaRepository _materiaRepository;
+        private readonly IPlanRepository _planRepository;
 
-        public MateriaController(ILogger<MateriaController> logger, IMateriaRepository materiaRepository)
+        public MateriaController(ILogger<MateriaController> logger, IMateriaRepository materiaRepository, IPlanRepository planRepository)
         {
             _logger = logger;
             _materiaRepository = materiaRepository;
+            _planRepository = planRepository;
             _logger.LogDebug("Inicializado controlador MateriaController");
         }
 
@@ -22,21 +24,28 @@ namespace Unidad._5.Lab._1.MVC.Controllers
             return View(_materiaRepository.GetMaterias());
         }
 
-        public IActionResult Edit(int materiaId)
+        public IActionResult Edit(int? id)
         {
-            return View(_materiaRepository.GetOneMateria(materiaId));
+            if (id == null) return NotFound();
+            Materia? materia = _materiaRepository.GetOneMateria((int)id);
+            if (materia == null) return NotFound();
+            return View(new EditMateriaViewModel(materia, _planRepository.GetPlanes()));
         }
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int materiaId, Materia materia)
+        public IActionResult Edit(int id, [Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]Materia materia)
         {
+            if (id != materia.Id) return NotFound();
             if (ModelState.IsValid)
             {
+                materia.Plan = _planRepository.GetOnePlan(materia.PlanId);
                 _materiaRepository.UpdateMateria(materia);
             }
 
-            return View(materia);
+            return RedirectToAction("List");
         }
     }
 }
