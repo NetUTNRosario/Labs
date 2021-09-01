@@ -7,6 +7,6 @@ namespace Unidad._5.Lab._1.MVC.Models
         public int HsSemanales { get; set; }
         public int HsTotales { get; set; }
         public int PlanId { get; set; }
-        public Plan Plan { get; set; }
+        public Plan? Plan { get; set; }
     }
 }
