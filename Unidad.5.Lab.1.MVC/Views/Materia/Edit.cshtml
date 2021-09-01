@@ -1,23 +1,26 @@
-@model Materia
+@model EditMateriaViewModel
 
 <form asp-action="Edit">
-    <div class="mb-3">
-        <label for="descripcionFormControl" class="form-label">Descripcion</label>
-        <input id="descripcionFormControl" class="form-control" placeholder="@Model.Descripcion"
-            value="@Model.Descripcion" />
+    <input asp-for="Materia.Id" type="hidden" />
+    <div class="form-group">
+        <label asp-for="Materia.Descripcion" class="form-label">Descripcion</label>
+        <input asp-for="Materia.Descripcion" class="form-control" placeholder="@Model.Materia.Descripcion"
+            value="@Model.Materia.Descripcion" />
     </div>
 
-    <div class="mb-3">
-        <label for="hsSemanalesFormControl" class="form-label">Horas Semanales</label>
-        <input type="number" id="hsSemanalesFormControl" class="form-control" placeholder="@Model.HsSemanales"
-            value="@Model.HsSemanales">
+    <div class="form-group">
+        <label asp-for="Materia.HsSemanales" class="form-label">Horas Semanales</label>
+        <input asp-for="Materia.HsSemanales" type="number" class="form-control" placeholder="@Model.Materia.HsSemanales"
+            value="@Model.Materia.HsSemanales">
     </div>
 
-    <div class="mb-3">
-        <label for="hsTotalesFormControl" class="form-label">Horas Totales</label>
-        <input type="number" id="hsTotalesFormControl" class="form-control" placeholder="@Model.HsTotales"
-            value="@Model.HsTotales">
+    <div class="form-group">
+        <label asp-for="Materia.HsTotales" class="form-label">Horas Totales</label>
+        <input asp-for="Materia.HsTotales" type="number" class="form-control" placeholder="@Model.Materia.HsTotales"
+            value="@Model.Materia.HsTotales">
     </div>
+
+    <select asp-for="Materia.PlanId" asp-items="Model.Planes"></select>
 
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
