@@ -26,6 +26,7 @@ namespace Unidad._5.Lab._1.MVC
         {
             services.AddControllersWithViews();
             services.AddSingleton<IMateriaRepository, MateriaRepository>();
+            services.AddSingleton<IPlanRepository, PlanRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
