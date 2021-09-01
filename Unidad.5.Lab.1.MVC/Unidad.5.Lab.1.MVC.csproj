@@ -2,5 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Unidad._5.Lab._1.MVC</RootNamespace>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 </Project>
