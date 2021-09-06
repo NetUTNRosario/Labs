@@ -1,26 +1,44 @@
 @model EditMateriaViewModel
 
-<form asp-action="Edit">
-    <input asp-for="Materia.Id" type="hidden" />
-    <div class="form-group">
-        <label asp-for="Materia.Descripcion" class="form-label">Descripcion</label>
-        <input asp-for="Materia.Descripcion" class="form-control" placeholder="@Model.Materia.Descripcion"
-            value="@Model.Materia.Descripcion" />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Materia.Id" type="hidden" />
+            <div class="form-group">
+                <label asp-for="Materia.Descripcion" class="form-label">Descripcion</label>
+                <input asp-for="Materia.Descripcion" class="form-control" placeholder="@Model.Materia.Descripcion"
+                       value="@Model.Materia.Descripcion" />
+                <span asp-validation-for="Materia.Descripcion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Materia.HsSemanales" class="form-label">Horas Semanales</label>
+                <input asp-for="Materia.HsSemanales" type="number" class="form-control" placeholder="@Model.Materia.HsSemanales"
+                       value="@Model.Materia.HsSemanales">
+                <span asp-validation-for="Materia.HsSemanales" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Materia.HsTotales" class="form-label">Horas Totales</label>
+                <input asp-for="Materia.HsTotales" type="number" class="form-control" placeholder="@Model.Materia.HsTotales"
+                       value="@Model.Materia.HsTotales">
+                <span asp-validation-for="Materia.HsTotales" class="text-danger"></span>
+            </div>
+
+            <select class="form-group" asp-for="Materia.PlanId" asp-items="Model.Planes"></select>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
     </div>
+</div>
 
-    <div class="form-group">
-        <label asp-for="Materia.HsSemanales" class="form-label">Horas Semanales</label>
-        <input asp-for="Materia.HsSemanales" type="number" class="form-control" placeholder="@Model.Materia.HsSemanales"
-            value="@Model.Materia.HsSemanales">
-    </div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
-    <div class="form-group">
-        <label asp-for="Materia.HsTotales" class="form-label">Horas Totales</label>
-        <input asp-for="Materia.HsTotales" type="number" class="form-control" placeholder="@Model.Materia.HsTotales"
-            value="@Model.Materia.HsTotales">
-    </div>
-
-    <select asp-for="Materia.PlanId" asp-items="Model.Planes"></select>
-
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

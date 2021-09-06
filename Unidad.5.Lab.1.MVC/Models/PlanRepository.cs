@@ -7,8 +7,8 @@ namespace Unidad._5.Lab._1.MVC.Models
 {
     public interface IPlanRepository
     {
-        Plan? GetOnePlan(int planId);
-        IEnumerable<Plan> GetPlanes();
+        Plan? GetOne(int planId);
+        IEnumerable<Plan> GetAll();
     }
 
     public class PlanRepository : IPlanRepository
@@ -39,13 +39,13 @@ namespace Unidad._5.Lab._1.MVC.Models
         /// The GetPlanes.
         /// </summary>
         /// <returns>The <see cref="IEnumerable{Plan}"/>.</returns>
-        public IEnumerable<Plan> GetPlanes() => _planes;
+        public IEnumerable<Plan> GetAll() => _planes;
 
         /// <summary>
         /// The GetOnePlan.
         /// </summary>
         /// <param name="planId">The planId<see cref="int"/>.</param>
         /// <returns>The <see cref="Plan"/>.</returns>
-        public Plan? GetOnePlan(int planId) => _planes.Find(p => p.Id == planId);
+        public Plan? GetOne(int planId) => _planes.Find(p => p.Id == planId);
     }
 }

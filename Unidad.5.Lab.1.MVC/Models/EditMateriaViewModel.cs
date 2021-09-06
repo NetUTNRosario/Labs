@@ -15,7 +15,7 @@ namespace Unidad._5.Lab._1.MVC.Models
             Materia = materia;
             Planes = planes
                 .Select(p => new SelectListItem 
-                    { Text = $"{p.Especialidad}:{p.Anio}", Value = p.Id.ToString(), Selected = p.Id == materia.Plan?.Id  }
+                    { Text = $"{p.Especialidad}:{p.Anio}", Value = p.Id.ToString(), Selected = p.Id == materia?.Plan?.Id  }
                 ).ToList();
         }
     }
