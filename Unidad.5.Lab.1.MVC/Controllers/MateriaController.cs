@@ -19,6 +19,8 @@ namespace Unidad._5.Lab._1.MVC.Controllers
             _logger.LogDebug("Inicializado controlador MateriaController");
         }
 
+        public IActionResult Index() => RedirectToAction("List");
+
         public IActionResult List()
         {
             return View(_materiaRepository.GetAlll());
