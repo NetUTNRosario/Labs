@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Unidad._5.Lab._1.MVC.Models;
+using Web.Models;
 
-namespace Unidad._5.Lab._1.MVC
+namespace Web
 {
     public class Startup
     {

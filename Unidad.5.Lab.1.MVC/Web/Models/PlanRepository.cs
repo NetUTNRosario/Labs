@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Unidad._5.Lab._1.MVC.Models
+namespace Web.Models
 {
     public interface IPlanRepository
     {

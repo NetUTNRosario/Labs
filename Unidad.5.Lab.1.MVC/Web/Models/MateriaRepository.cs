@@ -1,4 +1,4 @@
-namespace Unidad._5.Lab._1.MVC.Models
+namespace Web.Models
 {
     using System;
     using System.Collections.Generic;

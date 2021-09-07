@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Unidad._5.Lab._1.MVC
+namespace Web
 {
     public class Program
     {

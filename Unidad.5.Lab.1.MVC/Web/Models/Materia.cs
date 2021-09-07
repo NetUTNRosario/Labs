@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace Unidad._5.Lab._1.MVC.Models
+namespace Web.Models
 {
     public class Materia
     {

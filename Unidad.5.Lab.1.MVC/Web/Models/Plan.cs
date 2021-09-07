@@ -1,6 +1,6 @@
 using System;
 
-namespace Unidad._5.Lab._1.MVC.Models
+namespace Web.Models
 {
     public class Plan
     {
