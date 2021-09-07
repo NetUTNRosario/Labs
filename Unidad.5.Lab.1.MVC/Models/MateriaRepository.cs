@@ -5,7 +5,7 @@ namespace Unidad._5.Lab._1.MVC.Models
 
     public interface IMateriaRepository
     {
-        IEnumerable<Materia> GetAlll();
+        IEnumerable<Materia> GetAll();
 
         Materia? GetOne(int materiaId);
 
@@ -17,9 +17,11 @@ namespace Unidad._5.Lab._1.MVC.Models
     public class MateriaRepository : IMateriaRepository
     {
         private List<Materia> _materias;
+        private readonly IPlanRepository _planRepository;
 
         public MateriaRepository(IPlanRepository planRepository)
         {
+            _planRepository = planRepository;
             _materias = new List<Materia>() {
                 new()
                 {
@@ -42,7 +44,7 @@ namespace Unidad._5.Lab._1.MVC.Models
             };
         }
 
-        public IEnumerable<Materia> GetAlll() => _materias;
+        public IEnumerable<Materia> GetAll() => _materias;
 
         public Materia? GetOne(int materiaId) => _materias.Find(m => m.Id == materiaId);
 
@@ -53,12 +55,14 @@ namespace Unidad._5.Lab._1.MVC.Models
             {
                 throw new Exception("Materia not found in the current data");
             }
+            materia.Plan = _planRepository.GetOne(materia.PlanId);
             _materias[materiaIndex.Value] = materia;
         }
 
         public void Add(Materia materia)
         {
             materia.Id = _materias.Count + 2;
+            materia.Plan = _planRepository.GetOne(materia.PlanId);
             _materias.Add(materia);
         }
     }

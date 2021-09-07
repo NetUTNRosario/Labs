@@ -23,7 +23,7 @@ namespace Unidad._5.Lab._1.MVC.Controllers
 
         public IActionResult List()
         {
-            return View(_materiaRepository.GetAlll());
+            return View(_materiaRepository.GetAll());
         }
 
         public IActionResult Edit(int? id)
@@ -43,7 +43,6 @@ namespace Unidad._5.Lab._1.MVC.Controllers
             if (id != materia.Id) return NotFound();
             if (ModelState.IsValid)
             {
-                materia.Plan = _planRepository.GetOne(materia.PlanId);
                 _materiaRepository.Update(materia);
 
                 return RedirectToAction("List");
