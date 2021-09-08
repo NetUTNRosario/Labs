@@ -354,6 +354,8 @@ app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
 16. Ya que no es valido que una accion se llame "404" o "500" se debe utilizar la anotacion ```[Route("...")]``` para no utilizar la convencion de ruta ***"/{controlador}/{accion}/{id?}"*** para esta accion del controlador. Para esto ir al controlador ```Error``` accion ```NotFoundError``` y agregar la anotacion ```[Route("/error/404")]```. Agregar una vista para esta accion, se debe ver como lo siguiente.
 
+![image](https://user-images.githubusercontent.com/41701343/132452274-ee6732fb-6539-491a-b739-f95e07dd9f23.png)
+    
 <details close>
 <summary>Ver Vista Completa</summary>
 
