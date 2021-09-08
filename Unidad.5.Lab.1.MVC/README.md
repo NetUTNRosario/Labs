@@ -259,7 +259,7 @@ public CreateMateriaViewModel(Materia? materia, IEnumerable<Plan> planes)
 
 </details>
 
-11. Proceder de la misma manera que con la accion POST de ***Edit***, utilizando el metodo ```_materiaRepository.Add(Materia materia)```. Recordar revisar si las validaciones no fueron exitosas.  
+11. Con la accion GET de la accion ***Create*** tener en cuenta lo mencionado en el paso anterior. En cuanto a la accion POST proceder de la misma manera que con la de ***Edit***, utilizando el metodo ```_materiaRepository.Add(Materia materia)``` y agregando la anotacion ```[Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]``` para solo tomar y validar que esten incluidas esas propiedades en la instancia de materia envidada como argumento. Recordar revisar si las validaciones no fueron exitosas.  
     
 <details close>
 <summary>Ver Codigo</summary>
@@ -315,7 +315,38 @@ return RedirectToAction("List");
 
 </details>
 
-14. En el proyecto ***Test*** clase ```IntegrationTestWeb``` ir a ***Prueba***/***Ejecutar todas las pruebas*** de la barra de herramientas de VS. Esto es para verificar que la implementación cumpla con las especificaciones requeridas. Por ejemplo para la accion ***/Materia/List***:
+14. Ir la carpeta ***/Views/Shared*** vista ***_Layout*** (esta es la master-view donde sobre la que se renderiza cada una de las demas views), alli agregar una opcion mas al navbar ```<li class="nav-item">``` que redirija a la accion ```Create``` mediante las directivas ```asp-area=""```, ```asp-controller="Materia"``` y ```asp-action="Create"```.
+
+<details close>
+<summary>Ver Header Completo del Layout</summary>
+
+```html
+<header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Unidad._5.Lab._1.MVC</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Materia" asp-action="List">Listar Materias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Materia" asp-action="Create">Agregar Materia</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+```
+
+</details>
+
+15. En el proyecto ***Test*** clase ```IntegrationTestWeb``` ir a ***Prueba***/***Ejecutar todas las pruebas*** de la barra de herramientas de VS. Esto es para verificar que la implementación cumpla con las especificaciones requeridas. Por ejemplo para la accion ***/Materia/List***:
 ``` c#
 [Fact]
 public async Task VisitRootPage_ShouldRenderTwoMateriaCardsAndTheFirstOneMustHaveCertainCardSubtitle()

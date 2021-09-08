@@ -43,7 +43,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")] Materia materia)
+        public IActionResult Create(Materia materia)
         {
             throw new NotImplementedException();
         }
