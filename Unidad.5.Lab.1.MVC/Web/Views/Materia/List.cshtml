@@ -1,18 +1,1 @@
-@model IEnumerable<Materia>
-
-<ul class="list-group">
-    @foreach (Materia mat in Model)
-    {
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">@mat.Descripcion</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    @Html.DisplayNameFor(model => mat.HsSemanales): @mat.HsSemanales -
-                    @Html.DisplayNameFor(model => mat.HsTotales): @mat.HsTotales
-                </h6>
-                <p class="card-text">@mat.Plan.Especialidad <span class="text-info">@mat.Plan.Anio</span></p>
-                <a class="btn btn-primary" asp-area="" asp-action="Edit" asp-route-id="@mat.Id">Editar</a>
-            </div>
-        </div>
-    }
-</ul>
+@Model IEnumerable<Materia>
