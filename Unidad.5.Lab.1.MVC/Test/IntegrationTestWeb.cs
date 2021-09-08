@@ -52,7 +52,7 @@ namespace Test
             response.EnsureSuccessStatusCode();
             Assert.Equal(actual: parsedDocument.QuerySelectorAll("span[class='text-danger field-validation-valid']").Length, expected: 3);
             Assert.Contains(actualString: parsedDocument.QuerySelector("option[value='1']").TextContent
-                            , expectedSubstring: "Ingeniería en Sistemas de Información:2008");
+                            , expectedSubstring: "IngenierÃ­a en Sistemas de InformaciÃ³n:2008");
         }
     }
 }
