@@ -322,31 +322,60 @@ return RedirectToAction("List");
 
 ```html
 <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Unidad._5.Lab._1.MVC</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Materia" asp-action="List">Listar Materias</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Materia" asp-action="Create">Agregar Materia</a>
-                        </li>
-                    </ul>
-                </div>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Unidad._5.Lab._1.MVC</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Materia" asp-action="List">Listar Materias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Materia" asp-action="Create">Agregar Materia</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>
 ```
 
 </details>
 
-15. En el proyecto ***Test*** clase ```IntegrationTestWeb``` ir a ***Prueba***/***Ejecutar todas las pruebas*** de la barra de herramientas de VS. Esto es para verificar que la implementación cumpla con las especificaciones requeridas. Por ejemplo para la accion ***/Materia/List***:
+15. En la clase ```Startup``` metodo ```Configure(IApplicationBuilder app, IWebHostEnvironment env)``` en el lugar comentado agregar 
+```c#
+app.UseStatusCodePagesWithReExecute("/Error/{0}");
+```
+> Esto permitira redirigir a una pagina de error especificas segun el codigo de error que suceda, el ```{0}``` es remplazado durante la ejecucion por esto ultimo, logrando que se redirija al controlador ```Error``` y la accion marcada por esa ruta. Ejemplo "/Error/404", osea NotFound
+
+16. Ya que no es valido que una accion se llame "404" o "500" se debe utilizar la anotacion ```[Route("...")]``` para no utilizar la convencion de ruta ***"/{controlador}/{accion}/{id?}"*** para esta accion del controlador. Para esto ir al controlador ```Error``` accion ```NotFoundError``` y agregar la anotacion ```[Route("/error/404")]```. Agregar una vista para esta accion, se debe ver como lo siguiente.
+
+<details close>
+<summary>Ver Vista Completa</summary>
+
+```html
+<div class="page-wrap d-flex flex-row align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 text-center">
+                <span class="display-1 d-block">404</span>
+                <div class="mb-4 lead">Pagina no encontrada</div>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-link">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+</details>
+
+17. Tener en cuenta que hay mas tipos de errores, por lo que en la accion ```GenericError(int code)``` agregar la anotacion correspondiente, teniendo en cuenta que en este tipo de anotaciones es posible parametrizar el string de parametro con lo siguiente "{code:int}", este code es justamente reflejado en el parametro del metodo.
+
+18. En el proyecto ***Test*** clase ```IntegrationTestWeb``` ir a ***Prueba***/***Ejecutar todas las pruebas*** de la barra de herramientas de VS. Esto es para verificar que la implementación cumpla con las especificaciones requeridas. Por ejemplo para la accion ***/Materia/List***:
 ``` c#
 [Fact]
 public async Task VisitRootPage_ShouldRenderTwoMateriaCardsAndTheFirstOneMustHaveCertainCardSubtitle()

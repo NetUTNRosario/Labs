@@ -41,7 +41,7 @@ namespace Web
                 app.UseHsts();
             }
 
-            app.UseStatusCodePagesWithReExecute("/error/{0}");
+            // Aca
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
