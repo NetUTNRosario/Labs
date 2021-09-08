@@ -36,6 +36,8 @@ return View(_materiaRepository.GetAll())
 ```
 > Estas directivas ```@mat.{atributo}``` van a popular con los datos enviados desde el controlador el html enviado ante cada request (esto sucede en el servidor, osea su maquina en el puerto 5000). Estas estan fuertemente tipadas (lo cual hace que se provean sugerencias al escribir) gracias a la directiva ```@Model IEnumerable<Materia>``` que se encuentra al inicio del archivo, lo cual determina que tipo de dato se aceptara para ser enviado por el controlador en la accion correspondiente
 
+![image](https://user-images.githubusercontent.com/41701343/132447918-4167529f-bbed-49da-82ad-6e6e33590616.png)
+
 <details close>
 <summary>Ver Vista Completa</summary>
 
@@ -79,6 +81,9 @@ return View(new EditMateriaViewModel(materia, _planRepository.GetAll()));
 ```html
 <input asp-for="Materia.Id" type="hidden" />
 ```
+
+![image](https://user-images.githubusercontent.com/41701343/132448186-45922162-6000-4913-bf35-46d8c03c91c3.png)
+
 <details close>
 <summary>Ver Vista Completa</summary>
 
@@ -142,6 +147,10 @@ Al terminar agregar los spans siguientes como ultimo contenido de cada ```<div c
 </div>
 
 ```
+    
+![image](https://user-images.githubusercontent.com/41701343/132448329-fa3b8ae9-5c2f-4bfd-b201-91555a10fa4e.png)
+    
+    
 <details close>
 <summary>Ver Código</summary>
 
@@ -250,7 +259,8 @@ public CreateMateriaViewModel(Materia? materia, IEnumerable<Plan> planes)
 
 </details>
 
-11. Proceder de la misma manera que con la accion POST de ***Edit***, utilizando el metodo ```_materiaRepository.Add(Materia materia)```. Recordar revisar si las validaciones no fueron exitosas.
+11. Proceder de la misma manera que con la accion POST de ***Edit***, utilizando el metodo ```_materiaRepository.Add(Materia materia)```. Recordar revisar si las validaciones no fueron exitosas.  
+    
 <details close>
 <summary>Ver Codigo</summary>
 
@@ -267,6 +277,9 @@ return RedirectToAction("List");
 </details>
 
 13. Para la vista correspondiente a la accion ***Create*** proceder de forma similar a lo realizado para la vista ***Edit***.
+    
+![image](https://user-images.githubusercontent.com/41701343/132448388-d1c4d474-e5ac-43b5-9d4d-a4d1365d8d1a.png)  
+    
 <details close>
 <summary>Ver Vista Completa</summary>
 
