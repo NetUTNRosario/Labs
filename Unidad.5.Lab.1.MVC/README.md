@@ -7,6 +7,9 @@ Interiorizarse con conceptos de asp net core mvc como lo son: controladores, vis
 1. En la clase ```HomeController``` accion ```Index``` redireccionar a la accion ```List``` del controlador ```¨MateriaController```. Para esto usar el metodo 
 ```c#
 RedirectToAction(string actionName, string controllerName)
+// Es decir 
+RedirectToAction(controllerName: "Materia", actionName: "List") 
+// Aclaracion: al utilizar named parameters "actionName:" se puede alterar el orden los argumentos
 ```
 
 2. En la clase ```Startup``` ir al metodo ```ConfigureServices(IServiceCollection services)``` y agregar los siguientes servicios (repositorios que se encargaran de manejar las colecciones en memoria requeridas para este ejercicio) para ser proveidos por el contenedor de dependencias
@@ -375,7 +378,10 @@ app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
 </details>
 
-17. Tener en cuenta que hay mas tipos de errores, por lo que en la accion ```GenericError(int code)``` agregar la anotacion correspondiente, teniendo en cuenta que en este tipo de anotaciones es posible parametrizar el string de parametro con lo siguiente "{code:int}", este code es justamente reflejado en el parametro del metodo.
+17. Tener en cuenta que hay mas tipos de errores, por lo que en la accion ```GenericError(int code)``` agregar la anotacion correspondiente, teniendo en cuenta que en este tipo de anotaciones es posible parametrizar el string de parametro con lo siguiente ```[Route("/error/{code:int}")]```, siendo ***"{code:int}"*** justamente reflejado en el parametro del metodo.
+```c#
+public IActionResult GenericError(int code)
+```
 
 18. En el proyecto ***Test*** clase ```IntegrationTestWeb``` ir a ***Prueba***/***Ejecutar todas las pruebas*** de la barra de herramientas de VS. Esto es para verificar que la implementación cumpla con las especificaciones requeridas. Por ejemplo para la accion ***/Materia/List***:
 ``` c#
