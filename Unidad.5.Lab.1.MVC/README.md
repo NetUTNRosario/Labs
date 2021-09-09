@@ -4,13 +4,14 @@
 Interiorizarse con conceptos de asp net core mvc como lo son: controladores, vistas, modelo, validacion por data annotations, ruteo por código o por vistas, viewmodels, vistas de error, layout (o master-view) e inyección de dependencias.
 
 ### Pasos
-1. En la clase ```HomeController``` accion ```Index``` redireccionar a la accion ```List``` del controlador ```¨MateriaController```. Para esto usar el metodo 
+1. En la clase ```HomeController``` accion ```Index``` redireccionar a la accion ```List``` del controlador ```Materia```. Para esto usar el metodo 
 ```c#
 RedirectToAction(string actionName, string controllerName)
 // Es decir 
 RedirectToAction(controllerName: "Materia", actionName: "List") 
 // Aclaracion: al utilizar named parameters "actionName:" se puede alterar el orden los argumentos
 ```
+> Toda clase controlador tiene como sufijo ***Controller*** como convencion de framework, como en el caso de ***Materia{Controller}***, lo cual es eliminado en el ruteo por ejemplo (quedando la url ***"/Materia/List"*** en lugar de ***"/MateriaController/List"***, es decir sigue la convencion de ruta ***"/{controlador}/{accion}/{id?}"*** declarada en la clase ```Startup```)
 
 2. En la clase ```Startup``` ir al metodo ```ConfigureServices(IServiceCollection services)``` y agregar los siguientes servicios (repositorios que se encargaran de manejar las colecciones en memoria requeridas para este ejercicio) para ser proveidos por el contenedor de dependencias
 ```c#
