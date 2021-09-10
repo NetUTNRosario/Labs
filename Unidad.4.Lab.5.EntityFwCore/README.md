@@ -21,6 +21,82 @@ public class CursosRepositorioTest
 ```
 
 ### Ejercicios
+> Recordar desechar la instancia de context una vez realizada la consulta mediante un bloque ```using``` en donde se cree una instancia del context mediante ```_contextFactory.CreateContext()```
+
+> Para conocer los datos de la base de datos sobre los cuales los test serán evaluados revisar código de la clase ```TestDbSeed``` del proyecto ```DataAccessTest```
+<details close>
+<summary>Ver Datos en BD</summary>
+
+```c#
+var especialidades = new List<Especialidad>()
+{
+    new()
+    {
+        Descripcion = "Ingeniería en Sistemas de Información"
+    },
+    new()
+    {
+        Descripcion = "Ingeniería Química"
+    },
+    new()
+    {
+        Descripcion = "Ingeniería Eléctrica"
+    },
+    new()
+    {
+        Descripcion = "Ingeniería Mecánica"
+    },
+    new()
+    {
+        Id = 5,
+        Descripcion = "Ingeniería Civil"
+    }
+};
+
+var planes = new List<Plan>()
+{
+    new()
+    {
+        Anio = 2008,
+        Especialidad = especialidades[0]
+    },
+    new()
+    {
+        Anio = 1995,
+        Especialidad = especialidades[0]
+    },
+    new()
+    {
+        Anio = 1994,
+        Especialidad = especialidades[3]
+    },
+    new()
+    {
+        Anio = 2009,
+        Especialidad = especialidades[4]
+    }
+};
+
+var materias = new List<Materia>
+{
+    new()
+    {
+        Descripcion = "Sistemas de Gestión",
+        HsSemanales = 4,
+        HsTotales = 136,
+        Plan = planes[0]
+    },
+    new()
+    {
+        Descripcion = "Administración Gerencial",
+        HsSemanales = 6,
+        HsTotales = 102,
+        Plan = planes[0]
+    }
+};
+```
+
+</details>
 1. Traer las materias con menos de **x** horas semanales con el plan del año **z**, ordenados en forma descendente por horas semanales, incluyendo los datos del plan y la especialidad asociados a estas
 
 2. Guardar una materia con el plan mas actual que este asociado con la especialidad que contenga el nombre parcial enviado como parámetro
