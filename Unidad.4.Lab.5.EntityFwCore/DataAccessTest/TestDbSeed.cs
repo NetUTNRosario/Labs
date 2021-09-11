@@ -6,7 +6,7 @@ using Model;
 namespace DataAccessTest {
     public class TestDbSeed
     {
-        public static void Seed(IApplicationContextFactory contextFactory)
+        public static void RecreateAndSeed(IApplicationContextFactory contextFactory)
         {
             var especialidades = new List<Especialidad>()
             {

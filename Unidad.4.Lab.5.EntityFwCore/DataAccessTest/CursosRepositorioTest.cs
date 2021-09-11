@@ -10,26 +10,31 @@ namespace DataAccessTest
 {
     public class CursosRepositorioTest
     {
+        private readonly CursosRepositorio _cursosRepositorio;
+        public CursosRepositorioTest()
+        {
+            // Esto funciona antes de cada test, por lo que la db sqlite es recreada gracias a lo cual los test permanecen aislados entre si
+            // This works before each test, so the sqlite db is recreated in order to keep test isolated
+            _cursosRepositorio = new CursosRepositorio(new TestApplicationContextFactory());
+            TestDbSeed.RecreateAndSeed(new TestApplicationContextFactory());
+        }
+
         [Fact]
         public void GetMateriasTest()
         {
-            //Arrange
-            var cursosRepositorio = new CursosRepositorio(new TestApplicationContextFactory());
-            TestDbSeed.Seed(new TestApplicationContextFactory());
             //Act
-            var result = cursosRepositorio.GetMaterias(5, 2008);
+            IEnumerable<Materia> result = _cursosRepositorio.GetMaterias(hsSemanales: 5, anioPlan: 2008);
             //Assert
             Assert.Equal(expected: "Sistemas de Gestión", actual: result.FirstOrDefault().Descripcion);
             Assert.Equal(expected: 2008, actual: result.FirstOrDefault().Plan.Anio);
             Assert.Equal(expected: "Ingeniería en Sistemas de Información", actual: result.FirstOrDefault().Plan.Especialidad.Descripcion);
+            Assert.Single(result);
         }
 
         [Fact]
         public void InsertMateriaTest()
         {
             // Arrange
-            var cursosRepositorio = new CursosRepositorio(new TestApplicationContextFactory());
-            TestDbSeed.Seed(new TestApplicationContextFactory());
             var materia = new Materia()
             {
                 Descripcion = "Mineria de Datos",
@@ -37,16 +42,16 @@ namespace DataAccessTest
                 HsTotales = 128
             };
             // Act
-            cursosRepositorio.InsertMateria(materia, "Ingeniería en Sistemas");
+            _cursosRepositorio.InsertMateria(materia, nombreParcialEspecialidad: "Ingeniería en Sistemas");
             // Assert
             using (var context = new TestApplicationContextFactory().CreateContext())
             {
-                var materiaInDb = context.Materias
+                Materia materiaInDb = context.Materias
                         .Include(m => m.Plan)
                         .ThenInclude(p => p.Especialidad)
                         .FirstOrDefault(m => m.Descripcion == materia.Descripcion);
-                Assert.Equal(expected: 4, actual: materiaInDb.HsSemanales);
-                Assert.Equal(expected: 128, actual: materiaInDb.HsTotales);
+                Assert.Equal(expected: materia.HsSemanales, actual: materiaInDb.HsSemanales);
+                Assert.Equal(expected: materia.HsTotales, actual: materiaInDb.HsTotales);
                 Assert.Equal(expected: "Ingeniería en Sistemas de Información",
                              actual: materiaInDb.Plan.Especialidad.Descripcion);
             }
