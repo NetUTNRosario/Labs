@@ -1,7 +1,7 @@
 # Unidad 4 - Laboratorio 5
 
 ### Objetivos
-Interiorizarse con conceptos de asp net core mvc como lo son: controladores, vistas, modelo, validacion por data annotations, ruteo por código o por vistas, viewmodels, vistas de error, layout (o master-view) e inyección de dependencias.
+Interiorizarse con conceptos de asp net core mvc como lo son: controladores, vistas, modelo, validaciones en cliente y en servidor, ruteo por código o por vistas, viewmodels, vistas de error, layout (o master-view) e inyección de dependencias.
 
 ### Pasos
 1. En la clase ```HomeController``` accion ```Index``` redireccionar a la accion ```List``` del controlador ```Materia```. Para esto usar el metodo 
@@ -131,13 +131,14 @@ return View(new EditMateriaViewModel(materia, _planRepository.GetAll()));
 
 </details> 
 
-8. En la entidad ```Materia``` agregar validaciones para lo siguiente
+8. Para utilizar validaciones se utilizara la libreria [FluentValidation](https://docs.fluentvalidation.net/en/latest/aspnet.html), ya que permite realizar validaciones mucho mas complejas y ademas estas resultan mas legibles que cuando se utilizan data annotations. Como primer paso se debe instalar el paquete Nuget ***FluentValidation.AspNetCore*** con el comando ```dotnet add package FluentValidation```.AspNetCore*** o utilizando el administrador de paquetes Nuget de Visual Studio. Luego, en la clase ```Startup``` en el metodo ```ConfigureServices``` (aquel utilizado para inyeccion de dependencias) encadenar el metodo ```.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>())``` a ```services.AddControllersWithViews()```. De esta manera se logra la completa integracion de asp net core con esta liberia de validacion, utilizandose exactamente la misma forma de trabajo que con data annotations (el metodo por default del framework).
+
+9. En la entidad ```Materia``` agregar validaciones para lo siguiente
 - La descripcion de una materia debe tener este 3 y 20 caracteres
 - Las horas semanales de una materia deben ser entre 2 y 6. Ademas, este campo se debe mostrar como "Horas Semanales" 
 - Las horas totales no deben sobrepasar las 150 y tienen que ser superiores a 90 horas. Este campo se debe mostrar como "Horas Totales""
 - Los campos Descripcion, HsSemanales, HsTotales y PlanId son requeridos
-> Para esto usar las data annotations: [StringLength(maximoCaracteres, MinimumLength = minimoCaracteres)]
-, [Range(inferior, superior)], [Required], [Display(Name = "nombreX")]
+> Para esto usar la data annotation ```[Display(Name = "nombreX")]``` en la clase Materia y en el constructor de una clase separada ```MateriaValidator``` que herede de la clase generica ```AbstractValidator<Materia>``` agregar las validaciones mediante los metodos ```RuleFor(m => m.AtributoX)``` que son encadenables con ```NotEmpty()```, ```.Length(min:, max:)``` e ```.InclusiveBetween(from:, to:)```
 
 Al terminar agregar los spans siguientes como ultimo contenido de cada ```<div class="form-group">...</div>``` de la vista ***Edit***. Lo cual servira para mostrar los mensajes de validacion correspondientes a cada campo directamente abajo de este, esto sera ejecutado primero en cliente por lo que no se permitira hacer la request al servidor si hay errores de validacion y solo se hara la validacion en servidor si javascript se encuentra desactivado o por otras razones.
 ```html
@@ -159,21 +160,28 @@ Al terminar agregar los spans siguientes como ultimo contenido de cada ```<div c
 <summary>Ver Código</summary>
 
 ```c#
+public class Materia
+{
     public int Id { get; set; }
-    [Required]
-    [StringLength(20, MinimumLength = 3)]
     public string Descripcion { get; set; }
-    [Required]
-    [Range(2, 6)]
     [Display(Name = "Horas Semanales")]
     public int HsSemanales { get; set; }
-    [Required]
-    [Range(90, 150)]
     [Display(Name = "Horas Totales")]
     public int HsTotales { get; set; }
-    [Required]
     public int PlanId { get; set; }
     public Plan? Plan { get; set; }
+}
+
+public class MateriaValidator: AbstractValidator<Materia>
+{
+    public MateriaValidator()
+    {
+        RuleFor(m => m.Descripcion).NotEmpty().Length(min: 3, max: 20);
+        RuleFor(m => m.HsSemanales).NotEmpty().InclusiveBetween(from: 2, to: 6);
+        RuleFor(m => m.HsTotales).NotEmpty().InclusiveBetween(from: 90, to: 150);
+        RuleFor(m => m.PlanId).NotEmpty();
+    }
+}
 ```
 
 </details>
@@ -220,7 +228,8 @@ Al terminar agregar los spans siguientes como ultimo contenido de cada ```<div c
 ```
 
 </details>
-9. En la accion ```Edit(int id, [Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]Materia materia)```, osea la parte que ocurre al hacer submit (POST) del formulario obtenido en el GET de la accion, actualizar la materia del id correspondiente con el metodo ```_materiaRepository.Update(Materia materia)``` y redirigir a la accion ```List```. Recordar comprobar si no se pasaron las validaciones con ```!ModelState.IsValid```, si ocurre re-renderizar la vista devolviendo ```View(new EditMateriaViewModel(...))``` al igual que en el GET y si el id enviado en la ruta no corresponde al enviado en los datos del formulario, si esto ultimo sucede devolver el resultado ```NotFound()```)
+
+10. En la accion ```Edit(int id, [Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]Materia materia)```, osea la parte que ocurre al hacer submit (POST) del formulario obtenido en el GET de la accion, actualizar la materia del id correspondiente con el metodo ```_materiaRepository.Update(Materia materia)``` y redirigir a la accion ```List```. Recordar comprobar si no se pasaron las validaciones con ```!ModelState.IsValid```, si ocurre re-renderizar la vista devolviendo ```View(new EditMateriaViewModel(...))``` al igual que en el GET y si el id enviado en la ruta no corresponde al enviado en los datos del formulario, si esto ultimo sucede devolver el resultado ```NotFound()```)
 <details close>
 <summary>Ver Código</summary>
 
@@ -237,7 +246,7 @@ return RedirectToAction("List");
 
 </details>
 
-10. Agregar el codigo para el viewmodel ```CreateMateriaViewModel``` correspondiente a la accion ```Create```. Este es muy similar al viewmodel correspondiente a la accion ```Edit``` con la salvedad que la propiedad ```Materia``` puede ser nula (al hacer el GET de esta accion siempre lo es, ya que es un formulario de creacion por lo que todos sus datos se encuentran vacios), para esto denotar el tipo de referencia nullable ```Materia?``` cuando sea necesario. Ademas, aqui no se preselecciona ninguna ```<option />``` del ```<select />```, ya que esta no es una materia previamente existente y por lo tanto no tiene ningun plan asignado.
+11. Agregar el codigo para el viewmodel ```CreateMateriaViewModel``` correspondiente a la accion ```Create```. Este es muy similar al viewmodel correspondiente a la accion ```Edit``` con la salvedad que la propiedad ```Materia``` puede ser nula (al hacer el GET de esta accion siempre lo es, ya que es un formulario de creacion por lo que todos sus datos se encuentran vacios), para esto denotar el tipo de referencia nullable ```Materia?``` cuando sea necesario. Ademas, aqui no se preselecciona ninguna ```<option />``` del ```<select />```, ya que esta no es una materia previamente existente y por lo tanto no tiene ningun plan asignado.
 
 <details close>
 <summary>Ver Codigo</summary>
@@ -263,7 +272,7 @@ public CreateMateriaViewModel(Materia? materia, IEnumerable<Plan> planes)
 
 </details>
 
-11. Con la accion GET de la accion ***Create*** tener en cuenta lo mencionado en el paso anterior. En cuanto a la accion POST proceder de la misma manera que con la de ***Edit***, utilizando el metodo ```_materiaRepository.Add(Materia materia)``` y agregando la anotacion ```[Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]``` para solo tomar y validar que esten incluidas esas propiedades en la instancia de materia envidada como argumento. Recordar revisar si las validaciones no fueron exitosas.  
+12. Con la accion GET de la accion ***Create*** tener en cuenta lo mencionado en el paso anterior. En cuanto a la accion POST proceder de la misma manera que con la de ***Edit***, utilizando el metodo ```_materiaRepository.Add(Materia materia)``` y agregando la anotacion ```[Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]``` para solo tomar y validar que esten incluidas esas propiedades en la instancia de materia envidada como argumento. Recordar revisar si las validaciones no fueron exitosas.  
     
 <details close>
 <summary>Ver Codigo</summary>
@@ -280,7 +289,7 @@ return RedirectToAction("List");
 
 </details>
 
-13. Para la vista correspondiente a la accion ***Create*** proceder de forma similar a lo realizado para la vista ***Edit***.
+14. Para la vista correspondiente a la accion ***Create*** proceder de forma similar a lo realizado para la vista ***Edit***.
     
 ![image](https://user-images.githubusercontent.com/41701343/132448388-d1c4d474-e5ac-43b5-9d4d-a4d1365d8d1a.png)  
     
@@ -319,7 +328,7 @@ return RedirectToAction("List");
 
 </details>
 
-14. Ir la carpeta ***/Views/Shared*** vista ***_Layout*** (esta es la master-view donde sobre la que se renderiza cada una de las demas views), alli agregar una opcion mas al navbar ```<li class="nav-item">``` que redirija a la accion ```Create``` mediante las directivas ```asp-area=""```, ```asp-controller="Materia"``` y ```asp-action="Create"```.
+15. Ir la carpeta ***/Views/Shared*** vista ***_Layout*** (esta es la master-view donde sobre la que se renderiza cada una de las demas views), alli agregar una opcion mas al navbar ```<li class="nav-item">``` que redirija a la accion ```Create``` mediante las directivas ```asp-area=""```, ```asp-controller="Materia"``` y ```asp-action="Create"```.
 
 <details close>
 <summary>Ver Header Completo del Layout</summary>
@@ -350,13 +359,13 @@ return RedirectToAction("List");
 
 </details>
 
-15. En la clase ```Startup``` metodo ```Configure(IApplicationBuilder app, IWebHostEnvironment env)``` en el lugar comentado agregar 
+16. En la clase ```Startup``` metodo ```Configure(IApplicationBuilder app, IWebHostEnvironment env)``` en el lugar comentado agregar 
 ```c#
 app.UseStatusCodePagesWithReExecute("/Error/{0}");
 ```
 > Esto permitira redirigir a una pagina de error especificas segun el codigo de error que suceda, el ```{0}``` es remplazado durante la ejecucion por esto ultimo, logrando que se redirija al controlador ```Error``` y la accion marcada por esa ruta. Ejemplo "/Error/404", osea NotFound
 
-16. Ya que no es valido que una accion se llame "404" o "500" se debe utilizar la anotacion ```[Route("...")]``` para no utilizar la convencion de ruta ***"/{controlador}/{accion}/{id?}"*** para esta accion del controlador. Para esto ir al controlador ```Error``` accion ```NotFoundError``` y agregar la anotacion ```[Route("/error/404")]```. Agregar una vista para esta accion, se debe ver como lo siguiente.
+17. Ya que no es valido que una accion se llame "404" o "500" se debe utilizar la anotacion ```[Route("...")]``` para no utilizar la convencion de ruta ***"/{controlador}/{accion}/{id?}"*** para esta accion del controlador. Para esto ir al controlador ```Error``` accion ```NotFoundError``` y agregar la anotacion ```[Route("/error/404")]```. Agregar una vista para esta accion, se debe ver como lo siguiente.
 
 ![image](https://user-images.githubusercontent.com/41701343/132452274-ee6732fb-6539-491a-b739-f95e07dd9f23.png)
     
@@ -379,12 +388,12 @@ app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
 </details>
 
-17. Tener en cuenta que hay mas tipos de errores, por lo que en la accion ```GenericError(int code)``` agregar la anotacion correspondiente, teniendo en cuenta que en este tipo de anotaciones es posible parametrizar el string de parametro con lo siguiente ```[Route("/error/{code:int}")]```, siendo ***"{code:int}"*** justamente reflejado en el parametro del metodo.
+18. Tener en cuenta que hay mas tipos de errores, por lo que en la accion ```GenericError(int code)``` agregar la anotacion correspondiente, teniendo en cuenta que en este tipo de anotaciones es posible parametrizar el string de parametro con lo siguiente ```[Route("/error/{code:int}")]```, siendo ***"{code:int}"*** justamente reflejado en el parametro del metodo.
 ```c#
 public IActionResult GenericError(int code)
 ```
 
-18. En el proyecto ***Test*** clase ```IntegrationTestWeb``` ir a ***Prueba***/***Ejecutar todas las pruebas*** de la barra de herramientas de VS. Esto es para verificar que la implementación cumpla con las especificaciones requeridas. Por ejemplo para la accion ***/Materia/List***:
+19. En el proyecto ***Test*** clase ```IntegrationTestWeb``` ir a ***Prueba***/***Ejecutar todas las pruebas*** de la barra de herramientas de VS. Esto es para verificar que la implementación cumpla con las especificaciones requeridas. Por ejemplo para la accion ***/Materia/List***:
 ``` c#
 [Fact]
 public async Task VisitRootPage_ShouldRenderTwoMateriaCardsAndTheFirstOneMustHaveCertainCardSubtitle()
