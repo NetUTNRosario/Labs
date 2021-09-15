@@ -21,6 +21,10 @@ namespace Web.Controllers
             return View();
         }
 
+        [Route("/error/401")]
+        public IActionResult NotAuthorized() => View();
+
+        [Route("/error/{code:int}")]
         public IActionResult GenericError(int code)
         {
             _logger.LogInformation($"Error codigo {code}");
