@@ -95,7 +95,7 @@ return View(new EditMateriaViewModel(materia, _planRepository.GetAll()));
 @model EditMateriaViewModel
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-8">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="Materia.Id" type="hidden" />
@@ -131,7 +131,9 @@ return View(new EditMateriaViewModel(materia, _planRepository.GetAll()));
 
 </details> 
 
-8. Para utilizar validaciones se utilizara la libreria [FluentValidation](https://docs.fluentvalidation.net/en/latest/aspnet.html), ya que permite realizar validaciones mucho mas complejas y ademas estas resultan mas legibles que cuando se utilizan data annotations. Como primer paso se debe instalar el paquete Nuget ***FluentValidation.AspNetCore*** con el comando ```dotnet add package FluentValidation```.AspNetCore*** o utilizando el administrador de paquetes Nuget de Visual Studio. Luego, en la clase ```Startup``` en el metodo ```ConfigureServices``` (aquel utilizado para inyeccion de dependencias) encadenar el metodo ```.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>())``` a ```services.AddControllersWithViews()```. De esta manera se logra la completa integracion de asp net core con esta liberia de validacion, utilizandose exactamente la misma forma de trabajo que con data annotations (el metodo por default del framework).
+8. Para utilizar validaciones se utilizara la libreria [FluentValidation](https://docs.fluentvalidation.net/en/latest/aspnet.html), ya que permite realizar validaciones mucho mas complejas y ademas estas resultan mas legibles que cuando se utilizan data annotations. Como primer paso se debe instalar el paquete Nuget ***FluentValidation.AspNetCore*** con el comando ```dotnet add package FluentValidation.AspNetCore``` o utilizando el administrador de paquetes Nuget de Visual Studio. 
+
+9. Luego, en la clase ```Startup``` en el metodo ```ConfigureServices``` (aquel utilizado para inyeccion de dependencias) encadenar el metodo ```.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>())``` a ```services.AddControllersWithViews()```. De esta manera se logra la completa integracion de asp net core con esta liberia de validacion, utilizandose exactamente la misma forma de trabajo que con data annotations (el metodo por default del framework).
 
 <details close>
 <summary>Ver Código</summary>
@@ -145,7 +147,7 @@ public void ConfigureServices(IServiceCollection services)
 
 </details>
 
-9. En la entidad ```Materia``` agregar validaciones para lo siguiente
+10. En la entidad ```Materia``` agregar validaciones para lo siguiente
 - La descripcion de una materia debe tener este 3 y 20 caracteres
 - Las horas semanales de una materia deben ser entre 2 y 6. Ademas, este campo se debe mostrar como "Horas Semanales" 
 - Las horas totales no deben sobrepasar las 150 y tienen que ser superiores a 90 horas. Este campo se debe mostrar como "Horas Totales""
@@ -205,7 +207,7 @@ public class MateriaValidator: AbstractValidator<Materia>
 @model EditMateriaViewModel
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-8">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="Materia.Id" type="hidden" />
@@ -241,7 +243,7 @@ public class MateriaValidator: AbstractValidator<Materia>
 
 </details>
 
-10. En la accion ```Edit(int id, [Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]Materia materia)```, osea la parte que ocurre al hacer submit (POST) del formulario obtenido en el GET de la accion, actualizar la materia del id correspondiente con el metodo ```_materiaRepository.Update(Materia materia)``` y redirigir a la accion ```List```. Recordar comprobar si no se pasaron las validaciones con ```!ModelState.IsValid```, si ocurre re-renderizar la vista devolviendo ```View(new EditMateriaViewModel(...))``` al igual que en el GET y si el id enviado en la ruta no corresponde al enviado en los datos del formulario, si esto ultimo sucede devolver el resultado ```NotFound()```)
+11. En la accion ```Edit(int id, [Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]Materia materia)```, osea la parte que ocurre al hacer submit (POST) del formulario obtenido en el GET de la accion, actualizar la materia del id correspondiente con el metodo ```_materiaRepository.Update(Materia materia)``` y redirigir a la accion ```List```. Recordar comprobar si no se pasaron las validaciones con ```!ModelState.IsValid```, si ocurre re-renderizar la vista devolviendo ```View(new EditMateriaViewModel(...))``` al igual que en el GET y si el id enviado en la ruta no corresponde al enviado en los datos del formulario, si esto ultimo sucede devolver el resultado ```NotFound()```)
 <details close>
 <summary>Ver Código</summary>
 
@@ -258,7 +260,7 @@ return RedirectToAction("List");
 
 </details>
 
-11. Agregar el codigo para el viewmodel ```CreateMateriaViewModel``` correspondiente a la accion ```Create```. Este es muy similar al viewmodel correspondiente a la accion ```Edit``` con la salvedad que la propiedad ```Materia``` puede ser nula (al hacer el GET de esta accion siempre lo es, ya que es un formulario de creacion por lo que todos sus datos se encuentran vacios), para esto denotar el tipo de referencia nullable ```Materia?``` cuando sea necesario. Ademas, aqui no se preselecciona ninguna ```<option />``` del ```<select />```, ya que esta no es una materia previamente existente y por lo tanto no tiene ningun plan asignado.
+12. Agregar el codigo para el viewmodel ```CreateMateriaViewModel``` correspondiente a la accion ```Create```. Este es muy similar al viewmodel correspondiente a la accion ```Edit``` con la salvedad que la propiedad ```Materia``` puede ser nula (al hacer el GET de esta accion siempre lo es, ya que es un formulario de creacion por lo que todos sus datos se encuentran vacios), para esto denotar el tipo de referencia nullable ```Materia?``` cuando sea necesario. Ademas, aqui no se preselecciona ninguna ```<option />``` del ```<select />```, ya que esta no es una materia previamente existente y por lo tanto no tiene ningun plan asignado.
 
 <details close>
 <summary>Ver Codigo</summary>
@@ -284,7 +286,7 @@ public CreateMateriaViewModel(Materia? materia, IEnumerable<Plan> planes)
 
 </details>
 
-12. Con la accion GET de la accion ***Create*** tener en cuenta lo mencionado en el paso anterior. En cuanto a la accion POST proceder de la misma manera que con la de ***Edit***, utilizando el metodo ```_materiaRepository.Add(Materia materia)``` y agregando la anotacion ```[Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]``` para solo tomar y validar que esten incluidas esas propiedades en la instancia de materia envidada como argumento. Recordar revisar si las validaciones no fueron exitosas.  
+13. Con la accion GET de la accion ***Create*** tener en cuenta lo mencionado en el paso anterior. En cuanto a la accion POST proceder de la misma manera que con la de ***Edit***, utilizando el metodo ```_materiaRepository.Add(Materia materia)``` y agregando la anotacion ```[Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]``` para solo tomar y validar que esten incluidas esas propiedades en la instancia de materia envidada como argumento. Recordar revisar si las validaciones no fueron exitosas.  
     
 <details close>
 <summary>Ver Codigo</summary>
@@ -311,7 +313,7 @@ return RedirectToAction("List");
 ```html
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-8">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
