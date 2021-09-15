@@ -1,5 +1,16 @@
 @Model EditMateriaViewModel
 
+<div class="row">
+    <div class="col-md-4 col-md-8">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Materia.Id" type="hidden" />
+            <div class="form-group">
+                <label asp-for="Materia.Descripcion" class="form-label">Descripcion</label>
+                <input asp-for="Materia.Descripcion" class="form-control" placeholder="@Model.Materia.Descripcion"
+                       value="@Model.Materia.Descripcion" />
+                <span asp-validation-for="Materia.Descripcion" class="text-danger"></span>
+            </div>
 
 
 
