@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Unidad._5.Lab._1.MVC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <body>
     <header>
@@ -21,6 +22,36 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Materia" asp-action="List">Listar Materias</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Materia" asp-action="Create">Agregar Materia</a>
+                        </li>
+                        @if (User.Identity?.IsAuthenticated == false)
+                        {
+                        <li class="ml-md-auto"></li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                        </li>
+                        }
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                        <li class="ml-md-auto"></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle ml-auto" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                @User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Email)?.Value
+                            </a>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-item dropdown">
+                                    @User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Name)?.Value
+                                </div>
+                                <div class="dropdown-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                        }
                     </ul>
                 </div>
             </div>
