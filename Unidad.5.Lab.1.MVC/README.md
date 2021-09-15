@@ -133,6 +133,18 @@ return View(new EditMateriaViewModel(materia, _planRepository.GetAll()));
 
 8. Para utilizar validaciones se utilizara la libreria [FluentValidation](https://docs.fluentvalidation.net/en/latest/aspnet.html), ya que permite realizar validaciones mucho mas complejas y ademas estas resultan mas legibles que cuando se utilizan data annotations. Como primer paso se debe instalar el paquete Nuget ***FluentValidation.AspNetCore*** con el comando ```dotnet add package FluentValidation```.AspNetCore*** o utilizando el administrador de paquetes Nuget de Visual Studio. Luego, en la clase ```Startup``` en el metodo ```ConfigureServices``` (aquel utilizado para inyeccion de dependencias) encadenar el metodo ```.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>())``` a ```services.AddControllersWithViews()```. De esta manera se logra la completa integracion de asp net core con esta liberia de validacion, utilizandose exactamente la misma forma de trabajo que con data annotations (el metodo por default del framework).
 
+<details close>
+<summary>Ver Código</summary>
+
+```c#
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>());
+}
+```
+
+</details>
+
 9. En la entidad ```Materia``` agregar validaciones para lo siguiente
 - La descripcion de una materia debe tener este 3 y 20 caracteres
 - Las horas semanales de una materia deben ser entre 2 y 6. Ademas, este campo se debe mostrar como "Horas Semanales" 
