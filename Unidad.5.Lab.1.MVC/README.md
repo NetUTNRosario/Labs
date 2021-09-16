@@ -413,3 +413,288 @@ public IActionResult GenericError(int code)
 public async Task VisitRootPage_ShouldRenderTwoMateriaCardsAndTheFirstOneMustHaveCertainCardSubtitle()
 ```
 > Cada uno de estos test revisara el html enviado por cada accion de los controladores y chequeara que esten ciertos elementos previamente solicitados, como pueden ser las secciones de validacion o las opciones del select
+
+## Extencion:  Implementar Autenticación y Autorizacion
+1. En la clase ```Startup``` ir al metodo ```ConfigureServices(IServiceCollection services)``` y agregar el repositorio de usuarios que servira para registrar usuarios o revisar si estan registrados. Ademas, agregar la clase ```Hasher``` que permitira hashear las contraseñas y obtener un salt, de modo que estas no se guarden en texto plano y la clase ```UsuarioManager``` que agregara la cookie (que servira para identificar al usuario) al navegador del cliente o la eliminara (por lo tanto el usuario ya no podra acceder a los puntos que requieran autenticacion).
+```c#
+services.AddScoped<IHasher, Hasher>();
+services.AddSingleton<IUsuarioRepository, UsuarioRepository>();
+services.AddScoped<IUsuarioManager, UsuarioManager>();
+```
+
+2. Tambien en ```ConfigureServices(IServiceCollection services)``` agregar y configurar apropiadamente el servicio correspondiente a la autenticacion por cookies mediante:
+
+```c#
+services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.AccessDeniedPath = "/Error/401";
+});
+```
+> ```options.LoginPath``` permitira que cuando el framework redireccione a al usuario despues de intentar acceder a una ruta que requiere autorizacion este lo haga a la url que se tiene implementada. Esto es especialmente necesario para ```options.AccessDeniedPath``` ya que el fw por default envia a los usuarios que estan autenticados pero que no cuentan con el rol o permiso requerido para acceder a una ruta determinada a ***/Account/AccessDenied*** (ruta que no esta implementada en esta aplicacion), sin embargo si esta implementada la ruta ***/Error/401*** para estos casos.
+
+3. En el metodo ```void Configure(IApplicationBuilder app, IWebHostEnvironment env)``` agregar el middleware ```app.UseAuthentication()``` exactamente despues que el otro middleware ```app.UseRouting()``` y antes que ```app.UseAuthorization()```. Esto es debido a que la request pasa por los middlewares exactamente en el orden que estan declarados en este metodo.
+
+4. En la clase ```UsuarioRepository``` metodo ```UsuarioLogeado? Validar(LoginViewModel loginVM)``` completar el predicado que sirve como argumento de ```_usuarios.Find(u => completar)``` sabiendo que se quiere obtener el usuario para el cual su mail (u.Mail) coincida con el enviado como parametro en el login view model y cuyo hash de contraseña (```u.Clave```) sea equivalente al hash generado gracias a la clave enviada en el loginVM y el salt del usuario guardado (```_hasher.GenerateHash(loginVM.Clave, u.Salt)```)
+
+<details close>
+<summary>Ver Codigo</summary>
+
+```c#
+var user = _usuarios.Find(u => u.Mail == loginVM.Mail && _hasher.GenerateHash(loginVM.Clave, u.Salt) == u.Clave);
+```
+
+</details>
+
+5. En la clase ```UsuarioRepository``` metodo ```UsuarioLogeado? Register(RegisterViewModel registerVM)``` completar el seteo del usuario a guardar mediante los datos enviados en el register view model, teniendo en cuenta que la contraseña no debe ser guardada en formato texto plano, es decir es requerido que esta se le realice un proceso de hashing y este hash ademas de su salt asociado sean guardados para cualquier usuario.
+
+<details close>
+<summary>Ver Codigo</summary>
+
+```c#
+var salt = _hasher.GenerateSalt();
+var hashedPassword = _hasher.GenerateHash(registerVM.Clave, salt);
+
+Usuario user = new()
+{
+    Id = _usuarios.Count() + 2,
+    Nombre = registerVM.Nombre,
+    Mail = registerVM.Mail,
+    Clave = hashedPassword,
+    Salt = salt
+};
+```
+
+</details>
+
+6. Ir a la clase ```UsuarioManager``` metodo ```async Task SignIn(HttpContext httpContext, UsuarioLogeado usuarioLogeado, bool isPersistent = false)```. Es notable que este metodo cuenta con una caracteristica que no fue requerida hasta ahora en la materia, el manejo asincronico. Esto ultimo significa que este liberara el hilo de ejecucion mientras espera (```await```) que la tarea se complete (```Task<T>```, donde T no esta presente aqui ya que no se espera que la tarea contenga algun dato a devolver, es decir solo se espera que la tarea devuelta se complete en algun momento). Una vez entendido eso, declarar una lista de objetos ```Claim``` (declaraciones que son emitidas por el servidor y contienen ciertos datos que se van a considerar como validos si se comprueba que el generador de estos fue este) tomando como ejemplo que el primer elemento sera ```new Claim(ClaimTypes.NameIdentifier, usuarioLogeado.Id.ToString())```, agregar claims para ```ClaimTypes.Name```, ```ClaimTypes.Email``` y ```ClaimTypes.Role```. 
+
+<details close>
+<summary>Ver Codigo</summary>
+
+```c#
+var claims = new List<Claim>()
+{
+    new(ClaimTypes.NameIdentifier, usuarioLogeado.Id.ToString()),
+    new(ClaimTypes.Name, usuarioLogeado.Nombre),
+    new(ClaimTypes.Email, usuarioLogeado.Mail),
+    new(ClaimTypes.Role, "Admin")
+};
+```
+
+</details>
+
+7. Luego, crear una instancia de ```ClaimsIdentity``` suministrando el listado de claims y el esquema de autenticacion ```CookieAuthenticationDefaults.AuthenticationScheme```. 
+
+```c#
+string authScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+var claimPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims, authScheme));
+```
+
+8. Finalmente, hacer el await del metodo asincronico ```httpContext.SignInAsync(...)``` indicando como parametros el esquema de autenticacion, el claimPrincipal y si la cookie debe persistir entre sesiones (es decir cuando se cierra y abre nuevamente el navegador)
+
+```c#
+await httpContext.SignInAsync(authScheme, claimPrincipal, new AuthenticationProperties() { IsPersistent = isPersistent });
+```
+
+9. En el metodo ```async Task SignOut(HttpContext httpContext)``` unicamente se debe esperar al metodo asincronico ```httpContext.SignOutAsync(...)``` que toma como parametros el mismo esquema de autenticacion que el utilizado en el paso anterior
+
+<details close>
+<summary>Ver Codigo</summary>
+
+```c#
+await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+```
+
+</details>
+
+10. En la clase ```UsuarioRepository``` metodo ```async Task<IActionResult> Login(LoginViewModel loginVM)``` (notar que este tambien es asincronico ya que requiere esperar al metodo ```async Task SignIn(...)``` de ```UsuarioManager```, recordar que al hacer esto el hilo de ejecucion se libera volviendo al pool de threads). Alli, llamar al metodo ```_usuarioRepository.Validar(LoginViewModel)``` y chequear si el usuario que devuelve es null, en el caso de que suceda agregar al ModelState un error con ```ModelState.AddModelError(key, value)``` donde la key deberia ser ***""***, ya que es error que no esta asociado a ninguna campo del formulario en particular sino que es mas bien general (por lo que se mostrara arriba en la seccion ```<div asp-validation-summary="ModelOnly" class="text-danger"></div>``` de la vista)
+
+<details close>
+<summary>Ver Codigo</summary>
+
+```c#
+var loggedUser = _usuarioRepository.Validar(loginVM);
+
+if (loggedUser == null)
+{
+    ModelState.AddModelError("", "Mail o contraseña incorrectos");
+    return View(loginVM);
+}
+```
+
+</details>
+
+11. A continuacion, esperar al metodo ```_usuarioManager.SignIn(HttpContext httpContext, UsuarioLogeado usuarioLogeado, bool isPersistent)``` suministrando el contexto de la request en curso mediante ```this.HttpContext``` y los datos obtenidos del metodo anterior ademas de la preferencia sobre mantener la sesion abierta seteada en el login view model. Finalmente, siendo lo anterior exitoso, redirigir a la accion ```Index``` del controlador ```Materia```
+
+<details close>
+<summary>Ver Codigo</summary>
+
+```c#
+await _usuarioManager.SignIn(this.HttpContext, loggedUser, loginVM.IsPersistent);
+
+return RedirectToAction(controllerName: "Materia", actionName: "Index");
+```
+
+</details>
+
+12. Ir a la clase ```RegisterValidator``` en el archivo ***/Model/RegisterViewModel***, alli agregar validaciones para lo siguiente:
+- El nombre de un usuario debe tener este 3 y 30 caracteres
+- El mail debe tener el formato apropiado. Ademas, este campo se debe mostrar como "Horas Semanales" 
+- La clave debe ser de mas de 6 caracteres, con uno en mayuscula y al menos un numero (usar el metodo ```.Must(p => p``` de ***FluentValidator*** junto con el ```.Any(Char.IsDeterminadoTipo)``` de ***LINQ*** para strings)
+- El campo confirmarClave debe coincidir con lo ingresado para el campo clave (usar el metodo ```.Equal(m => m.Atributo)``` de ***FluentValidation***). Debe mostrarse como "Confirmar Clave"
+
+<details close>
+<summary>Ver Codigo</summary>
+
+```c#
+public record RegisterViewModel
+{
+    public string Nombre { get; set; }
+    public string Mail { get; init; }
+    public string Clave { get; init; }
+    [Display(Name = "Confirmar Clave")]
+    public string ConfirmarClave { get; init; }
+    public bool IsPersistent { get; init; }
+}
+
+public class RegisterValidator: AbstractValidator<RegisterViewModel>
+{
+    public RegisterValidator()
+    {
+        RuleFor(rvm => rvm.Nombre).Length(min: 3, max: 30);
+        RuleFor(rvm => rvm.Mail).NotEmpty().EmailAddress();
+        RuleFor(rvm => rvm.Clave).NotEmpty().MinimumLength(6)
+            // No se utiliza .Matches(@"\w*[A-Z]+\w*") ya que esto solo reconoce caracteres ASCII,
+            // es decir da errores de validacion al usar caracteres Unicode como 'Ñ' o 'ñ'
+            .Must(p => p.Any(Char.IsUpper)).WithMessage("La contraseña debe tener al menos un caracter en mayuscula")
+            .Must(p => p.Any(Char.IsNumber)).WithMessage("La contraseña debe tener al menos un numero");
+        RuleFor(rvm => rvm.ConfirmarClave).Equal(rvm => rvm.Clave);
+    }
+}
+```
+
+</details>
+
+13. En el caso de accion ```async Task<IActionResult> Register(RegisterViewModel registerVM)``` proceder de la misma manera, teniendo en cuenta que en este caso si loggedUser es devuelto como nulo por ```_usuarioRepository.Register(registerViewModel)``` es debido a que ya hay un usuario registrado con esos datos.
+
+<details close>
+<summary>Ver Codigo</summary>
+
+```c#
+var loggedUser = _usuarioRepository.Register(registerVM);
+
+if (loggedUser == null)
+{
+    ModelState.AddModelError("", "Usuario ya registrado");
+    return View(registerVM);
+}
+
+await _usuarioManager.SignIn(this.HttpContext, loggedUser, registerVM.IsPersistent);
+
+return RedirectToAction(controllerName: "Materia", actionName: "Index");
+```
+
+</details>
+
+14. Para la accion ```async Task<IActionResult> Logout()``` esperar al metodo ```_usuarioManager.SignOut(HttpContext)```,
+proveyendo como argumento el contexto de la request actual de la misma forma que se vio anteriormente (recordar que es una propiedad que es heredada de la clase padre ```Controller```). Por ultimo, redirigir de forma permanente a la accion ```Index``` del controlador ```Home```
+
+<details close>
+<summary>Ver Codigo</summary>
+
+```c#
+await _usuarioManager.SignOut(this.HttpContext);
+
+return RedirectToActionPermanent(controllerName: "Home", actionName: "Index");  
+```
+
+</details>
+
+15. Ir a la accion ```Create``` del controlador ```Materia``` y agregar la anotacion ```[Authorize]```, que permitira redireccionar las request que no cuenten con una cookie valida que identifique que usuario la esta realizando. Ademas, en la 
+ accion ```Edit``` agregar ```[Authorize(Roles = "Admin")]```, esto permitira no dar acceso a aquellos que no esten logeados y ademas rechazar a los que no cuenten con el rol admin alojado como claim en la cookie (en este caso no redirigiendo al login obviamente, sino enviandolos a la pagina de error ***NotAuthorized***).
+
+```c#
+[Authorize(Roles = "Admin")]
+public IActionResult Edit(int? id)
+
+[Authorize(Roles = "Admin")]
+public IActionResult Edit(int id, [Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]Materia materia)
+
+[Authorize]
+public IActionResult Create()
+
+[Authorize]
+public IActionResult Create(Materia materia)
+```
+
+16. En cuanto a la pagina de error ***NotAuthorized*** esta esta asociada a la accion ```NotAuthorized``` del controlador ```Error```. Se solicita programar una vista que se vea de la siguiente manera:
+
+> Como novedad aqui se utilizara un icono de la libreria bootstrap icons (```<i class="bi bi-shield-fill-exclamation display-1 d-block"></i>```), para lo cual se debe incluir su cdn en el ```<head></head>``` de la vista ```Shared/_Layout``` (```<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">```)
+
+<details close>
+<summary>Ver Vista completa</summary>
+
+```html
+<div class="page-wrap d-flex flex-row align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 text-center">
+                <i class="bi bi-shield-fill-exclamation display-1 d-block"></i>
+                <div class="lead">No</div>
+                <div class="mb-4 lead">Autorizado</div>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-link">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+</details>
+
+17. En la vista maestra ```Shared/_Layout``` renderizar segun si el usuario ***no*** este logeado los nav items correspondientes a Login y Register. Esto es posible realizarlo gracias al uso de la directiva razor ```@if (User.Identity?.IsAuthenticated == false) { ... }```. Mostrar ambos items a la derecha del nav-bar.
+
+<details close>
+<summary>Ver Vista Parcial</summary>
+
+```html 
+@if (User.Identity?.IsAuthenticated == false)
+{
+<li class="ml-md-auto"></li>
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+</li>
+}
+```
+
+</details>
+
+18. Tambien en la vista maestra ```Shared/_Layout``` renderizar segun si el usuario ***si*** este logeado un ```dropdown-menu``` (de bootstrap) con el email como ```dropdown-toggle``` y el nombre junto con la opcion de Logout como ```dropdown-items```. Utilizar la directiva razor ```@User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.TipoApropiado)?.Value```, que permite obtener y filtrar el listado de claims (en este caso ```ClaimTypes.Email``` y ```ClaimTypes.Name```) de la cookie que pertenece a la request actual.
+
+<details close>
+<summary>Ver Vista Parcial</summary>
+
+```html
+@if (User.Identity?.IsAuthenticated == true)
+{
+<li class="ml-md-auto"></li>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle ml-auto" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        @User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Email)?.Value
+    </a>
+    <div class="dropdown-menu">
+        <div class="dropdown-item dropdown">
+            @User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Name)?.Value
+        </div>
+        <div class="dropdown-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+        </div>
+    </div>
+</li>
+}
+```
+
+</details>

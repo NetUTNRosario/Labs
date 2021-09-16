@@ -45,7 +45,7 @@ namespace Web
                 app.UseHsts();
             }
 
-            // Aca
+            // Aca middleware para paginas de error
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
