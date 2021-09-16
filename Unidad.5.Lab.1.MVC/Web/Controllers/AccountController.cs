@@ -28,17 +28,7 @@ namespace Unidad._5.Lab._1.MVC.Controllers
         {
             if (!ModelState.IsValid) return View(loginVM);
 
-            var loggedUser = _usuarioRepository.Validar(loginVM);
-
-            if (loggedUser == null)
-            {
-                ModelState.AddModelError("", "Mail o contraseña incorrectos");
-                return View(loginVM);
-            }
-
-            await _usuarioManager.SignIn(this.HttpContext, loggedUser, loginVM.IsPersistent);
-
-            return RedirectToAction(controllerName: "Materia", actionName: "Index");
+            throw new NotImplementedException();
         }
 
         [HttpGet]
@@ -47,25 +37,13 @@ namespace Unidad._5.Lab._1.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel registerVM)
         {
-            var loggedUser = _usuarioRepository.Register(registerVM);
-
-            if (loggedUser == null)
-            {
-                ModelState.AddModelError("", "Usuario ya registrado");
-                return View(registerVM);
-            }
-
-            await _usuarioManager.SignIn(this.HttpContext, loggedUser, registerVM.IsPersistent);
-
-            return RedirectToAction(controllerName: "Materia", actionName: "Index");
+            throw new NotImplementedException();
         }
 
         [Authorize]
         public async Task<IActionResult> Logout()
         {
-            await _usuarioManager.SignOut(this.HttpContext);
-
-            return RedirectToActionPermanent(controllerName: "Home", actionName: "Index");
+            throw new NotImplementedException();
         }
     }
 }

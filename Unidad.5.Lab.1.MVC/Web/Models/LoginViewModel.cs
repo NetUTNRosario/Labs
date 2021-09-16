@@ -10,7 +10,7 @@ namespace Web.Models
     public record LoginViewModel
     {
         public string Mail { get; init; }
-        public string Password { get; init; }
+        public string Clave { get; init; }
         public bool IsPersistent { get; init; }
     }
 

@@ -37,7 +37,7 @@ namespace Web.Models
         }
         public UsuarioLogeado? Validar(LoginViewModel loginVM)
         {
-            var user = _usuarios.Find(u => u.Mail == loginVM.Mail && _hasher.GenerateHash(loginVM.Password, u.Salt) == u.Clave);
+            var user = _usuarios.Find(u => "completar");
 
             return user == null? null : new UsuarioLogeado(id: user.Id, nombre: user.Nombre, mail: user.Mail);
         }
@@ -46,17 +46,7 @@ namespace Web.Models
         {
             if (_usuarios.Find(u => u.Mail == registerVM.Mail) != null) return null;
 
-            var salt = _hasher.GenerateSalt();
-            var hashedPassword = _hasher.GenerateHash(registerVM.Clave, salt);
-
-            Usuario user = new()
-            {
-                Id = _usuarios.Count() + 2,
-                Nombre = registerVM.Nombre,
-                Mail = registerVM.Mail,
-                Clave = hashedPassword,
-                Salt = salt
-            };
+            Usuario user = new();
             _usuarios.Add(user);
 
             return new UsuarioLogeado(id: user.Id, nombre: user.Nombre, mail: user.Mail);
