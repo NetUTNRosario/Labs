@@ -37,6 +37,8 @@ namespace Unidad._5.Lab._1.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel registerVM)
         {
+            if (!ModelState.IsValid) return View(registerVM);
+
             throw new NotImplementedException();
         }
 
