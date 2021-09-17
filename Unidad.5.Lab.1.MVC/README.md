@@ -511,7 +511,7 @@ await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme
 
 </details>
 
-10. En la clase ```UsuarioRepository``` metodo ```async Task<IActionResult> Login(LoginViewModel loginVM)``` (notar que este tambien es asincronico ya que requiere esperar al metodo ```async Task SignIn(...)``` de ```UsuarioManager```, recordar que al hacer esto el hilo de ejecucion se libera volviendo al pool de threads). Alli, llamar al metodo ```_usuarioRepository.Validar(LoginViewModel)``` y chequear si el usuario que devuelve es null, en el caso de que suceda agregar al ModelState un error con ```ModelState.AddModelError(key, value)``` donde la key deberia ser ***""***, ya que es error que no esta asociado a ninguna campo del formulario en particular sino que es mas bien general (por lo que se mostrara arriba en la seccion ```<div asp-validation-summary="ModelOnly" class="text-danger"></div>``` de la vista)
+10. En el controlador ```Account``` metodo ```async Task<IActionResult> Login(LoginViewModel loginVM)``` (notar que este tambien es asincronico ya que requiere esperar al metodo ```async Task SignIn(...)``` de ```UsuarioManager```, recordar que al hacer esto el hilo de ejecucion se libera volviendo al pool de threads). Alli, llamar al metodo ```_usuarioRepository.Validar(LoginViewModel)``` y chequear si el usuario que devuelve es null, en el caso de que suceda agregar al ModelState un error con ```ModelState.AddModelError(key, value)``` donde la key deberia ser ***""***, ya que es error que no esta asociado a ninguna campo del formulario en particular sino que es mas bien general (por lo que se mostrara arriba en la seccion ```<div asp-validation-summary="ModelOnly" class="text-danger"></div>``` de la vista)
 
 <details close>
 <summary>Ver Codigo</summary>
@@ -579,7 +579,7 @@ public class RegisterValidator: AbstractValidator<RegisterViewModel>
 
 </details>
 
-13. En el caso de accion ```async Task<IActionResult> Register(RegisterViewModel registerVM)``` proceder de la misma manera, teniendo en cuenta que en este caso si loggedUser es devuelto como nulo por ```_usuarioRepository.Register(registerViewModel)``` es debido a que ya hay un usuario registrado con esos datos.
+13. En el caso de accion ```async Task<IActionResult> Register(RegisterViewModel registerVM)``` del controlador ```Account``` proceder de la misma manera, teniendo en cuenta que en este caso si loggedUser es devuelto como nulo por ```_usuarioRepository.Register(registerViewModel)``` es debido a que ya hay un usuario registrado con esos datos.
 
 <details close>
 <summary>Ver Codigo</summary>
