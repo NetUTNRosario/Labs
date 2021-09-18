@@ -28,7 +28,10 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>());
+            services.AddControllersWithViews().AddFluentValidation(fv => {
+                fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>();
+                fv.ValidatorOptions.LanguageManager.Culture = new System.Globalization.CultureInfo("es");
+                });
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
                 options.LoginPath = "/Account/Login";
                 options.LogoutPath = "/Account/Logout";
