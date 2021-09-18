@@ -543,10 +543,12 @@ return RedirectToAction(controllerName: "Materia", actionName: "Index");
 
 12. Ir a la clase ```RegisterValidator``` en el archivo ***/Model/RegisterViewModel***, alli agregar validaciones para lo siguiente:
 - El nombre de un usuario debe tener este 3 y 30 caracteres
-- El mail debe tener el formato apropiado. Ademas, este campo se debe mostrar como "Horas Semanales" 
+- El mail debe tener el formato apropiado.
 - La clave debe ser de mas de 6 caracteres, con uno en mayuscula y al menos un numero (usar el metodo ```.Must(p => p``` de ***FluentValidator*** junto con el ```.Any(Char.IsDeterminadoTipo)``` de ***LINQ*** para strings)
 - El campo confirmarClave debe coincidir con lo ingresado para el campo clave (usar el metodo ```.Equal(m => m.Atributo)``` de ***FluentValidation***). Debe mostrarse como "Confirmar Clave"
 
+![imagen](https://user-images.githubusercontent.com/41701343/133901053-80416e3c-f344-433b-b0ff-8667fb20b275.png)
+    
 <details close>
 <summary>Ver Codigo</summary>
 
