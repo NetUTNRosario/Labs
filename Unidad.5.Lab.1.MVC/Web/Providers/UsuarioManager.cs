@@ -25,7 +25,7 @@ namespace Web.Providers
                 new(ClaimTypes.NameIdentifier, usuarioLogeado.Id.ToString()),
                 new(ClaimTypes.Name, usuarioLogeado.Nombre),
                 new(ClaimTypes.Email, usuarioLogeado.Mail),
-                new(ClaimTypes.Role, "Admin")
+                new(ClaimTypes.Role, usuarioLogeado.Role.ToString())
             };
 
             string authScheme = CookieAuthenticationDefaults.AuthenticationScheme;
