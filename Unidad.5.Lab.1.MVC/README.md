@@ -547,7 +547,7 @@ return RedirectToAction(controllerName: "Materia", actionName: "Index");
 - La clave debe ser de mas de 6 caracteres, con uno en mayuscula y al menos un numero (usar el metodo ```.Must(p => p``` de ***FluentValidator*** junto con el ```.Any(Char.IsDeterminadoTipo)``` de ***LINQ*** para strings)
 - El campo confirmarClave debe coincidir con lo ingresado para el campo clave (usar el metodo ```.Equal(m => m.Atributo)``` de ***FluentValidation***). Debe mostrarse como "Confirmar Clave"
 
-![imagen](https://user-images.githubusercontent.com/41701343/133901053-80416e3c-f344-433b-b0ff-8667fb20b275.png)
+![imagen](https://user-images.githubusercontent.com/41701343/133905735-cab915ed-48f7-42ff-8020-3ead6928fe4b.png)
     
 <details close>
 <summary>Ver Codigo</summary>
@@ -637,6 +637,8 @@ public IActionResult Create(Materia materia)
 
 > Como novedad aqui se utilizara un icono de la libreria bootstrap icons (```<i class="bi bi-shield-fill-exclamation display-1 d-block"></i>```), para lo cual se debe incluir su cdn en el ```<head></head>``` de la vista ```Shared/_Layout``` (```<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">```)
 
+![imagen](https://user-images.githubusercontent.com/41701343/133905728-612bf984-15d5-40a3-834f-5d127abfaae1.png)   
+    
 <details close>
 <summary>Ver Vista completa</summary>
 
@@ -659,6 +661,8 @@ public IActionResult Create(Materia materia)
 
 17. En la vista maestra ```Shared/_Layout``` renderizar segun si el usuario ***no*** este logeado los nav items correspondientes a Login y Register. Esto es posible realizarlo gracias al uso de la directiva razor ```@if (User.Identity?.IsAuthenticated == false) { ... }```. Mostrar ambos items a la derecha del nav-bar.
 
+![imagen](https://user-images.githubusercontent.com/41701343/133905619-6f6fd86c-952e-4545-8abd-a855a987fef6.png)    
+    
 <details close>
 <summary>Ver Vista Parcial</summary>
 
@@ -679,6 +683,8 @@ public IActionResult Create(Materia materia)
 
 18. Tambien en la vista maestra ```Shared/_Layout``` renderizar segun si el usuario ***si*** este logeado un ```dropdown-menu``` (de bootstrap) con el email como ```dropdown-toggle``` y el nombre junto con la opcion de Logout como ```dropdown-items```. Utilizar la directiva razor ```@User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.TipoApropiado)?.Value```, que permite obtener y filtrar el listado de claims (en este caso ```ClaimTypes.Email``` y ```ClaimTypes.Name```) de la cookie que pertenece a la request actual.
 
+![imagen](https://user-images.githubusercontent.com/41701343/133905596-b325e35a-25ad-403e-a875-068b7e5b2f9f.png)    
+    
 <details close>
 <summary>Ver Vista Parcial</summary>
 
