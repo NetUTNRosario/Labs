@@ -26,7 +26,7 @@ namespace Web.Controllers
             return View(_materiaRepository.GetAll());
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Superadmin")]
         public IActionResult Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -38,7 +38,7 @@ namespace Web.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Superadmin")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]Materia materia)
         {
@@ -92,7 +92,9 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            _materiaRepository.Delete(id);
+            var materia = _materiaRepository.Delete(id);
+
+            if (materia == null) return NotFound();
 
             return RedirectToAction("List");
         }

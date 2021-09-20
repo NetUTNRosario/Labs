@@ -8,7 +8,8 @@ namespace Web.Models
     public enum UsuarioRol
     {
         User = 1,
-        Admin = 2
+        Admin = 2,
+        Superadmin = 3
     }
 
     public class Usuario
