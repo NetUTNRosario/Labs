@@ -515,6 +515,8 @@ public async Task VisitRootPage_ShouldRenderTwoMateriaCardsAndTheFirstOneMustHav
 > Cada uno de estos test revisara el html enviado por cada accion de los controladores y chequeara que esten ciertos elementos previamente solicitados, como pueden ser las secciones de validacion o las opciones del select
 
 ## Extencion:  Implementar Autenticación y Autorizacion
+> Tener en cuenta que hay dos usuarios pre-registrados en la aplicación, lo cual es declarado en el constructor de la clase ```UsuarioRepository```: (mail: admin@example.com, pass: Admin_1, rol: Admin) y (mail: superadmin@example.com, pass: Superadmin_1, rol: Superadmin)
+
 1. En la clase ```Startup``` ir al metodo ```ConfigureServices(IServiceCollection services)``` y agregar el repositorio de usuarios que servira para registrar usuarios o revisar si estan registrados. Ademas, agregar la clase ```Hasher``` que permitira hashear las contraseñas y obtener un salt, de modo que estas no se guarden en texto plano y la clase ```UsuarioManager``` que agregara la cookie (que servira para identificar al usuario) al navegador del cliente o la eliminara (por lo tanto el usuario ya no podra acceder a los puntos que requieran autenticacion).
 ```c#
 services.AddScoped<IHasher, Hasher>();
