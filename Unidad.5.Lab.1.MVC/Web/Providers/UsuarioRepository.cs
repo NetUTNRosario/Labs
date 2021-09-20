@@ -30,7 +30,7 @@ namespace Web.Models
                     Mail = "admin@example.com",
                     Clave = hasher.GenerateHash("Admin_1", salt),
                     Salt = salt, 
-                    Role = "Admin"
+                    Role = UsuarioRol.Admin
                 }
             };
             _hasher = hasher;
@@ -39,7 +39,7 @@ namespace Web.Models
         {
             var user = _usuarios.Find(u => "completar");
 
-            return user == null? null : new UsuarioLogeado(id: user.Id, nombre: user.Nombre, mail: user.Mail);
+            return user == null? null : new UsuarioLogeado(id: user.Id, nombre: user.Nombre, mail: user.Mail, user.Role);
         }
 
         public UsuarioLogeado? Register(RegisterViewModel registerVM)
@@ -49,7 +49,7 @@ namespace Web.Models
             Usuario user = new();
             _usuarios.Add(user);
 
-            return new UsuarioLogeado(id: user.Id, nombre: user.Nombre, mail: user.Mail);
+            return new UsuarioLogeado(id: user.Id, nombre: user.Nombre, mail: user.Mail, role: user.Role);
         }
     }
 }

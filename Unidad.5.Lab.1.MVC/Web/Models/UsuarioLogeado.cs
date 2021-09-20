@@ -9,13 +9,15 @@ namespace Web.Models
         public int Id { get; }
         public string Nombre { get; }
         public string Mail { get; }
+        public UsuarioRol Role { get; set; }
         public DateTime MomentoCreacion { get; }
 
-        public UsuarioLogeado(int id, string nombre, string mail, DateTime? momentoCreacion = null)
+        public UsuarioLogeado(int id, string nombre, string mail, UsuarioRol role, DateTime? momentoCreacion = null)
         {
             Id = id;
             Nombre = nombre;
             Mail = mail;
+            Role = role;
             MomentoCreacion = momentoCreacion ?? DateTime.Now;
         }
     }

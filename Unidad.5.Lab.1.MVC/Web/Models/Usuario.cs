@@ -5,6 +5,12 @@ using System.Threading.Tasks;
 
 namespace Web.Models
 {
+    public enum UsuarioRol
+    {
+        User = 1,
+        Admin = 2
+    }
+
     public class Usuario
     {
         public int Id { get; set; }
@@ -12,6 +18,6 @@ namespace Web.Models
         public string Mail { get; set; }
         public string Clave { get; set; }
         public string Salt { get; set; }
-        public string Role { get; set; } = "User";
+        public UsuarioRol Role { get; set; } = UsuarioRol.User;
     }
 }
