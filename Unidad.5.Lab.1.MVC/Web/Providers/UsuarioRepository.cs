@@ -21,19 +21,27 @@ namespace Web.Models
 
         public UsuarioRepository(IHasher hasher)
         {
-            string salt = hasher.GenerateSalt();
-            _usuarios = new List<Usuario>()
-            {
-                new()
-                {
-                    Nombre = "Hector Aguirre",
-                    Mail = "admin@example.com",
-                    Clave = hasher.GenerateHash("Admin_1", salt),
-                    Salt = salt, 
-                    Role = UsuarioRol.Admin
-                }
-            };
+            _usuarios = new List<Usuario>();
             _hasher = hasher;
+
+            string saltHector = hasher.GenerateSalt();
+            _usuarios.Add(new()
+            {
+                Nombre = "Hector Aguirre",
+                Mail = "admin@example.com",
+                Clave = hasher.GenerateHash("Admin_1", saltHector),
+                Salt = saltHector,
+                Role = UsuarioRol.Admin
+            });
+            string saltMario = hasher.GenerateSalt();
+            _usuarios.Add(new()
+            {
+                Nombre = "Mario Eche",
+                Mail = "superadmin@example.com",
+                Clave = hasher.GenerateHash("Superadmin_1", saltMario),
+                Salt = saltMario,
+                Role = UsuarioRol.Admin
+            });
         }
         public UsuarioLogeado? Validar(LoginViewModel loginVM)
         {

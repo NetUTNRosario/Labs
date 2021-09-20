@@ -47,5 +47,11 @@ namespace Web.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

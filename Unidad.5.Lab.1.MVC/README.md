@@ -144,7 +144,7 @@ public void ConfigureServices(IServiceCollection services)
     services.AddControllersWithViews().AddFluentValidation(fv => {
         fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>();
         // Opcional, los mensajes de: "{Prop} is required" y "Please enter a valid number." se seguiran mostrando en ingles a menos que se
-        // localice/internacionalice la aplicacion completa (tema intermedio-avanzado que no se tratara en este laboratorio).
+        // localice/internacionalice la aplicación completa (tema intermedio-avanzado que no se tratara en este laboratorio).
         fv.ValidatorOptions.LanguageManager.Culture = new CultureInfo("es");
     });
 }
@@ -412,7 +412,103 @@ app.UseStatusCodePagesWithReExecute("/Error/{0}");
 public IActionResult GenericError(int code)
 ```
 
-19. En el proyecto ***Test*** clase ```IntegrationTestWeb``` ir a ***Prueba***/***Ejecutar todas las pruebas*** de la barra de herramientas de VS. Esto es para verificar que la implementación cumpla con las especificaciones requeridas. Por ejemplo para la accion ***/Materia/List***:
+19. La unica accion que resta agregar al controlador ```Materia``` es la de ```Delete```, para esto en el GET de esta mostramos la materia a ser borrado a modo de solicitud de confirmacion de forma similar a lo que realizado para el GET de la accion ```Edit``` (claramente teniendo en cuenta el realizar las mismas comprobaciones previas antes de enviar los datos de la materia a la vista). En cuanto a la vista asociada, mostrar una description list (```<dl></dl>```) de los datos de la materia a borrar y debajo de eso un pequeño formulario con un boton para confirmar junto con un link para volver a la lista.
+
+> Es fundamental que el GET de una accion delete nunca realice el borrado de la entidad, ya que este tipo de acciones son consideradas seguras (ya que no realizan cambios en el estado de la aplicación), sino que lo apropiado es que esto sea mediante un POST (ver siguiente paso)
+
+<details close>
+<summary>Ver Codigo</summary>
+
+```c#
+if (id == null) return NotFound();
+
+var materia = _materiaRepository.GetOne((int)id);
+
+if (materia == null) return NotFound();
+
+return View(materia);
+```
+
+</details>
+
+
+<details close>
+<summary>Ver Vista Completa</summary>
+
+```html
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Descripcion
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HsSemanales)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.HsSemanales
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HsTotales)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.HsTotales
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plan)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Plan?.Especialidad <span class="text-info">@Model.Plan?.Anio</span>
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
+```
+
+</details>
+
+20. Para el POST de la accion ```Delete``` notar que al tener la misma signatura ```public IActionResult Delete(int id)``` que para el metodo con la anotacion GET hay un error de compilacion, por lo que es necesario cambiar la signatura ```public IActionResult DeleteConfirmed(int id)``` e indicar que en realidad este metodo debe ser considerado como la misma accion, gracias a la anotacion ```[HttpPost, ActionName("Delete")]```. En la implementacion llamar a ```_materiaRepository.Delete(id)``` y luego redirigir a la lista. Finalmente ir a la vista de la accion ```List``` y agregar un boton de navegacion mas para esta accion.
+
+> Para ambos GET y POST utilizar la anotacion ```[Authorize(Roles = "Superadmin")]```, denotando que esta accion conlleva mayores privilegios que ```Edit``` la cual debe ser accedida solo por usuarios con rol admin o superadmin
+
+<details close>
+<summary>Ver Codigo</summary>
+
+```c#
+[HttpPost, ActionName("Delete")]
+[Authorize(Roles = "Superadmin")]
+[ValidateAntiForgeryToken]
+public IActionResult DeleteConfirmed(int id)
+{
+    _materiaRepository.Delete(id);
+
+    return RedirectToAction("List");
+}
+```
+
+</details>
+
+<details close>
+<summary>Ver Vista de List</summary>
+
+```html
+<div class="card-body">
+    ...
+    <a class="btn btn-primary text-white" asp-area="" asp-action="Edit" asp-route-id="@mat.Id">Editar</a>
+    <a class="btn btn-danger text-white" asp-area="" asp-action="Delete" asp-route-id="@mat.Id">Delete</a>
+</div>
+```
+
+</details>
+
+21. En el proyecto ***Test*** clase ```IntegrationTestWeb``` ir a ***Prueba***/***Ejecutar todas las pruebas*** de la barra de herramientas de VS. Esto es para verificar que la implementación cumpla con las especificaciones requeridas. Por ejemplo para la accion ***/Materia/List***:
 ``` c#
 [Fact]
 public async Task VisitRootPage_ShouldRenderTwoMateriaCardsAndTheFirstOneMustHaveCertainCardSubtitle()
@@ -436,7 +532,7 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).Ad
     options.AccessDeniedPath = "/Error/401";
 });
 ```
-> ```options.LoginPath``` permitira que cuando el framework redireccione a al usuario despues de intentar acceder a una ruta que requiere autorizacion este lo haga a la url que se tiene implementada. Esto es especialmente necesario para ```options.AccessDeniedPath``` ya que el fw por default envia a los usuarios que estan autenticados pero que no cuentan con el rol o permiso requerido para acceder a una ruta determinada a ***/Account/AccessDenied*** (ruta que no esta implementada en esta aplicacion), sin embargo si esta implementada la ruta ***/Error/401*** para estos casos.
+> ```options.LoginPath``` permitira que cuando el framework redireccione a al usuario despues de intentar acceder a una ruta que requiere autorizacion este lo haga a la url que se tiene implementada. Esto es especialmente necesario para ```options.AccessDeniedPath``` ya que el fw por default envia a los usuarios que estan autenticados pero que no cuentan con el rol o permiso requerido para acceder a una ruta determinada a ***/Account/AccessDenied*** (ruta que no esta implementada en esta aplicación), sin embargo si esta implementada la ruta ***/Error/401*** para estos casos.
 
 3. En el metodo ```void Configure(IApplicationBuilder app, IWebHostEnvironment env)``` agregar el middleware ```app.UseAuthentication()``` exactamente despues que el otro middleware ```app.UseRouting()``` y antes que ```app.UseAuthorization()```. Esto es debido a que la request pasa por los middlewares exactamente en el orden que estan declarados en este metodo.
 
