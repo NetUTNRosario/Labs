@@ -1,0 +1,46 @@
+﻿@model RegisterViewModel
+
+<div class="row">
+    <div class="col-md-4 col-md-8">
+        <form asp-action="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="form-label"></label>
+                <input asp-for="Nombre" class="form-control">
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mail" class="form-label"></label>
+                <input asp-for="Mail" class="form-control">
+                <span asp-validation-for="Mail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Clave" class="form-label"></label>
+                <input asp-for="Clave" type="password" class="form-control">
+                <span asp-validation-for="Clave" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmarClave" class="form-label"></label>
+                <input asp-for="ConfirmarClave" type="password" class="form-control">
+                <span asp-validation-for="ConfirmarClave" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <input asp-for="IsPersistent" type="checkbox" class="form-check-input">
+                <label asp-for="IsPersistent" class="form-check-label">Mantener la sesion abierta</label>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Home" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
