@@ -38,6 +38,7 @@ namespace Web.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]Materia materia)
         {
@@ -52,12 +53,14 @@ namespace Web.Controllers
             return View(new EditMateriaViewModel(materia, _planRepository.GetAll()));
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             return View(new CreateMateriaViewModel(null, _planRepository.GetAll()));
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")] Materia materia)
         {
