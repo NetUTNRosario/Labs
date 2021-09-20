@@ -133,7 +133,7 @@ return View(new EditMateriaViewModel(materia, _planRepository.GetAll()));
 
 8. Para utilizar validaciones se utilizara la libreria [FluentValidation](https://docs.fluentvalidation.net/en/latest/aspnet.html), ya que permite realizar validaciones mucho mas complejas y ademas estas resultan mas legibles que cuando se utilizan data annotations. Como primer paso se debe instalar el paquete Nuget ***FluentValidation.AspNetCore*** con el comando ```dotnet add package FluentValidation.AspNetCore``` o utilizando el administrador de paquetes Nuget de Visual Studio. 
 
-9. Luego, en la clase ```Startup``` en el metodo ```ConfigureServices``` (aquel utilizado para inyeccion de dependencias) encadenar el metodo ```.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>())``` a ```services.AddControllersWithViews()```. De esta manera se logra la completa integracion de asp net core con esta liberia de validacion, utilizandose exactamente la misma forma de trabajo que con data annotations (el metodo por default del framework). Ademas, para forzar que los mensajes de validacion utilicen las traducciones al español que proporciona la libreria se agregara la siguiente expresion en la funcion que ```.AddFluentValidation(func)``` toma como argumento: ```fv.ValidatorOptions.LanguageManager.Culture = new CultureInfo("es");```
+9. Luego, en la clase ```Startup``` en el metodo ```ConfigureServices``` (aquel utilizado para inyeccion de dependencias) encadenar el metodo ```.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>())``` a ```services.AddControllersWithViews()```. De esta manera se logra la completa integracion de asp net core con esta liberia de validacion, utilizandose exactamente la misma forma de trabajo que con data annotations (el metodo por default del framework). Como ***paso opcional*** es posible forzar que los mensajes de validacion utilicen las traducciones al español que proporciona la libreria, gracias a agregar la siguiente expresion en la funcion (func) que ```.AddFluentValidation(func)``` toma como argumento: ```fv.ValidatorOptions.LanguageManager.Culture = new CultureInfo("es");```
 
 <details close>
 <summary>Ver Código</summary>
@@ -143,6 +143,8 @@ public void ConfigureServices(IServiceCollection services)
 {
     services.AddControllersWithViews().AddFluentValidation(fv => {
         fv.RegisterValidatorsFromAssemblyContaining<MateriaValidator>();
+        // Opcional, los mensajes de: "{Prop} is required" y "Please enter a valid number." se seguiran mostrando en ingles a menos que se
+        // localice/internacionalice la aplicacion completa (tema intermedio-avanzado que no se tratara en este laboratorio).
         fv.ValidatorOptions.LanguageManager.Culture = new CultureInfo("es");
     });
 }
