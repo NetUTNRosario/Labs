@@ -31,7 +31,7 @@ public MateriaController(ILogger<MateriaController> logger, IMateriaRepository m
 return View(_materiaRepository.GetAll())
 ```
 
-5. Agregar el contenido de la vista correspondiente ubicada en la carpeta ***Views/Materia***, mostrando un listado ```<ul>``` de cards de bootstrap (clase ***.card***, esto ya viene configurado con el proyecto default de inicio). Asegurarse que los atributos Descripcion, Plan, HsSemanales y HsTotales sean mostrados (estos ultimos dos utilizando la clase ***.card-subtitle*** de bootstrap, ademas se aconseja usar a Descripcion como un ***.card-title*** y para el resto ***.card-text***). En cuanto al uso de directivas razor para iterar en la coleccion usar 
+5. Agregar el contenido de la vista correspondiente ubicada en la carpeta ***Views/Materia***, mostrando un listado ```<ul>``` de cards de bootstrap (clase ***.card***, cabe aclarar que la libreria bootstrap ya viene configurada con el proyecto default de inicio) las cuales deben irse wrapeando hasta que ocupen el minimo espacio que requieren (usar ***d-flex flex-wrap*** en el container html y ***flex-grow-1*** en los elementos). Asegurarse que los atributos Descripcion, Plan, HsSemanales y HsTotales sean mostrados (estos ultimos dos utilizando la clase ***.card-subtitle*** de bootstrap, ademas se aconseja usar a Descripcion como un ***.card-title*** y para el resto ***.card-text***). En cuanto al uso de directivas razor para iterar en la coleccion usar 
 ```c#
 // Solo al inicio del archivo
 @model IEnumerable<Materia>
@@ -40,7 +40,7 @@ return View(_materiaRepository.GetAll())
 ```
 > Estas directivas ```@mat.{atributo}``` van a popular con los datos enviados desde el controlador el html enviado ante cada request (esto sucede en el servidor, osea su maquina en el puerto 5000). Estas estan fuertemente tipadas (lo cual hace que se provean sugerencias al escribir) gracias a la directiva ```@Model IEnumerable<Materia>``` que se encuentra al inicio del archivo, lo cual determina que tipo de dato se aceptara para ser enviado por el controlador en la accion correspondiente
 
-![image](https://user-images.githubusercontent.com/41701343/132447918-4167529f-bbed-49da-82ad-6e6e33590616.png)
+![image](https://user-images.githubusercontent.com/41701343/134066590-ab6edc66-4dae-4ef8-b4cf-ec6a933cfa31.png)
 
 <details close>
 <summary>Ver Vista Completa</summary>
@@ -48,20 +48,20 @@ return View(_materiaRepository.GetAll())
 ```html
 @model IEnumerable<Materia>
 
-<ul class="list-group">
+<ul class="d-flex flex-wrap">
     @foreach (Materia mat in Model)
     {
-        <div class="card">
+        <li class="card flex-grow-1 m-1">
             <div class="card-body">
                 <h5 class="card-title">@mat.Descripcion</h5>
                 <h6 class="card-subtitle mb-2 text-muted">
                     @Html.DisplayNameFor(model => mat.HsSemanales): @mat.HsSemanales -
                     @Html.DisplayNameFor(model => mat.HsTotales): @mat.HsTotales
                 </h6>
-                <p class="card-text">@mat.Plan.Especialidad <span class="text-info">@mat.Plan.Anio</span></p>
-                <a class="btn btn-primary" asp-area="" asp-action="Edit" asp-route-id="@mat.Id">Editar</a>
+                <p class="card-text">@mat.Plan?.Especialidad <span class="text-info">@mat.Plan?.Anio</span></p>
+                <a class="btn btn-primary text-white" asp-area="" asp-action="Edit" asp-route-id="@mat.Id">Editar</a>
             </div>
-        </div>
+        </li>
     }
 </ul>
 ```
