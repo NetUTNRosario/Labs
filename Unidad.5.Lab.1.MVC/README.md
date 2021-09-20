@@ -476,18 +476,17 @@ return View(materia);
 
 20. Para el POST de la accion ```Delete``` notar que al tener la misma signatura ```public IActionResult Delete(int id)``` que para el metodo con la anotacion GET hay un error de compilacion, por lo que es necesario cambiar la signatura ```public IActionResult DeleteConfirmed(int id)``` e indicar que en realidad este metodo debe ser considerado como la misma accion, gracias a la anotacion ```[HttpPost, ActionName("Delete")]```. En la implementacion llamar a ```_materiaRepository.Delete(id)``` y luego redirigir a la lista. Finalmente ir a la vista de la accion ```List``` y agregar un boton de navegacion mas para esta accion.
 
-> Para ambos GET y POST utilizar la anotacion ```[Authorize(Roles = "Superadmin")]```, denotando que esta accion conlleva mayores privilegios que ```Edit``` la cual debe ser accedida solo por usuarios con rol admin o superadmin
-
 <details close>
 <summary>Ver Codigo</summary>
 
 ```c#
 [HttpPost, ActionName("Delete")]
-[Authorize(Roles = "Superadmin")]
 [ValidateAntiForgeryToken]
 public IActionResult DeleteConfirmed(int id)
 {
-    _materiaRepository.Delete(id);
+    var materia = _materiaRepository.Delete(id);
+
+    if (materia == null) return NotFound();
 
     return RedirectToAction("List");
 }
@@ -718,18 +717,32 @@ return RedirectToActionPermanent(controllerName: "Home", actionName: "Index");
  accion ```Edit``` agregar ```[Authorize(Roles = "Admin")]```, esto permitira no dar acceso a aquellos que no esten logeados y ademas rechazar a los que no cuenten con el rol admin alojado como claim en la cookie (en este caso no redirigiendo al login obviamente, sino enviandolos a la pagina de error ***NotAuthorized***).
 
 ```c#
-[Authorize(Roles = "Admin")]
-public IActionResult Edit(int? id)
-
-[Authorize(Roles = "Admin")]
-public IActionResult Edit(int id, [Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]Materia materia)
-
+[HttpGet]
 [Authorize]
-public IActionResult Create()
+public IActionResult Create() {}
 
+[HttpPost]
 [Authorize]
-public IActionResult Create(Materia materia)
+public IActionResult Create(Materia materia) {}
+
+[HttpGet]
+[Authorize(Roles = "Admin")]
+public IActionResult Edit(int? id) {}
+
+[HttpPost]
+[Authorize(Roles = "Admin")]
+public IActionResult Edit(int id, [Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]Materia materia) {}
+
+[HttpGet]
+[Authorize(Roles = "Superadmin")]
+public IActionResult Delete(int? id) {}
+
+[HttpPost, ActionName("Delete")]
+[Authorize(Roles = "Superadmin")]
+public IActionResult DeleteConfirmed(int id) {}
 ```
+
+> Para ambos GET y POST de la accion ```Delete``` se utiliza la anotacion ```[Authorize(Roles = "Superadmin")]```, denotando que esta accion conlleva mayores privilegios que ```Edit``` la cual puede ser accedida tanto por usuarios con el rol admin como con el rol superadmin
 
 16. En cuanto a la pagina de error ***NotAuthorized*** esta esta asociada a la accion ```NotAuthorized``` del controlador ```Error```. Se solicita programar una vista que se vea de la siguiente manera:
 

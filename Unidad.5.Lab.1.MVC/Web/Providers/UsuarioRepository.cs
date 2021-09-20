@@ -40,7 +40,7 @@ namespace Web.Models
                 Mail = "superadmin@example.com",
                 Clave = hasher.GenerateHash("Superadmin_1", saltMario),
                 Salt = saltMario,
-                Role = UsuarioRol.Admin
+                Role = UsuarioRol.Superadmin
             });
         }
         public UsuarioLogeado? Validar(LoginViewModel loginVM)

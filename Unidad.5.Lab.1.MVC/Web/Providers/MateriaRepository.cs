@@ -13,7 +13,7 @@ namespace Web.Models
 
         void Add(Materia materia);
 
-        void Delete(int id);
+        Materia? Delete(int id);
     }
 
     public class MateriaRepository : IMateriaRepository
@@ -68,13 +68,15 @@ namespace Web.Models
             _materias.Add(materia);
         }
 
-        public void Delete(int id)
+        public Materia? Delete(int id)
         {
             var materiaToDelete = _materias.Find(m => m.Id == id);
 
-            if (materiaToDelete == null) throw new Exception("No se encontro la materia a borrar");
+            if (materiaToDelete == null) return null;
 
             _materias.Remove(materiaToDelete);
+
+            return materiaToDelete;
         }
     }
 }
