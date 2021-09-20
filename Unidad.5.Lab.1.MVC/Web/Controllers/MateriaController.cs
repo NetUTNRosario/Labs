@@ -73,5 +73,28 @@ namespace Web.Controllers
 
             return View(new CreateMateriaViewModel(materia, _planRepository.GetAll()));
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Superadmin")]
+        public IActionResult Delete(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var materia = _materiaRepository.GetOne((int)id);
+
+            if (materia == null) return NotFound();
+
+            return View(materia);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Superadmin")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _materiaRepository.Delete(id);
+
+            return RedirectToAction("List");
+        }
     }
 }

@@ -11,7 +11,8 @@
                     @Html.DisplayNameFor(model => mat.HsTotales): @mat.HsTotales
                 </h6>
                 <p class="card-text">@mat.Plan?.Especialidad <span class="text-info">@mat.Plan?.Anio</span></p>
-                <a class="btn btn-primary" asp-area="" asp-action="Edit" asp-route-id="@mat.Id">Editar</a>
+                <a class="btn btn-primary text-white" asp-area="" asp-action="Edit" asp-route-id="@mat.Id">Editar</a>
+                <a class="btn btn-danger text-white" asp-area="" asp-action="Delete" asp-route-id="@mat.Id">Delete</a>
             </div>
         </li>
     }
