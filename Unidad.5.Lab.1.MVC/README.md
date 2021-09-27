@@ -407,11 +407,12 @@ app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
 </details>
 
-18. Tener en cuenta que hay mas tipos de errores, por lo que en la accion ```GenericError(int code)``` agregar la anotacion correspondiente, teniendo en cuenta que en este tipo de anotaciones es posible parametrizar el string de parametro con lo siguiente ```[Route("/error/{code:int}")]```, siendo ***"{code:int}"*** justamente reflejado en el parametro del metodo.
+18. Tener en cuenta que hay mas tipos de errores, por lo que en la accion ```GenericError(int code)``` agregar la anotacion correspondiente, teniendo en cuenta que en este tipo de anotaciones es posible parametrizar el string de parametro con lo siguiente ```[Route("/error/{code:int}")]```, siendo ***"{code:int}"*** justamente reflejado en el parametro del metodo. Ademas dentro del metodo loggear que codigo de error ocurre con ```_logger.LogError($"Error codigo {code}")```.
 ```c#
 public IActionResult GenericError(int code)
 ```
-
+![image](https://user-images.githubusercontent.com/41701343/134944385-aa5ef8fc-1cb8-4561-a79b-87436fe80b08.png)
+    
 19. La unica accion que resta agregar al controlador ```Materia``` es la de ```Delete```, para esto en el GET de esta mostramos la materia a ser borrado a modo de solicitud de confirmacion de forma similar a lo que realizado para el GET de la accion ```Edit``` (claramente teniendo en cuenta el realizar las mismas comprobaciones previas antes de enviar los datos de la materia a la vista). En cuanto a la vista asociada, mostrar una description list (```<dl></dl>```) de los datos de la materia a borrar y debajo de eso un pequeño formulario con un boton para confirmar junto con un link para volver a la lista.
 
 > Es fundamental que el GET de una accion delete nunca realice el borrado de la entidad, ya que este tipo de acciones son consideradas seguras (ya que no realizan cambios en el estado de la aplicación), sino que lo apropiado es que esto sea mediante un POST (ver siguiente paso)
@@ -728,11 +729,11 @@ public IActionResult Create() {}
 public IActionResult Create(Materia materia) {}
 
 [HttpGet]
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Admin, Superadmin")]
 public IActionResult Edit(int? id) {}
 
 [HttpPost]
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Admin, Superadmin")]
 public IActionResult Edit(int id, [Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]Materia materia) {}
 
 [HttpGet]
