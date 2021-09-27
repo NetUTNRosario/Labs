@@ -21,10 +21,7 @@ namespace Web.Controllers
 
         public IActionResult Index() => RedirectToAction("List");
 
-        public IActionResult List()
-        {
-            return View(_materiaRepository.GetAll());
-        }
+        public IActionResult List() => View(_materiaRepository.GetAll());
 
         [Authorize(Roles = "Admin, Superadmin")]
         public IActionResult Edit(int? id)
@@ -35,22 +32,16 @@ namespace Web.Controllers
             return View(new EditMateriaViewModel(materia, _planRepository.GetAll()));
         }
 
-
-
         [HttpPost]
         [Authorize(Roles = "Admin, Superadmin")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")]Materia materia)
         {
             if (id != materia.Id) return NotFound();
-            if (ModelState.IsValid)
-            {
-                _materiaRepository.Update(materia);
+            if (! ModelState.IsValid) return View(new EditMateriaViewModel(materia, _planRepository.GetAll()));
 
-                return RedirectToAction("List");
-            }
-
-            return View(new EditMateriaViewModel(materia, _planRepository.GetAll()));
+            _materiaRepository.Update(materia);
+            return RedirectToAction("List");
         }
 
         [Authorize]
@@ -64,14 +55,10 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Id, Descripcion, HsSemanales, HsTotales, PlanId")] Materia materia)
         {
-            if (ModelState.IsValid)
-            {
-                _materiaRepository.Add(materia);
+            if (!ModelState.IsValid) return View(new CreateMateriaViewModel(materia, _planRepository.GetAll()));
 
-                return RedirectToAction("List");
-            }
-
-            return View(new CreateMateriaViewModel(materia, _planRepository.GetAll()));
+            _materiaRepository.Add(materia);
+            return RedirectToAction("List");
         }
 
         [HttpGet]

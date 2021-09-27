@@ -28,7 +28,7 @@ namespace Web.Controllers
         [Route("/error/{code:int}")]
         public IActionResult GenericError(int code)
         {
-            _logger.LogInformation($"Error codigo {code}");
+            _logger.LogError($"Error codigo {code}");
             return View();
         }
     }
