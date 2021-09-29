@@ -9,17 +9,21 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 |:cactus: [Git Working Tree](#El-Working-Tree-de-Git)|
 |:bookmark_tabs: [Glosario](#Glosario)|
 |:star2: [Extra](#Extra)|
+|:love_letter: [Otras Guías](#Otras-Guías)|
 
 ## Pre-Requisitos
 
 |Requisito|Descripción|Link|
 |:-|:-|:-|
-|Visual Studio .Net|Entorno para programar. Es deseable tener descargada la última versión|[https://visualstudio.microsoft.com/es/downloads/](https://visualstudio.microsoft.com/es/downloads/)|
+|Visual Studio .Net ***(1)***|Entorno para programar. Es deseable tener descargada la última versión|[https://visualstudio.microsoft.com/es/downloads/](https://visualstudio.microsoft.com/es/downloads/)|
 |Git|Sistema de control de versiones distribuido. Multiplataforma y de codigo abierto|[https://git-scm.com/](https://git-scm.com/)|
 |Usuario GitHub|Repositorios online|[https://github.com/join](https://github.com/join?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home)|
-|***[Recomendado/Opcional]*** GitKraken|Control de versiones con repositorios Git locales|[https://www.gitkraken.com/download](https://www.gitkraken.com/download)|
+|***[Recomendado/Opcional]*** GitKraken ***(2)***|Control de versiones con repositorios Git locales|[https://www.gitkraken.com/download](https://www.gitkraken.com/download)|
 
-> Nota: La versión gratuita de GitKraken posee todo lo necesario a utilizar, pero existe para el que le guste la herramienta una versión premium con otras features como: Tener Boards estilo trello y calendarios, entre otras cosas. Se puede conseguir gratuitamente como alumno universitario, teniendo un correo @frro dado de alta en la universidad (Secretaría de Asuntos Universitarios).
+> ***(1)*** También es posible utilizar el editor de código Visual Studio Code (no es un IDE como VS), gracias a la extensión para C# con la que cuenta este y el sdk de .NET 5 que corre tanto en Windows como en Mac y Linux. Para este propósito se creó este video:
+> [![image](https://user-images.githubusercontent.com/41701343/135330437-81dfd241-c457-42ff-a9d6-6d6b0b3d6f31.png)](https://youtu.be/bmAmbmwhfqI)
+
+> ***(2)*** La versión gratuita de GitKraken posee todo lo necesario para este curso. Sin embargo, existe una versión premium con otras features como: Tener Boards estilo trello y calendarios, entre otras cosas. Se puede conseguir gratuitamente como alumno universitario, teniendo un correo @frro dado de alta en la universidad (Secretaría de Asuntos Universitarios).
 
 ### Instalación Visual Studio Community
 
@@ -139,15 +143,19 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 
 ![imagen](https://user-images.githubusercontent.com/41701343/112894489-4fa93600-90b2-11eb-9fbe-27750a43c15e.png)
 
-#### Feedback de alumnos
-> Muchas gracias al alumno [Bruno Cocitto](https://github.com/brunococitto) por sus significativos aportes y solicitudes de cambios
-
-Aquel que desee soliticitar agregar o cambiar algo, tenga dudas respecto a algun ejercicio o simplemente quiera probar como hacer una [Pull Request](#Pull-Request) puede hacer sus cambios en su fork y luego realizar una pr al repo de la catedra
-
 15. De forma inversa a como se hace merge en GitKraken arrastrar la [branch](#Branch) donde se esta trabajando hacia *Remote*/*NetUtnRosario*/*Main* y seleccionar en el menu contextual: `Push and start a pull request to NetUtnRosario/main`
 
 ***15.b. En VS se debe pushear los cambios realizados en la branch donde se este trabajando y luego es necesario ir al sitio del repositorio en GitHub. Ya que el complemento de GIT de VS no puede manejar estas acciones que no son propias de Git en si, sino de la plataforma GitHub***
 ![imagen](https://user-images.githubusercontent.com/41701343/116576065-3841b080-a8dd-11eb-85e3-60a6e65087f8.png)
+
+#### Vídeo complemento
+Como complemento a lo expuesto en esta sección se creo el siguiente vídeo:
+[![image](https://user-images.githubusercontent.com/41701343/135307527-f4ca62bf-2046-4fc9-b951-0d0316184479.png)](https://youtu.be/81HgbEg55lQ)
+
+#### Feedback de alumnos
+> Muchas gracias al alumno [Bruno Cocitto](https://github.com/brunococitto) por sus significativos aportes y solicitudes de cambios
+
+Aquel que desee soliticitar agregar o cambiar algo, tenga dudas respecto a algun ejercicio o simplemente quiera probar como hacer una [Pull Request](#Pull-Request) puede hacer sus cambios en su fork y luego realizar una pr al repo de la catedra
 
 ## El Working Tree de Git
 ![git_working_tree](https://user-images.githubusercontent.com/44505076/111569584-b4df5c00-8781-11eb-8ee4-6c2c00ccb8cd.png)
@@ -230,11 +238,6 @@ El repositorio que se encuentra almacenado en GitHub (u otra plataforma) para to
 ### Status
 > Ver el estado general del repositorio [local](#Local) en la [branch](#Branch) actual, con respecto a [remoto](#Remote). Muestra en que branch se encuentra, cuantos commits hay, cuantos cambios se presentan en la "Staging Area", etc... GitKraken ofrece esta información de forma visual en la vista principal del repositorio, pero por consola se debería escribir `git status`.
 
-### Otras Guías
-> Para una explicación más completa de muchos de estos conceptos y como realizar varios de los casos de uso principales con Git y haciendo uso de Gitkraken, consultar: [https://elc.github.io/posts/git-guide-with-visual-interface/es/](https://elc.github.io/posts/git-guide-with-visual-interface/es/) de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo [https://github.com/ELC](https://github.com/ELC).
-
-> Otra guía sencilla (está tanto en español como en inglés) sobre Git pero haciendo uso de la Consola, consultar: [https://rogerdudler.github.io/git-guide/index.es.html](https://rogerdudler.github.io/git-guide/index.es.html) del usuario de GitHub [https://github.com/rogerdudler/](https://github.com/rogerdudler/).
-
 ## Extra
 
 ### Reset
@@ -248,3 +251,9 @@ El repositorio que se encuentra almacenado en GitHub (u otra plataforma) para to
 
 ### Rebase
 > Un rebase modifica la historia de [commits](#Commit) del repositorio, por lo tanto es peligroso. Tal vez se necesite por ejemplo cuando se crean commits incorrectos y se quiere cambiarlos, pero estos ya estan subidos al remoto con [push](#Push). Con rebase se puede cambiar el nombre de [commits](#Commit) en remoto, unificarlos diferentes en uno o borrarlos, entre otras cosas. Estando en la branch en la que se desea modificar esto (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir `git rebase -i HEAD~n`, donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i indica que será un rebase interactivo (da instrucciones de que se puede hacer con cada commit, sea unificar, renombrar, borrar, etc...).
+
+
+## Otras Guías
+Para una explicación más completa de muchos de estos conceptos y como realizar varios de los casos de uso principales con Git y haciendo uso de Gitkraken, consultar: [https://elc.github.io/posts/git-guide-with-visual-interface/es/](https://elc.github.io/posts/git-guide-with-visual-interface/es/) de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo [https://github.com/ELC](https://github.com/ELC).
+
+Otra guía sencilla (está tanto en español como en inglés) sobre Git pero haciendo uso de la Consola, consultar: [https://rogerdudler.github.io/git-guide/index.es.html](https://rogerdudler.github.io/git-guide/index.es.html) del usuario de GitHub [https://github.com/rogerdudler/](https://github.com/rogerdudler/).
