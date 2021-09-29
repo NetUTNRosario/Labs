@@ -14,12 +14,15 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 
 |Requisito|Descripción|Link|
 |:-|:-|:-|
-|Visual Studio .Net|Entorno para programar. Es deseable tener descargada la última versión|[https://visualstudio.microsoft.com/es/downloads/](https://visualstudio.microsoft.com/es/downloads/)|
+|Visual Studio .Net ***(1)***|Entorno para programar. Es deseable tener descargada la última versión|[https://visualstudio.microsoft.com/es/downloads/](https://visualstudio.microsoft.com/es/downloads/)|
 |Git|Sistema de control de versiones distribuido. Multiplataforma y de codigo abierto|[https://git-scm.com/](https://git-scm.com/)|
 |Usuario GitHub|Repositorios online|[https://github.com/join](https://github.com/join?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home)|
-|***[Recomendado/Opcional]*** GitKraken|Control de versiones con repositorios Git locales|[https://www.gitkraken.com/download](https://www.gitkraken.com/download)|
+|***[Recomendado/Opcional]*** GitKraken ***(2)***|Control de versiones con repositorios Git locales|[https://www.gitkraken.com/download](https://www.gitkraken.com/download)|
 
-> Nota: La versión gratuita de GitKraken posee todo lo necesario a utilizar, pero existe para el que le guste la herramienta una versión premium con otras features como: Tener Boards estilo trello y calendarios, entre otras cosas. Se puede conseguir gratuitamente como alumno universitario, teniendo un correo @frro dado de alta en la universidad (Secretaría de Asuntos Universitarios).
+> ***(1)*** También es posible utilizar el editor de código Visual Studio Code (no es un IDE como VS), gracias a la extensión para C# con la que cuenta este y el sdk de .NET 5 que corre tanto en Windows como en Mac y Linux. Para este propósito se creó este video:
+> [![image](https://user-images.githubusercontent.com/41701343/135330437-81dfd241-c457-42ff-a9d6-6d6b0b3d6f31.png)](https://youtu.be/bmAmbmwhfqI)
+
+> ***(2)*** La versión gratuita de GitKraken posee todo lo necesario para este curso. Sin embargo, existe una versión premium con otras features como: Tener Boards estilo trello y calendarios, entre otras cosas. Se puede conseguir gratuitamente como alumno universitario, teniendo un correo @frro dado de alta en la universidad (Secretaría de Asuntos Universitarios).
 
 ### Instalación Visual Studio Community
 
@@ -149,7 +152,7 @@ La forma de trabajo que se va a utilizar este año consiste en los siguientes pa
 
 Aquel que desee soliticitar agregar o cambiar algo, tenga dudas respecto a algun ejercicio o simplemente quiera probar como hacer una [Pull Request](#Pull-Request) puede hacer sus cambios en su fork y luego realizar una pr al repo de la catedra
 
-Como complemento a lo expuesto en este documento se creo el siguiente vídeo:
+Como complemento a lo expuesto en esta sección se creo el siguiente vídeo:
 [![image](https://user-images.githubusercontent.com/41701343/135307527-f4ca62bf-2046-4fc9-b951-0d0316184479.png)](https://youtu.be/81HgbEg55lQ)
 
 ## El Working Tree de Git
