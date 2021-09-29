@@ -9,6 +9,7 @@ En este repositorio se encuentran todos los laboratorios utilizados en la asigna
 |:cactus: [Git Working Tree](#El-Working-Tree-de-Git)|
 |:bookmark_tabs: [Glosario](#Glosario)|
 |:star2: [Extra](#Extra)|
+|:love_letter: [Otras Guías](#Otras-Guías)|
 
 ## Pre-Requisitos
 
@@ -237,11 +238,6 @@ El repositorio que se encuentra almacenado en GitHub (u otra plataforma) para to
 ### Status
 > Ver el estado general del repositorio [local](#Local) en la [branch](#Branch) actual, con respecto a [remoto](#Remote). Muestra en que branch se encuentra, cuantos commits hay, cuantos cambios se presentan en la "Staging Area", etc... GitKraken ofrece esta información de forma visual en la vista principal del repositorio, pero por consola se debería escribir `git status`.
 
-### Otras Guías
-> Para una explicación más completa de muchos de estos conceptos y como realizar varios de los casos de uso principales con Git y haciendo uso de Gitkraken, consultar: [https://elc.github.io/posts/git-guide-with-visual-interface/es/](https://elc.github.io/posts/git-guide-with-visual-interface/es/) de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo [https://github.com/ELC](https://github.com/ELC).
-
-> Otra guía sencilla (está tanto en español como en inglés) sobre Git pero haciendo uso de la Consola, consultar: [https://rogerdudler.github.io/git-guide/index.es.html](https://rogerdudler.github.io/git-guide/index.es.html) del usuario de GitHub [https://github.com/rogerdudler/](https://github.com/rogerdudler/).
-
 ## Extra
 
 ### Reset
@@ -255,3 +251,9 @@ El repositorio que se encuentra almacenado en GitHub (u otra plataforma) para to
 
 ### Rebase
 > Un rebase modifica la historia de [commits](#Commit) del repositorio, por lo tanto es peligroso. Tal vez se necesite por ejemplo cuando se crean commits incorrectos y se quiere cambiarlos, pero estos ya estan subidos al remoto con [push](#Push). Con rebase se puede cambiar el nombre de [commits](#Commit) en remoto, unificarlos diferentes en uno o borrarlos, entre otras cosas. Estando en la branch en la que se desea modificar esto (se recomienda antes crear otra branch desde el ultimo commit para tener una "copia de seguridad") se debe escribir `git rebase -i HEAD~n`, donde n se debe reemplazar por la cantidad de commits que se van a ver afectados por el rebase, y la -i indica que será un rebase interactivo (da instrucciones de que se puede hacer con cada commit, sea unificar, renombrar, borrar, etc...).
+
+
+## Otras Guías
+Para una explicación más completa de muchos de estos conceptos y como realizar varios de los casos de uso principales con Git y haciendo uso de Gitkraken, consultar: [https://elc.github.io/posts/git-guide-with-visual-interface/es/](https://elc.github.io/posts/git-guide-with-visual-interface/es/) de Ezequiel Castaño, alumno avanzando de sistemas UTN FRRo [https://github.com/ELC](https://github.com/ELC).
+
+Otra guía sencilla (está tanto en español como en inglés) sobre Git pero haciendo uso de la Consola, consultar: [https://rogerdudler.github.io/git-guide/index.es.html](https://rogerdudler.github.io/git-guide/index.es.html) del usuario de GitHub [https://github.com/rogerdudler/](https://github.com/rogerdudler/).
