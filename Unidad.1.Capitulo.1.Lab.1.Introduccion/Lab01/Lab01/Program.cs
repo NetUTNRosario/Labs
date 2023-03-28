@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Lab01
 {
-    class Program
+    internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hola mundoooo");
-            Console.WriteLine("Pulse cualquier tecla para finalizar");
-            Console.ReadKey();
+            Console.WriteLine("Hola mundooooo");
+            Console.WriteLine("Pulse una tecla para finalizar"); 
+            Console.ReadKey();  
         }
     }
 }
